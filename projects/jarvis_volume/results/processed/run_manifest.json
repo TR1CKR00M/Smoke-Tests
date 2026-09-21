@@ -1,0 +1,22 @@
+{
+  "environment": {
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "python": "3.11.11",
+    "scikit_learn": "1.5.2"
+  },
+  "raw_predictions": {
+    "path": "data/raw/equilibrium_volume_results.csv",
+    "sha256": "fdeb363e2d6ec62bc298c297817db7ab126af6120ccd8707111c2d6add53e014"
+  },
+  "reference_volumes": {
+    "path": "data/raw/jarvis_dft_volumes.csv",
+    "rows": 104,
+    "sha256": "afbcd0479ace14d69234ded1909e37e78944c7dc000508840454202d16533964"
+  },
+  "upstream_provenance": {
+    "raw_prediction_generation_metadata_available": false,
+    "raw_predictions_source": "owner-supplied artifact",
+    "reference_source": "JARVIS dft_3d"
+  }
+}

@@ -1,10 +1,11 @@
 import re
-import pandas as pd
-import numpy as np
+
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from jarvis.core.atoms import Atoms as JarvisAtoms
 from jarvis.db.figshare import data as jarvis_data
 from sklearn.metrics import mean_absolute_error, mean_squared_error
-from jarvis.core.atoms import Atoms as JarvisAtoms
 
 # ==========================================
 # 1. 加载预测数据并提取标准的 JID (例如 JVASP-1002)
@@ -18,7 +19,8 @@ df_pred["Literature_output"] = pd.to_numeric(df_pred["Literature_output"], error
 # 提取正统的 JARVIS ID（匹配 JVASP-数字）
 # 防止文件名如 "JVASP-1002_mac" 影响与 JARVIS 数据库的匹配
 df_pred["jid"] = df_pred["ID"].apply(
-    lambda x: re.search(r"JVASP-\d+", str(x)).group(0) if re.search(r"JVASP-\d+", str(x)) else None)
+    lambda x: re.search(r"JVASP-\d+", str(x)).group(0) if re.search(r"JVASP-\d+", str(x)) else None
+)
 
 # 剔除无效行
 df_pred = df_pred.dropna(subset=["jid", "Literature_output"])
@@ -34,11 +36,13 @@ dft_3d = jarvis_data("dft_3d")
 dft_dict = []
 for entry in dft_3d:
     # 将 atoms 字典转为 Atoms 对象，自动从晶格矩阵计算体积
-    atoms_obj = JarvisAtoms.from_dict(entry['atoms'])
-    dft_dict.append({
-        "jid": entry["jid"],
-        "dft_volume": atoms_obj.volume  # 准确获取晶胞平衡体积 (Å³)
-    })
+    atoms_obj = JarvisAtoms.from_dict(entry["atoms"])
+    dft_dict.append(
+        {
+            "jid": entry["jid"],
+            "dft_volume": atoms_obj.volume,  # 准确获取晶胞平衡体积 (Å³)
+        }
+    )
 
 df_dft = pd.DataFrame(dft_dict)
 

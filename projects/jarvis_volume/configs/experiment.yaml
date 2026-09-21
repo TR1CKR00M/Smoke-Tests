@@ -1,0 +1,6 @@
+raw_predictions: data/raw/equilibrium_volume_results.csv
+reference_volumes: data/raw/jarvis_dft_volumes.csv
+results_root: results
+prediction_column: Literature_output
+id_column: ID
+test_output_column: Test_output
