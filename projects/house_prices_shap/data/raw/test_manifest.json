@@ -1,0 +1,7 @@
+{
+  "path": "data/raw/test.csv",
+  "sha256": "8fdd3d829d4d986b58f845c9553b225e67dd8383624d90fb6ca1d4bed5798c1e",
+  "rows": 1460,
+  "source": "Kaggle House Prices test set",
+  "canonical_source_pending": true
+}

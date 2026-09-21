@@ -1,0 +1,27 @@
+{
+  "dataset": {
+    "numeric_features": 36,
+    "path": "data/raw/train.csv",
+    "rows": 1460,
+    "sha256": "1e18addf81e5e4d347cc17ee6075bbe4a42b7fa26b9e5b063e8f692a5f929d41",
+    "target": "SalePrice",
+    "test_rows": 438,
+    "train_rows": 1022
+  },
+  "environment": {
+    "generated_at_utc": "2026-09-21T08:28:16.574523+00:00",
+    "packages": {
+      "numpy": "1.26.4",
+      "pandas": "2.3.3",
+      "scikit_learn": "1.5.2",
+      "shap": "0.49.1",
+      "xgboost": "2.1.4"
+    },
+    "platform": "macOS-14.2.1-arm64-arm-64bit",
+    "python": "3.11.11"
+  },
+  "split": {
+    "random_state": 7,
+    "test_size": 0.3
+  }
+}

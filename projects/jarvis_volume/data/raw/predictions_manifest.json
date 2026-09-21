@@ -1,0 +1,8 @@
+{
+  "path": "data/raw/equilibrium_volume_results.csv",
+  "sha256": "fdeb363e2d6ec62bc298c297817db7ab126af6120ccd8707111c2d6add53e014",
+  "rows": 105,
+  "source": "owner-supplied artifact",
+  "generation_metadata_available": false,
+  "blocker": "Upstream MACE prediction generation script, model configuration, and provenance are missing."
+}

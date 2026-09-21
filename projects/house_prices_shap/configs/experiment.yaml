@@ -1,0 +1,23 @@
+raw_data: data/raw/train.csv
+results_root: results
+target: SalePrice
+identifier: Id
+split:
+  test_size: 0.30
+  random_state: 7
+models:
+  xgboost:
+    random_state: 7
+  random_forest:
+    random_state: 7
+  mlp:
+    hidden_layer_sizes: [20, 20]
+    max_iter: 10000
+    random_state: 7
+shap:
+  background_samples: 500
+data_provenance:
+  train:
+    source: https://raw.githubusercontent.com/sudheernaidu53/Machine-learning-Deep-learning-projects/master/kaggle%20competitions/House%20Prices%20Advanced%20Regression%20Techniques/train.csv
+    source_type: public_mirror
+    canonical_source_pending: true

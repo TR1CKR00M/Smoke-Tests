@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smoke-tests"
+version = "0.1.0"
+description = "Reproducible research workspace with two independent projects: SHAP model comparison and MACE/JARVIS volume benchmarking."
+requires-python = ">=3.11"
+dependencies = [
+  "pandas>=2.2,<3",
+  "numpy>=1.26,<2",
+  "scikit-learn>=1.5,<1.6",
+  "xgboost>=2.1,<3",
+  "shap>=0.46,<1",
+  "matplotlib>=3.9,<4",
+  "seaborn>=0.13,<1",
+  "jarvis-tools>=2026.6.12",
+  "pyyaml>=6.0,<7",
+  "pytest>=8.3,<9",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3,<9",
+  "ruff>=0.6,<1",
+]
+
+[tool.setuptools]
+packages = ["house_prices_shap", "jarvis_volume", "common"]
+
+[tool.setuptools.package-dir]
+house_prices_shap = "projects/house_prices_shap/src/house_prices_shap"
+jarvis_volume = "projects/jarvis_volume/src/jarvis_volume"
+common = "src/common"
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["projects/house_prices_shap/tests", "projects/jarvis_volume/tests"]
+markers = [
+  "slow: full end-to-end reproduction test",
+  "shap: SHAP explanation tests",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["B008"]
