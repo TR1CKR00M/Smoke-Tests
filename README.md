@@ -42,7 +42,7 @@ src/common/
 docs/
 ```
 
-Each project has its own README. The top-level docs define the architecture, provenance policy, exact reproduction commands, evaluation findings, and governance standards.
+Each project has its own README, and [`docs/PROJECTS.md`](docs/PROJECTS.md) records the project registry and isolation rules. The top-level docs define the architecture, provenance policy, exact reproduction commands, evaluation findings, and governance standards.
 
 ## Provenance chain
 
