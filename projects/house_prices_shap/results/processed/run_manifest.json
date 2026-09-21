@@ -1,4 +1,11 @@
 {
+  "data_provenance": {
+    "train": {
+      "canonical_source_pending": true,
+      "source": "https://raw.githubusercontent.com/sudheernaidu53/Machine-learning-Deep-learning-projects/master/kaggle%20competitions/House%20Prices%20Advanced%20Regression%20Techniques/train.csv",
+      "source_type": "public_mirror"
+    }
+  },
   "dataset": {
     "numeric_features": 36,
     "path": "data/raw/train.csv",
@@ -9,7 +16,7 @@
     "train_rows": 1022
   },
   "environment": {
-    "generated_at_utc": "2026-09-21T08:28:16.574523+00:00",
+    "generated_at_utc": "2026-09-21T08:37:45.953607+00:00",
     "packages": {
       "numpy": "1.26.4",
       "pandas": "2.3.3",
