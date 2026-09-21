@@ -6,6 +6,8 @@ Each experiment is an independent project. The only shared code is under `src/co
 | --- | --- |
 | [`house_prices_shap`](house_prices_shap) | Kaggle House Prices model comparison and SHAP interpretability |
 | [`jarvis_volume`](jarvis_volume) | MACE/JARVIS equilibrium-volume benchmarking |
+| [`data_cleaning_practice`](data_cleaning_practice) | Basic data cleaning and preprocessing exercise |
+
 
 New experiments should be added as a new folder with the same structure:
 
