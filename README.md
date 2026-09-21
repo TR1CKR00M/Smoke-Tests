@@ -6,6 +6,7 @@ This repository is a long-lived workspace for reproducible data-to-paper workflo
 | --- | --- | --- |
 | [`house_prices_shap`](projects/house_prices_shap) | Train XGBoost, RandomForest, and MLP regressors on Kaggle House Prices and analyze SHAP explanations. | Reproduced with fixed seeds. |
 | [`jarvis_volume`](projects/jarvis_volume) | Compare MACE-predicted equilibrium volumes against JARVIS-DFT `dft_3d`. | Downstream evaluation reproduced. |
+| [`data_cleaning_practice`](data_cleaning_practice) | Basic data cleaning and preprocessing exercise |
 
 The two projects have no shared dataset, target, or experiment. They live in separate folders and have separate configs, outputs, reports, and tests.
 
