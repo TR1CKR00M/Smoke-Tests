@@ -39,10 +39,10 @@ import os
 from pathlib import Path
 
 import numpy as np
-from ase.io import read, Trajectory
+from ase import units
+from ase.io import Trajectory, read
 from ase.md.langevin import Langevin
 from ase.md.velocitydistribution import MaxwellBoltzmannDistribution, Stationary
-from ase import units
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
