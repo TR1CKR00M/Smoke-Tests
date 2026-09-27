@@ -33,16 +33,18 @@ Usage:
     python run_foundation_md.py --model medium-mpa-0 --temp 600 --steps 20000
 """
 
-import os
-os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 import argparse
+import os
+from pathlib import Path
+
 import numpy as np
 from ase.io import read, Trajectory
 from ase.md.langevin import Langevin
 from ase.md.velocitydistribution import MaxwellBoltzmannDistribution, Stationary
 from ase import units
-from pathlib import Path
+
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 output_dir = Path("results/raw")
 output_dir.mkdir(parents=True, exist_ok=True)
@@ -83,7 +85,11 @@ def run_nvt(
     log_path: str = "md_foundation_log.csv",
     seed: int = 42,
 ):
-    MaxwellBoltzmannDistribution(atoms, temperature_K=temperature_K, rng=np.random.default_rng(seed))
+    MaxwellBoltzmannDistribution(
+        atoms,
+        temperature_K=temperature_K,
+        rng=np.random.default_rng(seed)
+        )
     Stationary(atoms)
 
     dyn = Langevin(
