@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e  # 任何命令报错时立即退出脚本
+set -e
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$SCRIPT_DIR"
@@ -11,8 +11,8 @@ python tests/run_foundation_md.py --model medium-0b3 --temp 600 --steps 2000
 python tests/plot_temp_pressure.py
 
 if [ ! -f "results/figures/multi_file_comparison.png" ]; then
-    echo "错误：未生成预期对比图！"
+    echo "Error: no expected figures generated"
     exit 1
 fi
 
-echo "=== 复现验证成功！ ==="
+echo "=== Verification success! ==="
