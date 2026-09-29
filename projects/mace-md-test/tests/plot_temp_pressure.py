@@ -19,7 +19,8 @@ plt.rcParams.update(
         "mathtext.fontset": "stix",
     }
 )
-csv_files = ["results/raw/md_medium-mpa-0_600K_log.csv","results/raw/md_medium-0b3_600K_log.csv"]
+csv_files = ["results/raw/md_medium-mpa-0_600K_log.csv","results/raw/md_medium-0b3_600K_log.csv",
+"results/raw/md_medium_600K_log.csv","results/raw/md_medium-omat-0_600K_log.csv"]
 #csv_files = sorted(glob.glob("results/raw/*.csv"))
 
 for f in csv_files:

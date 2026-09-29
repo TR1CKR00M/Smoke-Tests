@@ -30,7 +30,7 @@ Notes on what is intentionally NOT here:
     byte-for-byte reproduction input.
 
 Usage:
-    python run_foundation_md.py --model medium-mpa-0 --temp 600 --steps 20000
+    python tests/run_foundation_md.py --model medium-mpa-0 --temp 600 --steps 20000
 """
 
 
