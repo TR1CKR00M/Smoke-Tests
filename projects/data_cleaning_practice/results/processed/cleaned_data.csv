@@ -1,0 +1,22 @@
+Class,Student_ID,Subject,Score
+Class A,1203,Math,67
+Class B,1124,Math,86
+Class B,3252,Math,76
+Class A,3665,Math,75
+Class B,5657,Math,45
+Class A,2123,Math,87
+Class B,3523,Math,65
+Class A,1203,Science,89
+Class B,1124,Science,56
+Class B,3252,Science,97
+Class A,3665,Science,67
+Class B,5657,Science,78
+Class A,2123,Science,65
+Class B,3523,Science,68
+Class A,1203,English,65
+Class B,1124,English,57
+Class B,3252,English,87
+Class A,3665,English,75
+Class B,5657,English,56
+Class A,2123,English,43
+Class B,3523,English,78
