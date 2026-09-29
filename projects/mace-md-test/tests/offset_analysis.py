@@ -4,12 +4,11 @@
 # %%
 import glob
 import os
-from IPython.display import display
-import matplotlib.pyplot as plt
+
 import numpy as np
 import pandas as pd
+from IPython.display import display
 from scipy import stats
-import statsmodels.api as sm
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
 
 # 1. 加载数据并截取稳态区间（假设前 20% 为弛豫阶段）
@@ -79,7 +78,8 @@ for i in range(len(models)):
     for j in range(i + 1, len(models)):
         m1, m2 = models[i], models[j]
         d_val = calc_cohens_d(data_y1[m1], data_y1[m2])
+        mean_diff=np.mean(data_y1[m1]) - np.mean(data_y1[m2])
         print(
-            f"{m1} vs {m2} -> Offset (Mean Diff): {np.mean(data_y1[m1]) - np.mean(data_y1[m2]):.4f}, Cohen's d: {d_val:.4f}"
+            f"{m1} vs {m2} -> Offset (Mean Diff): {mean_diff:.4f}, Cohen's d: {d_val:.4f}"
         )
 

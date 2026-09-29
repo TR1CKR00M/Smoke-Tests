@@ -4,11 +4,12 @@
 # %%
 import glob
 import os
+
 import matplotlib.pyplot as plt
 import pandas as pd
 
 output_dir = "results/figures"
-
+output_path= os.path.join(output_dir, "multi_file_comparison_alpha_adjusted.png")
 # 设置科研绘图基本样式
 plt.style.use("seaborn-v0_8-paper" if "seaborn-v0_8-paper" in plt.style.available else "default")
 plt.rcParams.update(
@@ -115,7 +116,6 @@ ax2.legend(frameon=True, edgecolor="gray", fontsize=8.5, loc="best")
 plt.tight_layout()
 
 # 保存高质量图表
-plt.savefig(os.path.join(output_dir, "multi_file_comparison_alpha_adjusted.png"), dpi=600, bbox_inches="tight")
-plt.savefig(os.path.join(output_dir, "multi_file_comparison_alpha_adjusted.svg"), format="svg", bbox_inches="tight")
+plt.savefig(output_path, dpi=600, bbox_inches="tight")
 
 plt.show()

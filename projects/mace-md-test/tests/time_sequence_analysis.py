@@ -4,6 +4,7 @@
 # %%
 import glob
 import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -53,9 +54,8 @@ for i in range(1, len(models)):
 
     # (1) ADF 检验 (检验后半段稳态区是否平稳)
     adf_result = adfuller(y_diff[int(len(y_diff) * 0.3) :])
-    print(
-        f"[{pair_label}] ADF p-value: {adf_result[1]:.4e} -> {'已平稳 (Converged)' if adf_result[1] < 0.05 else '未平稳 (Drifting)'}"
-    )
+    status='Converged' if adf_result[1] < 0.05 else 'Drifting'
+    print(f"[{pair_label}] ADF p-value: {adf_result[1]:.4e} -> {status}")
 
     # (2) 滑动平均平滑曲线
     y_diff_smooth = (
