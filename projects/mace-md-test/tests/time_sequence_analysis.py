@@ -77,7 +77,7 @@ for i in range(1, len(models)):
         print(
             f"   拟合极限残差 C: {fit_C:.4f}, 时间常数 tau: {fit_tau:.2f} fs"
         )
-    except Exception as e:
+    except Exception:
         fit_C, fit_tau = np.nan, np.nan
         print("   拟合未收敛")
 
