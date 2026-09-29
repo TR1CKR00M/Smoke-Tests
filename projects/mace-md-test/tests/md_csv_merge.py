@@ -13,6 +13,7 @@ import argparse
 import glob
 import os
 import re
+
 import pandas as pd
 
 
@@ -48,7 +49,7 @@ def merge_md_logs(
   merged_dfs = []
   time_offset = 0.0  # 时间累积偏移量 (fs)
 
-  for i, (steps, filepath) in enumerate(file_info):
+  for _i, (_steps, filepath) in enumerate(file_info):
     df = pd.read_csv(filepath)
 
     if df.empty:

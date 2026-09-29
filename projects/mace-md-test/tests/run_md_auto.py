@@ -13,17 +13,18 @@ python run_md_auto.py --temp 600 --steps 200000 --restart
 
 import argparse
 import glob
-from pathlib import Path
 import os
 import re
+from pathlib import Path
+
 import numpy as np
 from ase import units
-from ase.io import read, Trajectory
+from ase.io import Trajectory, read
 from ase.io.trajectory import Trajectory as TrajReader
 from ase.md.langevin import Langevin
 from ase.md.velocitydistribution import (
-    MaxwellBoltzmannDistribution,
-    Stationary,
+  MaxwellBoltzmannDistribution,
+  Stationary,
 )
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
