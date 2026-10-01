@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
 from pathlib import Path
 
 import numpy as np
@@ -50,10 +49,17 @@ def main() -> None:
         raise RuntimeError(f"expected {expected_atoms} atoms, got {len(atoms)}")
     momenta = atoms.get_momenta()
     if cfg.get("initialize_momenta", False):
-        MaxwellBoltzmannDistribution(atoms, temperature_K=float(cfg["temperature_K"]), rng=np.random.default_rng(int(cfg["seed"])))
+        MaxwellBoltzmannDistribution(
+            atoms,
+            temperature_K=float(cfg["temperature_K"]),
+            rng=np.random.default_rng(int(cfg["seed"])),
+        )
         momenta = atoms.get_momenta()
     if momenta is None or not np.isfinite(momenta).all():
-        raise RuntimeError("last frame has no finite momenta; set initialize_momenta=true only for a new run")
+        raise RuntimeError(
+            "last frame has no finite momenta; "
+            "set initialize_momenta=true only for a new run"
+        )
     if not np.isfinite(atoms.get_positions()).all():
         raise RuntimeError("last frame has non-finite positions")
 
