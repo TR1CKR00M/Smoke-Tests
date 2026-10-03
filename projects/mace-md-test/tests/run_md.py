@@ -123,7 +123,7 @@ def load_previous_csv_logs(csv_path: Path) -> list[tuple[float, float, float, fl
         return rows
     with open(csv_path, encoding="utf-8") as f:
         reader = csv.reader(f)
-        header = next(reader, None)  # 跳过表头
+        #header = next(reader, None)  # 跳过表头
         for line in reader:
             if line:
                 rows.append((float(line[0]), float(line[1]), float(line[2]), float(line[3])))
@@ -164,7 +164,7 @@ def run_nvt_md(args):
 
         # 读取上一运行的轨迹
         parent_traj_reader = TrajReader(parent_traj_path)
-        atoms = parent_traj_reader[-1]  # 提取最后一帧（保留当前真实的 positions 与 momenta/velocities）
+        atoms = parent_traj_reader[-1]  # 提取最后一帧
 
         # 继承历史 CSV 日志
         log_rows = load_previous_csv_logs(parent_log_path)
@@ -309,7 +309,7 @@ def analyze_msd(traj_path: Path, timestep_fs: float, log_every: int):
 
 
 if __name__ == "__main__":
-    p = argparse.ArgumentParser(description="MACE MD 统一运行脚本 (支持独立目录管理、合并轨迹与 CSV 日志、断点续跑)")
+    p = argparse.ArgumentParser(description="MACE_MD 统一运行脚本")
     p.add_argument("--xyz", default="data/raw/sb2te3_cr_81atom.xyz", help="初始结构文件路径")
     p.add_argument("--model", default="medium-mpa-0", help="MACE 模型名称")
     p.add_argument("--device", default="", help="计算设备 (如 cuda, cpu)")
