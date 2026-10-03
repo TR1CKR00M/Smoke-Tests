@@ -1,0 +1,32 @@
+run_id: run_20261002_203606_3f4685e6
+timestamp: '20261002_203606'
+parameters:
+  model: medium-mpa-0
+  temperature: 600.0
+  steps: 2000
+  total_accumulated_steps: 6000
+  seed: 42
+  timestep: 1.0
+  friction: 0.02
+  device: ''
+  dtype: float32
+  log_every: 20
+lineage:
+  is_restart: true
+  parent_run_dir: results/runs/run_20261002_200817_ec69ae7e
+  parent_run_id: run_20261002_200817_ec69ae7e
+software_versions:
+  python: 3.10.20
+  ase: 3.29.0
+  mace: not installed
+  torch: 2.14.0
+  numpy: 2.2.6
+  scipy: 1.15.2
+  pyyaml: 6.0.3
+  cuda_available: 'False'
+hashes:
+  input_source: results/runs/run_20261002_200817_ec69ae7e/trajectory.traj
+  input_sha256: 5598b464ee7f1c0492623e870e9504ff62a22996dde4323c7eaaebe421a0eb1c
+  outputs:
+    trajectory.traj: 3be7e8008155c1bf53d8bf1cc404b84911421970bde2d9b268862661cbc8db6c
+    thermo_log.csv: c9d2077f74e6eca525be4e64e4d2bf5ea3f4ed26805de8f926331ce5e8548ae1
