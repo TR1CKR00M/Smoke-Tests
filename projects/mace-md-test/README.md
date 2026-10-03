@@ -34,6 +34,10 @@ The outputs are named `atlas_multi_file_comparison`,
 `timecourse`; the implementation is self-contained so the result does not
 depend on an untracked local plotting installation.
 
+The historical `plot_comparison_beta.py` and `time_sequence_analysis.py`
+commands are compatibility wrappers around the same implementation. They do
+not contain a second plotting implementation or require `statsmodels`.
+
 ### Restartable MD simulation
 
 Run `tests/run_md.py` with an explicit `--parent-run-dir` for a restart. Each
@@ -41,5 +45,4 @@ run writes its own trajectory, thermodynamic log, and `manifest.yaml`. The
 manifest records parameters, software versions, input/output hashes, and the
 parent run. The old `run_md_auto.py` and CSV merge entrypoints were removed in
 this PR and should not be referenced by documentation.
-
 

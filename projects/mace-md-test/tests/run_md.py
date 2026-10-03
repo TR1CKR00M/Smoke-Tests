@@ -25,14 +25,6 @@ from pathlib import Path
 
 import numpy as np
 import yaml
-from ase import units
-from ase.io import Trajectory, read
-from ase.io.trajectory import Trajectory as TrajReader
-from ase.md.langevin import Langevin
-from ase.md.velocitydistribution import (
-    MaxwellBoltzmannDistribution,
-    Stationary,
-)
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
@@ -134,6 +126,14 @@ def load_previous_csv_logs(csv_path: Path) -> list[tuple[float, float, float, fl
 
 def run_nvt_md(args):
     """MD 运行主流程：包含初始化/读取断点、历史文件继承合并、MD 演化及元数据写出。"""
+    # Keep ASE/MACE optional for repository-level provenance and plotting tests.
+    # They are required only when an actual MD run is requested.
+    from ase import units
+    from ase.io import Trajectory, read
+    from ase.io.trajectory import Trajectory as TrajReader
+    from ase.md.langevin import Langevin
+    from ase.md.velocitydistribution import MaxwellBoltzmannDistribution, Stationary
+
     base_dir = Path(args.output_dir)
     parent_run_dir = None
     parent_manifest = None
@@ -294,6 +294,8 @@ def run_nvt_md(args):
 
 def analyze_msd(traj_path: Path, timestep_fs: float, log_every: int):
     """对生成的轨迹计算 MSD 和估算扩散系数。"""
+    from ase.io.trajectory import Trajectory as TrajReader
+
     traj = TrajReader(traj_path)
     positions = np.array([f.get_positions() for f in traj])
     disp = positions - positions[0]
