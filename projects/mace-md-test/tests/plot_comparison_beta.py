@@ -66,7 +66,7 @@ plt.rcParams.update(
 
 # %%
 # 从指定的 txt 文件中读取 csv 文件列表（忽略空行和前后空格）
-with open(txt_file_path, "r", encoding="utf-8") as f:
+with open(txt_file_path, encoding="utf-8") as f:
     csv_files = [line.strip() for line in f if line.strip()]
 
 # 预设科研高对比度调色板（支持多个模型清晰区分）

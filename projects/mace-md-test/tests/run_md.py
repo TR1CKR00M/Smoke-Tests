@@ -22,7 +22,6 @@ import sys
 import uuid
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, Any, Optional, Tuple, List
 
 import numpy as np
 import yaml
@@ -50,7 +49,7 @@ def compute_sha256(filepath: str | Path) -> str:
     return sha256_hash.hexdigest()
 
 
-def get_software_versions() -> Dict[str, str]:
+def get_software_versions() -> dict[str, str]:
     """获取关键依赖库及环境版本。"""
     versions = {
         "python": sys.version.split()[0],
@@ -82,7 +81,7 @@ def attach_calculator(atoms, model: str, device: str = "", dtype: str = "float32
     return atoms
 
 
-def create_run_directory(base_dir: Path) -> Tuple[Path, str, str]:
+def create_run_directory(base_dir: Path) -> tuple[Path, str, str]:
     """创建全局唯一的 Run 目录。"""
     timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_uuid = str(uuid.uuid4())
@@ -93,7 +92,7 @@ def create_run_directory(base_dir: Path) -> Tuple[Path, str, str]:
     return run_dir, run_id, timestamp_str
 
 
-def find_latest_run(base_dir: Path, model: str, temp: float) -> Optional[Path]:
+def find_latest_run(base_dir: Path, model: str, temp: float) -> Path | None:
     """在基础目录下查找符合特定模型和温度的最佳/最新 Run 目录。"""
     if not base_dir.exists():
         return None
@@ -101,7 +100,7 @@ def find_latest_run(base_dir: Path, model: str, temp: float) -> Optional[Path]:
     candidate_runs = []
     for manifest_path in base_dir.glob("*/manifest.yaml"):
         try:
-            with open(manifest_path, "r", encoding="utf-8") as f:
+            with open(manifest_path, encoding="utf-8") as f:
                 meta = yaml.safe_load(f)
 
             params = meta.get("parameters", {})
@@ -117,12 +116,12 @@ def find_latest_run(base_dir: Path, model: str, temp: float) -> Optional[Path]:
     return candidate_runs[0][1]
 
 
-def load_previous_csv_logs(csv_path: Path) -> List[Tuple[float, float, float, float]]:
+def load_previous_csv_logs(csv_path: Path) -> list[tuple[float, float, float, float]]:
     """读取已有的 CSV 日志，以便追加续跑数据。"""
     rows = []
     if not csv_path.exists():
         return rows
-    with open(csv_path, "r", encoding="utf-8") as f:
+    with open(csv_path, encoding="utf-8") as f:
         reader = csv.reader(f)
         header = next(reader, None)  # 跳过表头
         for line in reader:
@@ -160,7 +159,7 @@ def run_nvt_md(args):
 
         print(f"[*] 准备进行续跑，目标父运行目录: {parent_run_dir}")
         if parent_manifest_path.exists():
-            with open(parent_manifest_path, "r", encoding="utf-8") as f:
+            with open(parent_manifest_path, encoding="utf-8") as f:
                 parent_manifest = yaml.safe_load(f)
 
         # 读取上一运行的轨迹
@@ -172,7 +171,7 @@ def run_nvt_md(args):
 
         past_steps = parent_manifest.get("parameters", {}).get("total_accumulated_steps", (
                     len(parent_traj_reader) - 1) * args.log_every) if parent_manifest else (
-                                                                                                       len(parent_traj_reader) - 1) * args.log_every
+                    len(parent_traj_reader) - 1) * args.log_every
         input_file_sha256 = compute_sha256(parent_traj_path)
         input_source = str(parent_traj_path)
         print(f"[*] 成功加载最后一帧 (已有累计步数: {past_steps})")
