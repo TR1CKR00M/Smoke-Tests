@@ -123,10 +123,12 @@ def load_previous_csv_logs(csv_path: Path) -> list[tuple[float, float, float, fl
         return rows
     with open(csv_path, encoding="utf-8") as f:
         reader = csv.reader(f)
-        #header = next(reader, None)  # 跳过表头
         for line in reader:
-            if line:
-                rows.append((float(line[0]), float(line[1]), float(line[2]), float(line[3])))
+            if not line or line[0].strip() == "time_fs":
+                continue
+            if len(line) != 4:
+                raise ValueError(f"expected four columns in {csv_path}, got {len(line)}")
+            rows.append((float(line[0]), float(line[1]), float(line[2]), float(line[3])))
     return rows
 
 
