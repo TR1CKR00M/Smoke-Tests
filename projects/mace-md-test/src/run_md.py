@@ -7,9 +7,9 @@ run_md.py
 生成包含完整历史记录的输出文件，并保存包含完整元数据、依赖版本及 SHA256 校验的 manifest.yaml。
 
 Usage:
-python run_md.py --temp 600 --steps 20000 --model medium-mpa-0
-python run_md.py --temp 600 --steps 20000 --model medium-mpa-0 --restart
-python run_md.py --steps 50000 --parent-run-dir results/runs/run_20261002_195728_a1b2c3d4
+python src/run_md.py --temp 600 --steps 20000 --model medium-mpa-0
+python src/run_md.py --temp 600 --steps 20000 --model medium-mpa-0 --restart
+python src/run_md.py --steps 50000 --parent-run-dir results/runs/<parent-run-directory>
 
 """
 
@@ -18,6 +18,7 @@ import csv
 import hashlib
 import importlib.metadata
 import os
+import platform
 import sys
 import uuid
 from datetime import datetime
@@ -45,8 +46,10 @@ def get_software_versions() -> dict[str, str]:
     """获取关键依赖库及环境版本。"""
     versions = {
         "python": sys.version.split()[0],
+        "platform": platform.platform(),
+        "machine": platform.machine(),
     }
-    packages = ["ase", "mace", "torch", "numpy", "scipy", "pyyaml"]
+    packages = ["ase", "mace-torch", "torch", "numpy", "scipy", "pyyaml"]
     for pkg in packages:
         try:
             versions[pkg] = importlib.metadata.version(pkg)
@@ -58,17 +61,60 @@ def get_software_versions() -> dict[str, str]:
         versions["cuda_available"] = str(torch.cuda.is_available())
         if torch.cuda.is_available():
             versions["cuda_version"] = torch.version.cuda or "unknown"
+            versions["cuda_device"] = torch.cuda.get_device_name(0)
+        versions["rocm_version"] = torch.version.hip or "unknown"
+        versions["mps_available"] = str(
+            hasattr(torch.backends, "mps") and torch.backends.mps.is_available()
+        )
     except Exception:
         pass
 
     return versions
 
 
-def attach_calculator(atoms, model: str, device: str = "", dtype: str = "float32"):
-    """挂载 MACE 计算器。"""
+def resolve_model_provenance(model: str) -> dict[str, str | None]:
+    """Resolve the requested MACE model to a concrete file and fingerprint it."""
+    from mace.calculators.foundations_models import (
+        download_mace_mp_checkpoint,
+        mace_mp_urls,
+    )
+
+    requested = str(model)
+    requested_path = Path(requested).expanduser()
+    if requested_path.is_file():
+        model_path = requested_path.resolve()
+        source_url = None
+        source_kind = "local_file"
+    else:
+        # Resolve aliases and URLs through the same MACE helper used by
+        # mace_mp, then pass the concrete path to prevent a second resolution.
+        model_path = Path(download_mace_mp_checkpoint(requested)).resolve()
+        source_url = mace_mp_urls.get(requested)
+        if requested.startswith(("https://", "http://")):
+            source_url = requested
+        source_kind = "mace_mp_alias" if requested in mace_mp_urls else (
+            "url" if source_url else "mace_mp_resolver"
+        )
+
+    model_provenance = {
+        "requested": requested,
+        "source_kind": source_kind,
+        "source_url": source_url,
+        "resolved_path": str(model_path),
+        "sha256": compute_sha256(model_path),
+    }
+    return model_provenance
+
+
+def attach_calculator(
+    atoms, model_provenance: dict[str, str | None], device: str = "", dtype: str = "float32"
+):
+    """挂载已经解析并记录来源的 MACE 计算器。"""
     from mace.calculators import mace_mp
 
-    calc = mace_mp(model=model, device=device, default_dtype=dtype)
+    calc = mace_mp(
+        model=model_provenance["resolved_path"], device=device, default_dtype=dtype
+    )
     atoms.calc = calc
     return atoms
 
@@ -141,29 +187,66 @@ def run_nvt_md(args):
     # 1. 确定是新运行还是续跑
     if args.parent_run_dir:
         parent_run_dir = Path(args.parent_run_dir)
+        if not parent_run_dir.is_dir():
+            raise FileNotFoundError(f"parent run directory does not exist: {parent_run_dir}")
     elif args.restart:
         parent_run_dir = find_latest_run(base_dir, args.model, args.temp)
+        if parent_run_dir is None:
+            raise FileNotFoundError(
+                f"no parent run found for model={args.model!r}, temperature={args.temp} K"
+            )
 
-    # 创建本次运行的独立 Run 目录
-    run_dir, run_id, timestamp_str = create_run_directory(base_dir)
-    traj_path = run_dir / "trajectory.traj"
-    log_path = run_dir / "thermo_log.csv"
-    manifest_path = run_dir / "manifest.yaml"
+    model_provenance = resolve_model_provenance(args.model)
+    if parent_run_dir:
+        parent_manifest_path = parent_run_dir / "manifest.yaml"
+        if not parent_manifest_path.is_file():
+            raise FileNotFoundError(f"parent run has no manifest: {parent_manifest_path}")
+        with open(parent_manifest_path, encoding="utf-8") as f:
+            parent_manifest = yaml.safe_load(f) or {}
+        for name in ("trajectory.traj", "thermo_log.csv"):
+            artifact = parent_run_dir / name
+            if not artifact.is_file():
+                raise FileNotFoundError(f"parent run is missing {name}: {artifact}")
+            expected_hash = parent_manifest.get("hashes", {}).get("outputs", {}).get(name)
+            if expected_hash and compute_sha256(artifact) != expected_hash:
+                raise ValueError(f"parent run artifact hash mismatch: {artifact}")
+        parent_sha256 = (parent_manifest.get("model_provenance") or {}).get("sha256")
+        if parent_sha256 and parent_sha256 != model_provenance["sha256"]:
+            raise ValueError(
+                "Restart model differs from the parent run: "
+                f"parent SHA256={parent_sha256}, "
+                f"current SHA256={model_provenance['sha256']}"
+            )
+        parent_params = parent_manifest.get("parameters", {})
+        for key, current in (
+            ("temperature", args.temp),
+            ("timestep", args.timestep),
+            ("friction", args.friction),
+            ("dtype", args.dtype),
+            ("log_every", args.log_every),
+        ):
+            previous = parent_params.get(key)
+            if previous is not None and previous != current:
+                raise ValueError(
+                    f"Restart parameter {key}={current!r} differs from parent value {previous!r}"
+                )
+
+    rng = np.random.default_rng(args.seed)
+    rng_state_restored = False
+    if parent_manifest and parent_manifest.get("rng_state_after_run"):
+        rng.bit_generator.state = parent_manifest["rng_state_after_run"]
+        rng_state_restored = True
 
     log_rows = []
     parent_traj_reader = None
 
     # 2. 读取结构与合并历史记录
-    if parent_run_dir and parent_run_dir.exists():
+    if parent_run_dir is not None:
         parent_traj_path = parent_run_dir / "trajectory.traj"
         parent_log_path = parent_run_dir / "thermo_log.csv"
         parent_manifest_path = parent_run_dir / "manifest.yaml"
 
         print(f"[*] 准备进行续跑，目标父运行目录: {parent_run_dir}")
-        if parent_manifest_path.exists():
-            with open(parent_manifest_path, encoding="utf-8") as f:
-                parent_manifest = yaml.safe_load(f)
-
         # 读取上一运行的轨迹
         parent_traj_reader = TrajReader(parent_traj_path)
         atoms = parent_traj_reader[-1]  # 提取最后一帧
@@ -178,21 +261,30 @@ def run_nvt_md(args):
         input_source = str(parent_traj_path)
         print(f"[*] 成功加载最后一帧 (已有累计步数: {past_steps})")
     else:
-        if args.restart or args.parent_run_dir:
-            print("[!] 未找到可续跑的 Run 目录，将回退为启动全新的模拟...")
-        else:
-            print("[*] 开始全新的 MD 模拟...")
+        print("[*] 开始全新的 MD 模拟...")
 
         atoms = read(args.xyz)
         MaxwellBoltzmannDistribution(
             atoms,
             temperature_K=args.temp,
-            rng=np.random.default_rng(args.seed),
+            rng=rng,
         )
         Stationary(atoms)
         past_steps = 0
         input_file_sha256 = compute_sha256(args.xyz)
         input_source = args.xyz
+
+    if (past_steps + args.steps) % args.log_every:
+        raise ValueError(
+            "total accumulated steps must be divisible by --log-every "
+            "so the final state is included in the trajectory and log"
+        )
+
+    # Create the run only after parent data and continuation settings validate.
+    run_dir, run_id, timestamp_str = create_run_directory(base_dir)
+    traj_path = run_dir / "trajectory.traj"
+    log_path = run_dir / "thermo_log.csv"
+    manifest_path = run_dir / "manifest.yaml"
 
     print(f"[*] 创建 Run 目录: {run_dir}")
 
@@ -208,20 +300,24 @@ def run_nvt_md(args):
         traj = Trajectory(traj_path, mode="w", atoms=atoms)
 
     # 4. 挂载 MACE 计算器与 Langevin 积分器
-    atoms = attach_calculator(atoms, model=args.model, device=args.device, dtype=args.dtype)
+    atoms = attach_calculator(
+        atoms, model_provenance=model_provenance, device=args.device, dtype=args.dtype
+    )
 
     dyn = Langevin(
         atoms,
         timestep=args.timestep * units.fs,
         temperature_K=args.temp,
         friction=args.friction,
+        rng=rng,
     )
+    # Continue ASE's global step count so restart observers do not emit a
+    # duplicate frame/log row at the parent trajectory's final time.
+    dyn.nsteps = past_steps
 
     dyn.attach(traj.write, interval=args.log_every)
 
     # 5. 记录日志（包含时间轴偏移量计算）
-    time_offset_fs = past_steps * args.timestep
-
     def log_step():
         epot = atoms.get_potential_energy()
         ekin = atoms.get_kinetic_energy()
@@ -233,7 +329,7 @@ def run_nvt_md(args):
             pressure_GPa = np.nan
 
         # 加上历史时间偏移，确保整段 csv 时间连续
-        current_time_fs = time_offset_fs + (dyn.get_time() / units.fs)
+        current_time_fs = dyn.get_time() / units.fs
         log_rows.append((current_time_fs, epot, temp, pressure_GPa))
 
     dyn.attach(log_step, interval=args.log_every)
@@ -255,6 +351,10 @@ def run_nvt_md(args):
         "thermo_log.csv": compute_sha256(log_path),
     }
 
+    software_versions = get_software_versions()
+    selected_device = args.device or (
+        "cuda" if software_versions.get("cuda_available") == "True" else "cpu"
+    )
     manifest_data = {
         "run_id": run_id,
         "timestamp": timestamp_str,
@@ -264,18 +364,28 @@ def run_nvt_md(args):
             "steps": args.steps,
             "total_accumulated_steps": total_accumulated_steps,
             "seed": args.seed,
+            "rng_state_restored": rng_state_restored,
             "timestep": args.timestep,
             "friction": args.friction,
             "device": args.device,
+            "device_selected": selected_device,
             "dtype": args.dtype,
             "log_every": args.log_every,
+        },
+        "integrator": {
+            "name": "ASE Langevin",
+            "fix_center_of_mass": True,
+            "temperature_definition": "2 * kinetic_energy / (3 * atom_count * kB)",
+            "pressure_definition": "negative mean of three diagonal virial stresses, converted to GPa",
         },
         "lineage": {
             "is_restart": parent_run_dir is not None,
             "parent_run_dir": str(parent_run_dir) if parent_run_dir else None,
             "parent_run_id": parent_manifest.get("run_id") if parent_manifest else None,
         },
-        "software_versions": get_software_versions(),
+        "software_versions": software_versions,
+        "model_provenance": model_provenance,
+        "rng_state_after_run": rng.bit_generator.state,
         "hashes": {
             "input_source": input_source,
             "input_sha256": input_file_sha256,
@@ -329,6 +439,13 @@ if __name__ == "__main__":
     p.add_argument("--parent-run-dir", type=str, default=None, help="显式指定用于续跑的父 Run 目录")
 
     args = p.parse_args()
+
+    if args.temp <= 0 or args.timestep <= 0 or args.friction <= 0:
+        p.error("--temp, --timestep, and --friction must be positive")
+    if args.steps <= 0 or args.log_every <= 0:
+        p.error("--steps and --log-every must be positive")
+    if args.steps % args.log_every:
+        p.error("--steps must be divisible by --log-every so the final state is recorded")
 
     latest_traj, run_dir = run_nvt_md(args)
     analyze_msd(latest_traj, args.timestep, args.log_every)

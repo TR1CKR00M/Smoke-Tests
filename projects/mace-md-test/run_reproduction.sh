@@ -4,7 +4,7 @@ set -e
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$SCRIPT_DIR"
 
-python tests/reproduce_plots.py
+python src/reproduce_plots.py
 python -m pytest -q tests/test_reproduce_plots.py
 
 for figure in \

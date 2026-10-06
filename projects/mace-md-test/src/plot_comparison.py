@@ -9,11 +9,14 @@ logic to the single validated implementation.
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
 
-from reproduce_plots import configure_style, plot_trajectory, read_logs
-
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src.reproduce_plots import configure_style, plot_trajectory, read_logs
 
 
 def main() -> None:

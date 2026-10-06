@@ -1,0 +1,38 @@
+run_id: run_20261006_175352_8fead085
+timestamp: '20261006_175352'
+parameters:
+  model: medium-omat-0
+  temperature: 600.0
+  steps: 2000
+  total_accumulated_steps: 2000
+  seed: 42
+  timestep: 1.0
+  friction: 0.02
+  device: ''
+  dtype: float32
+  log_every: 20
+lineage:
+  is_restart: false
+  parent_run_dir: null
+  parent_run_id: null
+software_versions:
+  python: 3.10.20
+  ase: 3.29.0
+  mace: not installed
+  torch: 2.14.0
+  numpy: 2.2.6
+  scipy: 1.15.2
+  pyyaml: 6.0.3
+  cuda_available: 'False'
+model_provenance:
+  requested: medium-omat-0
+  source_kind: mace_mp_alias
+  source_url: https://github.com/ACEsuit/mace-mp/releases/download/mace_omat_0/mace-omat-0-medium.model
+  resolved_path: /Users/trickroom/.cache/mace/maceomat0mediummodel
+  sha256: d4b14be9afa294eebdbe31a0280b26a0fa29715771e978cbfd3ca24e0d90307a
+hashes:
+  input_source: data/raw/sb2te3_cr_81atom.xyz
+  input_sha256: 978a35fe20f6ab15e7ceaf648dddaf5b90e07effe4f6d74435916c6f576c3e14
+  outputs:
+    trajectory.traj: f688298651ec595d0d4b15a215baf9304505201787010c7e6ea02feb284d58f3
+    thermo_log.csv: 5d7522b14bd98a12f8148e4226d6dbb4e1c9c65cdecdb635c6371d4550b1c7e4

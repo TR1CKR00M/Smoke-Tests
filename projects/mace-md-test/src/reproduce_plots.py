@@ -11,7 +11,9 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.metadata
 import json
+import sys
 from pathlib import Path
 
 import matplotlib as mpl
@@ -159,10 +161,16 @@ def main() -> None:
 
     all_paths = sorted(args.raw_dir.glob("*_log.csv"))
     all_data = read_logs(all_paths)
-    plot_trajectory(all_data, args.output_dir / "atlas_multi_file_comparison", raw_alpha=0.16)
+    output_bases = [
+        args.output_dir / "atlas_multi_file_comparison",
+        args.output_dir / "atlas_multi_file_comparison_alpha_adjusted",
+        args.output_dir / "atlas_group_1",
+        args.output_dir / "atlas_time_sequence_analysis",
+    ]
+    plot_trajectory(all_data, output_bases[0], raw_alpha=0.16)
     plot_trajectory(
         all_data,
-        args.output_dir / "atlas_multi_file_comparison_alpha_adjusted",
+        output_bases[1],
         raw_alpha=0.08,
     )
 
@@ -174,21 +182,42 @@ def main() -> None:
                 raise FileNotFoundError(f"metadata entry does not exist: {path}")
             listed.append(path)
     group_data = read_logs(listed)
-    plot_trajectory(group_data, args.output_dir / "atlas_group_1", raw_alpha=0.12)
-    plot_pairwise(all_data, args.output_dir / "atlas_time_sequence_analysis")
+    plot_trajectory(group_data, output_bases[2], raw_alpha=0.12)
+    plot_pairwise(all_data, output_bases[3])
+
+    output_paths = [base.with_suffix(ext) for base in output_bases for ext in (".png", ".svg", ".pdf")]
+
+    def relative_path(path: Path) -> str:
+        try:
+            return str(path.resolve().relative_to(ROOT))
+        except ValueError:
+            return str(path.resolve())
+
+    input_paths = all_paths + listed + [args.metadata.resolve()]
 
     manifest = {
-        "script": str(Path(__file__).relative_to(ROOT.parent.parent)),
+        "schema_version": 2,
+        "script": str(Path(__file__).resolve().relative_to(ROOT)),
+        "script_sha256": sha256(Path(__file__).resolve()),
         "inputs": {
-            str(path.relative_to(ROOT.parent.parent)): sha256(path)
-            for path in all_paths + listed
+            relative_path(path): sha256(path)
+            for path in input_paths
         },
-        "outputs": [
-            "atlas_multi_file_comparison.{png,svg,pdf}",
-            "atlas_multi_file_comparison_alpha_adjusted.{png,svg,pdf}",
-            "atlas_group_1.{png,svg,pdf}",
-            "atlas_time_sequence_analysis.{png,svg,pdf}",
-        ],
+        "outputs": {path.name: sha256(path) for path in output_paths},
+        "parameters": {
+            "raw_dir": relative_path(args.raw_dir),
+            "metadata": relative_path(args.metadata),
+            "output_dir": relative_path(args.output_dir),
+            "raw_alpha": [0.16, 0.08, 0.12],
+            "smoothing": "centered rolling mean; window=max(3,min(21, floor(n/10)*2+1))",
+            "pairwise_smoothing_window": 21,
+        },
+        "software_versions": {
+            "python": sys.version.split()[0],
+            "matplotlib": importlib.metadata.version("matplotlib"),
+            "numpy": importlib.metadata.version("numpy"),
+            "pandas": importlib.metadata.version("pandas"),
+        },
         "grammar": "Plot Atlas timecourse; self-contained implementation",
     }
     (args.output_dir / "atlas_plot_manifest.json").write_text(

@@ -1,2 +1,1 @@
-results/runs/run_20261002_200051_5ae6af1a/thermo_log.csv
-results/runs/run_20261002_200817_ec69ae7e/thermo_log.csv
+results/raw/md_restart_full/md_medium-mpa-0_600K_200000steps_log.csv

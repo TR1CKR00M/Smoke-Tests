@@ -1,20 +1,20 @@
 '''
 Usage:
-  python tests/offset_analysis_beta.py -f <FILE1> <FILE2> [OPTIONS]
+  python tests/offset_analysis.py -f <FILE1> <FILE2> [OPTIONS]
 
 Examples:
   # 1. 默认分析（压力变量，自动保存至 ./plots，并弹出交互界面）：
-  python tests/offset_analysis_beta.py -f results/raw/md_medium-mpa-0_600K_log.csv results/raw/md_medium_600K_log.csv
+  python tests/offset_analysis.py -f results/raw/md_medium-mpa-0_600K_log.csv results/raw/md_medium_600K_log.csv
 
   # 2. 分析温度变量、指定输出目录，并开启无界面（静默）保存：
-  python tests/offset_analysis_beta.py \
+  python tests/offset_analysis.py \
       --files results/raw/md_medium-mpa-0_600K_log.csv results/raw/md_medium_600K_log.csv \
       --var temperature \
       --save-dir results/figures \
       --no-show
 
   # 3. 调整平衡态截断比例 (Burn-in) 为 30%：
-  python tests/offset_analysis_beta.py \
+  python tests/offset_analysis.py \
       -f results/raw/md_medium-mpa-0_600K_log.csv results/raw/md_medium_600K_log.csv \
       --burn-in 0.30 \
       --var temperature \
@@ -237,8 +237,8 @@ class MDAnalyzer:
         mad = np.mean(np.abs(diff))
 
         ttest_res = welch_ttest_neff(
-            mean1=m2_stats["mean"], var1=m2_stats["var"], neff1=m2_stats["n_eff"],
-            mean2=m1_stats["mean"], var2=m1_stats["var"], neff2=m1_stats["n_eff"]
+            mean1=m1_stats["mean"], var1=m1_stats["var"], neff1=m1_stats["n_eff"],
+            mean2=m2_stats["mean"], var2=m2_stats["var"], neff2=m2_stats["n_eff"]
         )
 
         res = [{
