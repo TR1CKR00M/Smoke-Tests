@@ -1,0 +1,18 @@
+{
+  "script": "projects/mace-md-test/tests/reproduce_plots.py",
+  "inputs": {
+    "projects/mace-md-test/results/raw/md_medium-0b3_600K_log.csv": "62c0597aa699d72ed440da3ac03433d844fd180ff5f96870f13670f7d6166a44",
+    "projects/mace-md-test/results/raw/md_medium-mpa-0_600K_log.csv": "149bf04cd3ecd3128b65fae971a33c1f5490d8edcd987b58a7d9a8231d58bea4",
+    "projects/mace-md-test/results/raw/md_medium-omat-0_600K_log.csv": "657aa665c8b65733715895810d4ad62dcf8e592faad1cec5c501f62fa0ea4a5a",
+    "projects/mace-md-test/results/raw/md_medium_600K_log.csv": "d59ff12f5bf7afe4b8660e228508ec507e8bde711d61ea6b675a90e506b62569",
+    "projects/mace-md-test/results/runs/run_20261002_200051_5ae6af1a/thermo_log.csv": "4c99d36d7ad8f7a6a4c44218e28bfc4d092d65d253c8382f914aa1ab6e23dbca",
+    "projects/mace-md-test/results/runs/run_20261002_200817_ec69ae7e/thermo_log.csv": "5b7924d763fd8ecefcbede4b09f598993a6453539decd1cac97b1d8ef2135fb2"
+  },
+  "outputs": [
+    "atlas_multi_file_comparison.{png,svg,pdf}",
+    "atlas_multi_file_comparison_alpha_adjusted.{png,svg,pdf}",
+    "atlas_group_1.{png,svg,pdf}",
+    "atlas_time_sequence_analysis.{png,svg,pdf}"
+  ],
+  "grammar": "Plot Atlas timecourse; self-contained implementation"
+}

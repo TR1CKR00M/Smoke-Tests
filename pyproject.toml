@@ -36,7 +36,7 @@ common = "src/common"
 
 [tool.pytest.ini_options]
 addopts = "-ra"
-testpaths = ["projects/house_prices_shap/tests", "projects/jarvis_volume/tests"]
+testpaths = ["projects/house_prices_shap/tests", "projects/jarvis_volume/tests", "projects/mace-md-test/tests"]
 markers = [
   "slow: full end-to-end reproduction test",
   "shap: SHAP explanation tests",
