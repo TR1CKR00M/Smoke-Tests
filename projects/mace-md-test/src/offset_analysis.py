@@ -4,7 +4,9 @@ Usage:
 
 Examples:
   # 1. 默认分析（压力变量，自动保存至 ./plots，并弹出交互界面）：
-  python tests/offset_analysis.py -f results/raw/md_medium-mpa-0_600K_log.csv results/raw/md_medium_600K_log.csv
+  python src/offset_analysis.py \
+      -f results/raw/md_medium-mpa-0_600K_log.csv \
+         results/raw/md_medium_600K_log.csv
 
   # 2. 分析温度变量、指定输出目录，并开启无界面（静默）保存：
   python tests/offset_analysis.py \
@@ -30,12 +32,13 @@ Options:
   --no-show                  静默运行模式，仅保存图片，不弹出 Matplotlib 绘图窗口
 '''
 
-import os
 import argparse
+import os
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import scipy.stats as stats
-import matplotlib.pyplot as plt
 import seaborn as sns
 
 # 设置绘图风格
@@ -72,7 +75,9 @@ def calc_autocorr_time(x: np.ndarray, max_lag: int = None) -> tuple[float, np.nd
     return max(0.5, tau), acf
 
 
-def compute_block_averaging(x: np.ndarray, min_blocks: int = 10) -> tuple[np.ndarray, np.ndarray, float]:
+def compute_block_averaging(
+    x: np.ndarray, min_blocks: int = 10
+) -> tuple[np.ndarray, np.ndarray, float]:
     """
     计算块平均标准误（Block-Averaged Standard Errors）
 
@@ -222,7 +227,12 @@ class MDAnalyzer:
 
         return pd.DataFrame(results).set_index("Model")
 
-    def compare_two_models(self, model1_name: str, model2_name: str, target_variable: str = "pressure") -> pd.DataFrame:
+    def compare_two_models(
+        self,
+        model1_name: str,
+        model2_name: str,
+        target_variable: str = "pressure",
+    ) -> pd.DataFrame:
         m1_stats = self.stats_summary[model1_name]
         m2_stats = self.stats_summary[model2_name]
 
@@ -253,7 +263,12 @@ class MDAnalyzer:
         }]
         return pd.DataFrame(res).set_index("Model (Target)")
 
-    def plot_diagnostics(self, target_variable: str = "pressure", save_path: str = None, show: bool = True):
+    def plot_diagnostics(
+        self,
+        target_variable: str = "pressure",
+        save_path: str = None,
+        show: bool = True,
+    ):
         """绘制 2x2 四合一诊断图，支持指定路径保存且防止图像空白"""
         fig, axes = plt.subplots(2, 2, figsize=(15, 10))
 
@@ -261,7 +276,12 @@ class MDAnalyzer:
         for name, df in self.raw_data.items():
             axes[0, 0].plot(df["time"], df[target_variable], alpha=0.35, label=f"{name} (raw)")
             trimmed = self.trimmed_data[name]
-            axes[0, 0].plot(trimmed["time"], trimmed[target_variable], alpha=0.8, label=f"{name} (trimmed)")
+            axes[0, 0].plot(
+                trimmed["time"],
+                trimmed[target_variable],
+                alpha=0.8,
+                label=f"{name} (trimmed)",
+            )
 
         axes[0, 0].set_title(f"Time Series ({target_variable.capitalize()})")
         axes[0, 0].set_xlabel("Time")
@@ -304,7 +324,7 @@ class MDAnalyzer:
         for name, trimmed in self.trimmed_data.items():
             sns.kdeplot(trimmed[target_variable], ax=axes[1, 1], label=name, fill=True, alpha=0.2)
 
-        axes[1, 1].set_title(f"Density Plot - Offset Visualizer")
+        axes[1, 1].set_title("Density Plot - Offset Visualizer")
         axes[1, 1].set_xlabel(target_variable.capitalize())
         axes[1, 1].set_ylabel("Density")
         axes[1, 1].legend(loc="upper right", fontsize=8)
@@ -341,11 +361,30 @@ if __name__ == "__main__":
         help="传入两个 CSV 文件的路径，如: --files path/to/model1.csv path/to/model2.csv"
     )
 
-    parser.add_argument("--burn-in", type=float, default=0.20, help="剪裁 Burn-in 的比例 (默认: 0.20 代表前 20%)")
-    parser.add_argument("--var", type=str, default="pressure", choices=["pressure", "temperature"],
-                        help="分析的变量 (默认: pressure)")
-    parser.add_argument("--save-dir", type=str, default="./plots", help="指定图表保存的文件夹路径 (默认: ./plots)")
-    parser.add_argument("--no-show", action="store_true", help="加入此参数后只保存图片，不在屏幕上展示弹窗")
+    parser.add_argument(
+        "--burn-in",
+        type=float,
+        default=0.20,
+        help="剪裁 Burn-in 的比例 (默认: 0.20 代表前 20%)",
+    )
+    parser.add_argument(
+        "--var",
+        type=str,
+        default="pressure",
+        choices=["pressure", "temperature"],
+        help="分析的变量 (默认: pressure)",
+    )
+    parser.add_argument(
+        "--save-dir",
+        type=str,
+        default="./plots",
+        help="指定图表保存的文件夹路径 (默认: ./plots)",
+    )
+    parser.add_argument(
+        "--no-show",
+        action="store_true",
+        help="加入此参数后只保存图片，不在屏幕上展示弹窗",
+    )
 
     args = parser.parse_args()
 
@@ -373,7 +412,7 @@ if __name__ == "__main__":
 
     # 计算统计特征并进行 Block Averaging 对比
     df_stats = analyzer.compute_statistics(target_variable=args.var)
-    print(f"\n[表 1: 平稳段统计量与 SEM 交叉验证 (Naive vs Tau_int vs Block Averaging)]")
+    print("\n[表 1: 平稳段统计量与 SEM 交叉验证 (Naive vs Tau_int vs Block Averaging)]")
     print(df_stats.to_string())
 
     # 两模型对比

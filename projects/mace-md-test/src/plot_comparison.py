@@ -16,10 +16,9 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.reproduce_plots import configure_style, plot_trajectory, read_logs
-
-
 def main() -> None:
+    from src.reproduce_plots import configure_style, plot_trajectory, read_logs
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("txt_name", help="metadata file under data/metadata")
     args = parser.parse_args()

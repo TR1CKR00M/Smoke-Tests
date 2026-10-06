@@ -185,7 +185,11 @@ def main() -> None:
     plot_trajectory(group_data, output_bases[2], raw_alpha=0.12)
     plot_pairwise(all_data, output_bases[3])
 
-    output_paths = [base.with_suffix(ext) for base in output_bases for ext in (".png", ".svg", ".pdf")]
+    output_paths = [
+        base.with_suffix(ext)
+        for base in output_bases
+        for ext in (".png", ".svg", ".pdf")
+    ]
 
     def relative_path(path: Path) -> str:
         try:

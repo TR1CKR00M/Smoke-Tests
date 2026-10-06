@@ -376,7 +376,9 @@ def run_nvt_md(args):
             "name": "ASE Langevin",
             "fix_center_of_mass": True,
             "temperature_definition": "2 * kinetic_energy / (3 * atom_count * kB)",
-            "pressure_definition": "negative mean of three diagonal virial stresses, converted to GPa",
+            "pressure_definition": (
+                "negative mean of three diagonal virial stresses, converted to GPa"
+            ),
         },
         "lineage": {
             "is_restart": parent_run_dir is not None,
