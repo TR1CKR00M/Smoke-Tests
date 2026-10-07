@@ -11,9 +11,12 @@ jobs:
         python-version: ["3.11"]
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v3
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+      - uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
       - run: uv sync --extra dev
       - run: uv run pytest -q -m "not slow and not shap"
       - run: uv run ruff check .

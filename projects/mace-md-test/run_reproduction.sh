@@ -4,15 +4,15 @@ set -e
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$SCRIPT_DIR"
 
-#pip install -r requirements.txt
+python src/reproduce_plots.py
+python -m pytest -q tests/test_reproduce_plots.py
 
-python tests/run_foundation_md.py --model medium-mpa-0 --temp 600 --steps 2000
-python tests/run_foundation_md.py --model medium-0b3 --temp 600 --steps 2000
-python tests/plot_temp_pressure.py
+for figure in \
+    results/figures/atlas_multi_file_comparison.png \
+    results/figures/atlas_multi_file_comparison_alpha_adjusted.png \
+    results/figures/atlas_group_1.png \
+    results/figures/atlas_time_sequence_analysis.png; do
+    test -s "$figure"
+done
 
-if [ ! -f "results/figures/multi_file_comparison.png" ]; then
-    echo "Error: no expected figures generated"
-    exit 1
-fi
-
-echo "=== Verification success! ==="
+echo "=== Plot reproduction verification success! ==="

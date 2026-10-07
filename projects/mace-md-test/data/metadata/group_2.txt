@@ -1,0 +1,4 @@
+results/runs/run_20261006_173548_aff595e5/thermo_log.csv
+results/runs/run_20261006_174119_f834f4c6/thermo_log.csv
+results/runs/run_20261006_174820_36750535/thermo_log.csv
+results/runs/run_20261006_175352_8fead085/thermo_log.csv

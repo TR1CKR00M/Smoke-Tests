@@ -1,0 +1,38 @@
+run_id: run_20261006_173548_aff595e5
+timestamp: '20261006_173548'
+parameters:
+  model: medium-mpa-0
+  temperature: 600.0
+  steps: 2000
+  total_accumulated_steps: 2000
+  seed: 42
+  timestep: 1.0
+  friction: 0.02
+  device: ''
+  dtype: float32
+  log_every: 20
+lineage:
+  is_restart: false
+  parent_run_dir: null
+  parent_run_id: null
+software_versions:
+  python: 3.10.20
+  ase: 3.29.0
+  mace: not installed
+  torch: 2.14.0
+  numpy: 2.2.6
+  scipy: 1.15.2
+  pyyaml: 6.0.3
+  cuda_available: 'False'
+model_provenance:
+  requested: medium-mpa-0
+  source_kind: mace_mp_alias
+  source_url: https://github.com/ACEsuit/mace-mp/releases/download/mace_mpa_0/mace-mpa-0-medium.model
+  resolved_path: /Users/trickroom/.cache/mace/macempa0mediummodel
+  sha256: 75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638
+hashes:
+  input_source: data/raw/sb2te3_cr_81atom.xyz
+  input_sha256: 978a35fe20f6ab15e7ceaf648dddaf5b90e07effe4f6d74435916c6f576c3e14
+  outputs:
+    trajectory.traj: 9a636fe6a003e67c575ee39c08a363c9c096776309b4ff3ae733735c2efeb54e
+    thermo_log.csv: e0fbe76c3e5fc758d7d68d8824437a480e6b369306bcd0c2c72bb1a1644513f0
