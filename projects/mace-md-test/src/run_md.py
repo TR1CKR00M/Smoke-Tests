@@ -198,8 +198,9 @@ def find_latest_run(base_dir: Path, model: str, temp: float) -> Path | None:
         newest_completed is None or legacy_runs[0][0] > newest_completed[0]
     ):
         return legacy_runs[0][1]
+    newest_legacy = max(legacy_runs, key=lambda item: item[0]) if legacy_runs else None
     if len(legacy_runs) > 1 and (
-        newest_completed is None or max(legacy_runs, key=lambda item: item[0])[0] > newest_completed[0]
+        newest_completed is None or newest_legacy[0] > newest_completed[0]
     ):
         raise ValueError(
             "multiple legacy runs have a trajectory but no manifest, so their model and "
