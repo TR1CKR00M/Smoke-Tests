@@ -96,7 +96,23 @@ python src/run_md.py --temp 600 --steps 20000 --model medium-mpa-0 \
 ```
 
 Alternatively, `--restart` selects the latest run matching the requested model
-and temperature. The manifest records simulation parameters, software
+and temperature, preferring an unfinished run. During simulation the script
+periodically saves the trajectory, thermodynamic CSV, completed-step count, and
+Langevin random-number state. If a time limit interrupts the job, submit the
+same command again with `--restart` and the original target step count, for
+example:
+
+```sh
+python src/run_md.py --temp 600 --steps 20000 --model medium-mpa-0 --restart
+```
+
+For an unfinished run, `--steps` is interpreted as the original total target;
+the script runs only the remaining steps and creates a new run directory with
+the committed trajectory history plus the continuation. A completed run keeps
+the previous behavior: `--restart --steps N` adds N more steps. Old trajectory
+directories without a manifest can be resumed only when they are the sole
+unidentified legacy trajectory; their original settings and random state
+cannot be verified or exactly restored. The manifest records simulation parameters, software
 versions, input and output hashes, run lineage, and MACE model provenance:
 requested model, resolved checkpoint path, known source URL or local-file
 origin, and checkpoint SHA256. A restart is rejected if the parent's recorded
