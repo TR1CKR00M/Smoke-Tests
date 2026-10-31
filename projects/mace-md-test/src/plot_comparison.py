@@ -35,7 +35,8 @@ def main() -> None:
     paths = [ROOT / line.strip() for line in metadata.read_text().splitlines() if line.strip()]
     if args.labels is not None and len(args.labels) != len(paths):
         parser.error(
-            f"--labels needs one label per CSV path ({len(paths)} expected, {len(args.labels)} given)"
+            f"--labels needs one label per CSV path "
+            f"({len(paths)} expected, {len(args.labels)} given)"
         )
     if args.labels is not None and len(set(args.labels)) != len(args.labels):
         parser.error("--labels must be unique")
