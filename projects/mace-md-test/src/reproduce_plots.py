@@ -57,7 +57,6 @@ def read_logs(paths: list[Path]) -> dict[str, pd.DataFrame]:
     if not paths:
         raise ValueError("No CSV files were supplied")
     data: dict[str, pd.DataFrame] = {}
-    reference_time: np.ndarray | None = None
     required = {"time_fs", "potential_energy_eV", "temperature_K", "pressure_GPa"}
     for path in paths:
         frame = pd.read_csv(path)
@@ -69,10 +68,10 @@ def read_logs(paths: list[Path]) -> dict[str, pd.DataFrame]:
         time = frame["time_fs"].to_numpy(float)
         if np.any(np.diff(time) <= 0):
             raise ValueError(f"{path} has a non-increasing time axis")
-        if reference_time is None:
-            reference_time = time
-        elif not np.array_equal(reference_time, time):
-            raise ValueError(f"time axis mismatch: {path}")
+        # Each run may start at a different absolute timestamp or use a
+        # different logging cadence. Compare trajectories by elapsed time.
+        frame = frame.copy()
+        frame["time_fs"] = time - time[0]
         label = path.stem.removesuffix("_log")
         # Run-directory logs can share the generic name ``thermo_log.csv``.
         # In that case the run id is the only unambiguous plot label.
@@ -125,14 +124,24 @@ def plot_pairwise(data: dict[str, pd.DataFrame], output: Path) -> None:
     x = reference["time_fs"].to_numpy(float)
     fig, axes = plt.subplots(2, 1, figsize=(6.2, 5.3), sharex=True, constrained_layout=True)
     for i, label in enumerate(labels[1:]):
-        target_energy = data[label]["potential_energy_eV"].to_numpy(float)
+        target_time = data[label]["time_fs"].to_numpy(float)
+        target_values = data[label]["potential_energy_eV"].to_numpy(float)
+        reference_time = reference["time_fs"].to_numpy(float)
         reference_energy = reference["potential_energy_eV"].to_numpy(float)
+        # Interpolate onto reference samples only over the shared elapsed-time
+        # interval; extrapolating would invent a comparison beyond either run.
+        shared = (x >= target_time[0]) & (x <= target_time[-1])
+        if not np.any(shared):
+            raise ValueError(f"{label} has no elapsed-time overlap with {labels[0]}")
+        x_pair = x[shared]
+        reference_energy = np.interp(x_pair, reference_time, reference_energy)
+        target_energy = np.interp(x_pair, target_time, target_values)
         diff = np.abs(target_energy - reference_energy)
         smooth = pd.Series(diff).rolling(21, center=True, min_periods=1).mean()
         cumulative = np.cumsum(diff) / np.arange(1, len(diff) + 1)
         colour = PALETTE[i % len(PALETTE)]
-        axes[0].plot(x, smooth, color=colour, lw=1.45, label=f"{label} vs {labels[0]}")
-        axes[1].plot(x, cumulative, color=colour, lw=1.45, label=f"{label} vs {labels[0]}")
+        axes[0].plot(x_pair, smooth, color=colour, lw=1.45, label=f"{label} vs {labels[0]}")
+        axes[1].plot(x_pair, cumulative, color=colour, lw=1.45, label=f"{label} vs {labels[0]}")
     axes[0].set_ylabel(r"Smoothed $|\Delta E|$ (eV)")
     axes[1].set_ylabel(r"Cumulative mean $|\Delta E|$ (eV)")
     axes[1].set_xlabel("Time (fs)")

@@ -1,0 +1,59 @@
+run_id: run_20261027_144449_6fd775bb
+timestamp: '20261027_144449'
+parameters:
+  model: medium-mpa-0
+  temperature: 600.0
+  steps: 200000
+  total_accumulated_steps: 200000
+  seed: 42
+  rng_state_restored: false
+  timestep: 1.0
+  friction: 0.02
+  device: ''
+  device_selected: cuda
+  dtype: float32
+  log_every: 20
+integrator:
+  name: ASE Langevin
+  fix_center_of_mass: true
+  temperature_definition: 2 * kinetic_energy / (3 * atom_count * kB)
+  pressure_definition: negative mean of three diagonal virial stresses, converted
+    to GPa
+lineage:
+  is_restart: false
+  parent_run_dir: null
+  parent_run_id: null
+software_versions:
+  python: 3.11.9
+  platform: Linux-5.14.0-570.58.1.el9_6.x86_64-x86_64-with-glibc2.34
+  machine: x86_64
+  ase: 3.29.0
+  mace-torch: 0.3.16
+  torch: 2.5.1
+  numpy: 2.2.6
+  scipy: 1.15.2
+  pyyaml: 6.0.3
+  cuda_available: 'True'
+  cuda_version: '12.4'
+  cuda_device: NVIDIA A100-SXM4-80GB
+  rocm_version: unknown
+  mps_available: 'False'
+model_provenance:
+  requested: medium-mpa-0
+  source_kind: mace_mp_alias
+  source_url: https://github.com/ACEsuit/mace-mp/releases/download/mace_mpa_0/mace-mpa-0-medium.model
+  resolved_path: /weka/home/jhu/ywu366/.cache/mace/macempa0mediummodel
+  sha256: 75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638
+rng_state_after_run:
+  bit_generator: PCG64
+  state:
+    state: 100462653572002326455310515603958406916
+    inc: 332724090758049132448979897138935081983
+  has_uint32: 0
+  uinteger: 0
+hashes:
+  input_source: data/raw/sb2te3_cr_81atom.xyz
+  input_sha256: 978a35fe20f6ab15e7ceaf648dddaf5b90e07effe4f6d74435916c6f576c3e14
+  outputs:
+    trajectory.traj: dc4abab77d562d1b4053ed88746d7c8f3b954b43788b51383fdd27b881a3ec23
+    thermo_log.csv: de390fc88fe3fc249205ed95f94f9e504ae90091dd06eea7c32617d8c9df8cfa

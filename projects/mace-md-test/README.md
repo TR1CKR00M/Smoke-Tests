@@ -78,6 +78,20 @@ metadata file, run the compatibility entrypoint, for example:
 python src/plot_comparison.py group_2.txt
 ```
 
+Each non-empty line in the metadata file must contain a CSV path relative to
+the project root. By default, the plot legend uses each CSV filename. Supply
+`--labels` to choose legend labels in the same order as those paths:
+
+```sh
+python src/plot_comparison.py group_2.txt --labels "MACE baseline" "MACE fine-tuned"
+```
+
+Provide exactly one unique label per CSV. The plotting entrypoint rebases each
+trajectory's time axis so its first observation is at 0 fs. This allows runs
+with different absolute start times or logging intervals to appear on the
+same plot. Pairwise energy differences are interpolated over the trajectories'
+shared elapsed-time range.
+
 ## Run or restart an MD simulation
 
 Run commands from the project root. A new run creates a unique directory under
@@ -96,7 +110,23 @@ python src/run_md.py --temp 600 --steps 20000 --model medium-mpa-0 \
 ```
 
 Alternatively, `--restart` selects the latest run matching the requested model
-and temperature. The manifest records simulation parameters, software
+and temperature, preferring an unfinished run. During simulation the script
+periodically saves the trajectory, thermodynamic CSV, completed-step count, and
+Langevin random-number state. If a time limit interrupts the job, submit the
+same command again with `--restart` and the original target step count, for
+example:
+
+```sh
+python src/run_md.py --temp 600 --steps 20000 --model medium-mpa-0 --restart
+```
+
+For an unfinished run, `--steps` is interpreted as the original total target;
+the script runs only the remaining steps and creates a new run directory with
+the committed trajectory history plus the continuation. A completed run keeps
+the previous behavior: `--restart --steps N` adds N more steps. Old trajectory
+directories without a manifest can be resumed only when they are the sole
+unidentified legacy trajectory; their original settings and random state
+cannot be verified or exactly restored. The manifest records simulation parameters, software
 versions, input and output hashes, run lineage, and MACE model provenance:
 requested model, resolved checkpoint path, known source URL or local-file
 origin, and checkpoint SHA256. A restart is rejected if the parent's recorded
@@ -125,11 +155,11 @@ of freedom, so it does not correct for the center-of-mass constraint.
 
 `src/offset_analysis.py` is an exploratory comparison of pressure or
 temperature in two CSV logs. It trims a time-based burn-in and reports
-autocorrelation- and block-based uncertainty estimates. It does not validate
-that the input time axes match. Its current offset metrics pair rows by index,
-while its Welch-style significance test treats the two series as independent;
-use its p-value only after validating those assumptions for the experiment.
-For example:
+autocorrelation- and block-based uncertainty estimates. For its offset metrics,
+it pairs retained rows by index; it does not align or interpolate differing
+time axes. Its Welch-style significance test treats the two series as
+independent. Check that these assumptions fit the experiment before
+interpreting the offset metrics or p-value. For example:
 
 ```sh
 python src/offset_analysis.py \
