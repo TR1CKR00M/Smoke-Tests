@@ -78,6 +78,20 @@ metadata file, run the compatibility entrypoint, for example:
 python src/plot_comparison.py group_2.txt
 ```
 
+Each non-empty line in the metadata file must contain a CSV path relative to
+the project root. By default, the plot legend uses each CSV filename. Supply
+`--labels` to choose legend labels in the same order as those paths:
+
+```sh
+python src/plot_comparison.py group_2.txt --labels "MACE baseline" "MACE fine-tuned"
+```
+
+Provide exactly one unique label per CSV. The plotting entrypoint rebases each
+trajectory's time axis so its first observation is at 0 fs. This allows runs
+with different absolute start times or logging intervals to appear on the
+same plot. Pairwise energy differences are interpolated over the trajectories'
+shared elapsed-time range.
+
 ## Run or restart an MD simulation
 
 Run commands from the project root. A new run creates a unique directory under
@@ -141,11 +155,11 @@ of freedom, so it does not correct for the center-of-mass constraint.
 
 `src/offset_analysis.py` is an exploratory comparison of pressure or
 temperature in two CSV logs. It trims a time-based burn-in and reports
-autocorrelation- and block-based uncertainty estimates. It does not validate
-that the input time axes match. Its current offset metrics pair rows by index,
-while its Welch-style significance test treats the two series as independent;
-use its p-value only after validating those assumptions for the experiment.
-For example:
+autocorrelation- and block-based uncertainty estimates. For its offset metrics,
+it pairs retained rows by index; it does not align or interpolate differing
+time axes. Its Welch-style significance test treats the two series as
+independent. Check that these assumptions fit the experiment before
+interpreting the offset metrics or p-value. For example:
 
 ```sh
 python src/offset_analysis.py \
