@@ -1,0 +1,9 @@
+numpy
+ase
+matplotlib
+scipy
+h5py
+mace-torch
+qcengine
+qcelemental
+geometric

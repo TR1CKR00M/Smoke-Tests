@@ -6,6 +6,7 @@ Each experiment is an independent project. The only shared code is under `src/co
 | --- | --- |
 | [`house_prices_shap`](house_prices_shap) | Kaggle House Prices model comparison and SHAP interpretability |
 | [`jarvis_volume`](jarvis_volume) | MACE/JARVIS equilibrium-volume benchmarking |
+| [`mace-off`](mace-off) | MACE-OFF23 evaluation on SPICE data and constrained torsion scans |
 | [`data_cleaning_practice`](data_cleaning_practice) | Basic data cleaning and preprocessing exercise |
 
 
