@@ -17,7 +17,6 @@ import numpy as np
 from ase import units
 from scipy.interpolate import CubicSpline
 
-
 ROOT = Path(__file__).resolve().parent.parent
 DATASETS = {
     "tnet500": ROOT / "data" / "TNet500_minimal",
@@ -107,7 +106,7 @@ def gather(results_dir: Path):
 
         if dataset == "tnet500":
             row_by_angle = {round(float(row["grid_angle_deg"]) % 360.0, 6): row for row in rows}
-            for angle, ref_xyz in zip(ref_angles, ref_geometries):
+            for angle, ref_xyz in zip(ref_angles, ref_geometries, strict=True):
                 row = row_by_angle.get(round(float(angle), 6))
                 if row is None:
                     continue
@@ -212,7 +211,8 @@ def main():
     parser.add_argument("--summary", type=Path,
                         default=ROOT / "results" / "metrics" / "fig2_metrics.csv")
     parser.add_argument("--allow-partial", action="store_true",
-                        help="create a clearly partial figure when not all molecules/points are present")
+                        help=("create a partial figure when not all molecules/points "
+                              "are present"))
     args = parser.parse_args()
     profiles, references, rmsds, counts = gather(args.results_dir)
     missing = []

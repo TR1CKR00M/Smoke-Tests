@@ -19,7 +19,6 @@ from ase.constraints import FixInternals
 from ase.io import write
 from ase.optimize import BFGS
 
-
 ROOT = Path(__file__).resolve().parent.parent
 DATASETS = {
     "tnet500": ROOT / "data" / "TNet500_minimal",

@@ -13,7 +13,6 @@ from ase.data import covalent_radii
 from ase.io import iread
 from ase.neighborlist import primitive_neighbor_list
 
-
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_FILES = (
     ROOT / "data" / "test_large_neut_all.xyz",
@@ -40,7 +39,7 @@ def molecular_components(numbers: np.ndarray, positions: np.ndarray) -> list[np.
         "ij", [False, False, False], np.zeros((3, 3)), positions,
         atom_cutoffs, self_interaction=False,
     )
-    for i, j in zip(atom_i, atom_j):
+    for i, j in zip(atom_i, atom_j, strict=True):
         if i < j:
             left, right = root(int(i)), root(int(j))
             if left != right:
@@ -131,7 +130,10 @@ def main() -> None:
         print(f"  any molecular-fragment net force > {NET_FORCE_LIMIT:g} eV/Å: "
               f"{summary['molecular_net_force_hits']:,}")
         print(f"  frames flagged by any criterion: {summary['flagged_frames']:,}")
-        print("  frames by config_type: " + ", ".join(f"{name}={n:,}" for name, n in by_type.most_common()))
+        counts_by_type = ", ".join(
+            f"{name}={n:,}" for name, n in by_type.most_common()
+        )
+        print("  frames by config_type: " + counts_by_type)
 
     columns = [
         "file", "frame", "config_type", "n_atoms", "max_atom_force_eV_per_A",

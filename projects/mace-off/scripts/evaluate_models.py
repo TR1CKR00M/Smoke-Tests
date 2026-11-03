@@ -16,7 +16,6 @@ from ase.io import iread
 from ase.neighborlist import primitive_neighbor_list
 from mace.calculators import MACECalculator
 
-
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_TEST = ROOT / "data" / "test_large_neut_all.xyz"
 MODEL_DIR = ROOT / "models" / "mace_off23"
@@ -68,7 +67,7 @@ def molecular_components(numbers: np.ndarray, positions: np.ndarray) -> list[np.
         "ij", [False, False, False], np.zeros((3, 3)), positions,
         cutoffs, self_interaction=False,
     )
-    for i, j in zip(atom_i, atom_j):
+    for i, j in zip(atom_i, atom_j, strict=True):
         if i < j:
             a, b = root(int(i)), root(int(j))
             if a != b:
@@ -91,7 +90,7 @@ def intermolecular_force(numbers: np.ndarray, positions: np.ndarray,
         translation = (masses[:, None] / masses.sum()) * molecular_forces.sum(axis=0)
 
         inertia = np.zeros((3, 3), dtype=np.float64)
-        for mass, r in zip(masses, relative):
+        for mass, r in zip(masses, relative, strict=True):
             inertia += mass * (np.dot(r, r) * np.eye(3) - np.outer(r, r))
         # Torque convention here is r x f, equivalent to the supplied
         # f x r / r x I^-1 T formulation after accounting for its sign.
@@ -198,7 +197,9 @@ def build_rows(totals: dict, seen: dict, input_counts: dict, excluded: dict) -> 
                 "n_input": input_counts.get(subset.name, 0),
                 "n_excluded": excluded.get(subset.name, {}).get("either", 0),
                 "n_excluded_atom_force": excluded.get(subset.name, {}).get("atomic_force", 0),
-                "n_excluded_system_net_force": excluded.get(subset.name, {}).get("system_net_force", 0),
+                "n_excluded_system_net_force": excluded.get(subset.name, {}).get(
+                    "system_net_force", 0
+                ),
                 "expected_n_test": subset.expected_count,
                 "model": model_name,
                 "energy_rmse_mev_per_atom": energy_rmse,
@@ -227,10 +228,11 @@ def save_outputs(rows: list[dict], seen: dict, csv_path: Path, figure_path: Path
     )
     lookup = {(row["subset"], row["model"]): row for row in rows}
     fig, axes = plt.subplots(3, 1, figsize=(16, 12), sharex=True, constrained_layout=True)
-    for ax, (key, ylabel) in zip(axes, metrics):
+    for ax, (key, ylabel) in zip(axes, metrics, strict=True):
         for model_i, (model_name, _) in enumerate(MODEL_FILES):
             values = [lookup[(spec.name, model_name)][key] for spec in SUBSETS]
-            ax.bar(x + (model_i - 1) * width, values, width, color=colors[model_i], label=model_name)
+            ax.bar(x + (model_i - 1) * width, values, width,
+                   color=colors[model_i], label=model_name)
         ax.set_ylabel(ylabel)
         ax.grid(axis="y", alpha=0.25)
         ax.set_axisbelow(True)
@@ -252,9 +254,11 @@ def save_outputs(rows: list[dict], seen: dict, csv_path: Path, figure_path: Path
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--xyz", type=Path, default=DEFAULT_TEST, help="extxyz test set; train file is not used")
+    parser.add_argument("--xyz", type=Path, default=DEFAULT_TEST,
+                        help="extxyz test set; train file is not used")
     parser.add_argument("--device", default="cpu", help="MACE device, e.g. cpu or cuda")
-    parser.add_argument("--limit", type=int, help="process only the first N frames for a quick inference check")
+    parser.add_argument("--limit", type=int,
+                        help="process only the first N frames for a quick inference check")
     parser.add_argument("--csv", type=Path, default=OUTPUT_CSV)
     parser.add_argument("--figure", type=Path, default=OUTPUT_FIGURE)
     args = parser.parse_args()
@@ -268,7 +272,8 @@ def main() -> None:
         n_skipped = excluded.get(subset.name, {}).get("either", 0)
         if n_input:
             print(f"{subset.name}: read {n_input:,}, excluded {n_skipped:,}, "
-                  f"evaluated {seen.get(subset.name, 0):,} (reference target {subset.expected_count:,})")
+                  f"evaluated {seen.get(subset.name, 0):,} "
+                  f"(reference target {subset.expected_count:,})")
     rows = build_rows(totals, seen, input_counts, excluded)
     save_outputs(rows, seen, args.csv, args.figure)
     print(f"Processed {processed:,} frames; metrics: {args.csv}; figure: {args.figure}")

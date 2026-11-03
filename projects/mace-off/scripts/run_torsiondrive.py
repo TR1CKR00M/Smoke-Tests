@@ -25,15 +25,18 @@ def parse_dihedral(value: str) -> tuple[int, int, int, int]:
     try:
         atoms = tuple(int(part) for part in value.split(","))
     except ValueError as exc:
-        raise argparse.ArgumentTypeError("dihedral must be four comma-separated zero-based atom indices") from exc
+        message = "dihedral must be four comma-separated zero-based atom indices"
+        raise argparse.ArgumentTypeError(message) from exc
     if len(atoms) != 4 or len(set(atoms)) != 4 or min(atoms) < 0:
-        raise argparse.ArgumentTypeError("dihedral must contain four distinct nonnegative atom indices")
+        message = "dihedral must contain four distinct nonnegative atom indices"
+        raise argparse.ArgumentTypeError(message)
     return atoms  # type: ignore[return-value]
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("xyz", type=Path, help="published optimized starting geometry in XYZ format")
+    parser.add_argument("xyz", type=Path,
+                        help="published optimized starting geometry in XYZ format")
     parser.add_argument("--dihedral", required=True, type=parse_dihedral,
                         help="four zero-based atom indices, e.g. 2,5,8,11")
     parser.add_argument("--charge", type=int, default=0)
@@ -41,7 +44,8 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=Path("torsiondrive-result.json"))
     parser.add_argument("--ncores", type=int, default=4)
     parser.add_argument("--memory", type=float, default=8.0, help="QCEngine memory in GiB")
-    parser.add_argument("--maxiter", type=int, default=300, help="geometry optimizer iteration limit")
+    parser.add_argument("--maxiter", type=int, default=300,
+                        help="geometry optimizer iteration limit")
     args = parser.parse_args()
 
     if not args.xyz.is_file():
