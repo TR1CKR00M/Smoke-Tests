@@ -1,0 +1,5 @@
+model,l=0_count,l=1_count,l=2_count,l=3_count,l=4_count,l=0_percent,l=1_percent,l=2_percent,l=3_percent,l=4_percent
+mace_k32_L0,4,5,4,2,5,20.0,25.0,20.0,10.0,25.0
+mace_k32_L2,12,2,1,5,0,60.0,10.0,5.0,25.0,0.0
+mace_k128_L0,11,2,3,0,4,55.0,10.0,15.0,0.0,20.0
+mace_k128_L2,11,4,1,4,0,55.0,20.0,5.0,20.0,0.0

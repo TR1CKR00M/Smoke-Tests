@@ -1,0 +1,81 @@
+model,rank,feature_name,l,n1,n2,mean_abs_shap,feature_class
+mace_k32_L0,1,Mo-Mo_n33_l0,0,3,3,0.1079288328544308,Host-only
+mace_k32_L0,2,Cr-Cr_n14_l4,4,1,4,0.058617086173093004,Dopant-related (Cr)
+mace_k32_L0,3,S-Mo_n22_l0,0,2,2,0.04481732125961269,Host-only
+mace_k32_L0,4,Cr-Cr_n24_l4,4,2,4,0.03655585899290709,Dopant-related (Cr)
+mace_k32_L0,5,S-Cr_n22_l0,0,2,2,0.03501200593534649,Dopant-related (Cr)
+mace_k32_L0,6,Mo-Mo_n34_l0,0,3,4,0.03345891846780493,Host-only
+mace_k32_L0,7,S-Cr_n44_l4,4,4,4,0.02152064817118039,Dopant-related (Cr)
+mace_k32_L0,8,S-Mo_n24_l1,1,2,4,0.015252560637890473,Host-only
+mace_k32_L0,9,S-Mo_n34_l1,1,3,4,0.011084789721772617,Host-only
+mace_k32_L0,10,Cr-Mo_n43_l2,2,4,3,0.010595293610924966,Dopant-related (Cr)
+mace_k32_L0,11,Cr-Mo_n24_l1,1,2,4,0.009719463019814838,Dopant-related (Cr)
+mace_k32_L0,12,S-Cr_n24_l2,2,2,4,0.009588532061207414,Dopant-related (Cr)
+mace_k32_L0,13,S-Mo_n43_l3,3,4,3,0.009421912841861259,Host-only
+mace_k32_L0,14,S-S_n22_l4,4,2,2,0.008791516041434575,Host-only
+mace_k32_L0,15,S-Mo_n12_l2,2,1,2,0.00867650444429978,Host-only
+mace_k32_L0,16,Cr-Mo_n43_l1,1,4,3,0.008342183760164192,Dopant-related (Cr)
+mace_k32_L0,17,Cr-Mo_n42_l4,4,4,2,0.008168058121656423,Dopant-related (Cr)
+mace_k32_L0,18,Cr-Mo_n32_l1,1,3,2,0.008166545859834595,Dopant-related (Cr)
+mace_k32_L0,19,Mo-Mo_n44_l3,3,4,4,0.007623353160935355,Host-only
+mace_k32_L0,20,Cr-Cr_n24_l2,2,2,4,0.0075195118200464765,Dopant-related (Cr)
+mace_k32_L2,1,Mo-Mo_n33_l0,0,3,3,0.2113606050880492,Host-only
+mace_k32_L2,2,S-Mo_n22_l0,0,2,2,0.10075205020418963,Host-only
+mace_k32_L2,3,Cr-Mo_n32_l0,0,3,2,0.04645838583061359,Dopant-related (Cr)
+mace_k32_L2,4,Cr-Cr_n34_l3,3,3,4,0.032834300258949234,Dopant-related (Cr)
+mace_k32_L2,5,S-Cr_n43_l0,0,4,3,0.03207836738180955,Dopant-related (Cr)
+mace_k32_L2,6,Cr-Cr_n14_l3,3,1,4,0.029739369285201413,Dopant-related (Cr)
+mace_k32_L2,7,Mo-Mo_n22_l1,1,2,2,0.026689291572117288,Host-only
+mace_k32_L2,8,Cr-Mo_n31_l0,0,3,1,0.026288996166756215,Dopant-related (Cr)
+mace_k32_L2,9,Cr-Mo_n34_l0,0,3,4,0.024790689194288874,Dopant-related (Cr)
+mace_k32_L2,10,S-Cr_n23_l0,0,2,3,0.02362459698636004,Dopant-related (Cr)
+mace_k32_L2,11,Cr-Cr_n33_l0,0,3,3,0.022875721600291235,Dopant-related (Cr)
+mace_k32_L2,12,S-Cr_n33_l0,0,3,3,0.018046839899867505,Dopant-related (Cr)
+mace_k32_L2,13,S-Mo_n34_l3,3,3,4,0.017925452856374764,Host-only
+mace_k32_L2,14,Cr-Mo_n21_l0,0,2,1,0.015761048330049952,Dopant-related (Cr)
+mace_k32_L2,15,Cr-Mo_n23_l0,0,2,3,0.014407228645806538,Dopant-related (Cr)
+mace_k32_L2,16,S-Mo_n14_l3,3,1,4,0.014128273527371917,Host-only
+mace_k32_L2,17,S-Mo_n24_l3,3,2,4,0.014027932125890699,Host-only
+mace_k32_L2,18,S-Cr_n13_l0,0,1,3,0.010704351228114311,Dopant-related (Cr)
+mace_k32_L2,19,S-S_n22_l1,1,2,2,0.009178661888641413,Host-only
+mace_k32_L2,20,Mo-Mo_n12_l2,2,1,2,0.008347288932036576,Host-only
+mace_k128_L0,1,Mo-Mo_n33_l0,0,3,3,0.2066595784770496,Host-only
+mace_k128_L0,2,S-Mo_n22_l0,0,2,2,0.10965075038428114,Host-only
+mace_k128_L0,3,Cr-Mo_n32_l0,0,3,2,0.04753203355352211,Dopant-related (Cr)
+mace_k128_L0,4,Cr-Mo_n34_l0,0,3,4,0.04011344673245076,Dopant-related (Cr)
+mace_k128_L0,5,S-Cr_n23_l0,0,2,3,0.03780088803123764,Dopant-related (Cr)
+mace_k128_L0,6,Cr-Cr_n44_l4,4,4,4,0.03777960121853718,Dopant-related (Cr)
+mace_k128_L0,7,Cr-Cr_n33_l0,0,3,3,0.03562364139614579,Dopant-related (Cr)
+mace_k128_L0,8,S-S_n44_l1,1,4,4,0.025310357370644736,Host-only
+mace_k128_L0,9,S-Cr_n33_l0,0,3,3,0.023980615793605605,Dopant-related (Cr)
+mace_k128_L0,10,S-Cr_n43_l0,0,4,3,0.017545076098047743,Dopant-related (Cr)
+mace_k128_L0,11,S-Cr_n24_l1,1,2,4,0.01553091225268087,Dopant-related (Cr)
+mace_k128_L0,12,Cr-Mo_n22_l2,2,2,2,0.01519438049739147,Dopant-related (Cr)
+mace_k128_L0,13,Cr-Cr_n24_l4,4,2,4,0.014687872422354153,Dopant-related (Cr)
+mace_k128_L0,14,Cr-Cr_n34_l4,4,3,4,0.013285807495338905,Dopant-related (Cr)
+mace_k128_L0,15,Cr-Mo_n11_l2,2,1,1,0.01255614230721282,Dopant-related (Cr)
+mace_k128_L0,16,Cr-Mo_n22_l0,0,2,2,0.012130164976559046,Dopant-related (Cr)
+mace_k128_L0,17,Cr-Cr_n14_l4,4,1,4,0.011470400046999247,Dopant-related (Cr)
+mace_k128_L0,18,Cr-Mo_n31_l0,0,3,1,0.011066712160515498,Dopant-related (Cr)
+mace_k128_L0,19,Cr-Mo_n23_l2,2,2,3,0.010128169878121887,Dopant-related (Cr)
+mace_k128_L0,20,S-Cr_n24_l0,0,2,4,0.009384748644301513,Dopant-related (Cr)
+mace_k128_L2,1,S-S_n22_l0,0,2,2,0.21437513434245564,Host-only
+mace_k128_L2,2,S-Mo_n33_l0,0,3,3,0.11313337147722821,Host-only
+mace_k128_L2,3,Cr-Mo_n32_l0,0,3,2,0.061064758843929604,Dopant-related (Cr)
+mace_k128_L2,4,Cr-Cr_n33_l0,0,3,3,0.04544531579888081,Dopant-related (Cr)
+mace_k128_L2,5,S-Cr_n43_l0,0,4,3,0.025738024293865795,Dopant-related (Cr)
+mace_k128_L2,6,S-Mo_n21_l0,0,2,1,0.02379594011559287,Host-only
+mace_k128_L2,7,S-Mo_n31_l1,1,3,1,0.02365681692065542,Host-only
+mace_k128_L2,8,Cr-Mo_n31_l0,0,3,1,0.023472392644518877,Dopant-related (Cr)
+mace_k128_L2,9,S-Cr_n23_l0,0,2,3,0.02242467081163966,Dopant-related (Cr)
+mace_k128_L2,10,S-Cr_n13_l0,0,1,3,0.018291250389620713,Dopant-related (Cr)
+mace_k128_L2,11,Cr-Mo_n34_l0,0,3,4,0.017764583598229706,Dopant-related (Cr)
+mace_k128_L2,12,Cr-Mo_n33_l3,3,3,3,0.014855330903842182,Dopant-related (Cr)
+mace_k128_L2,13,Cr-Mo_n32_l3,3,3,2,0.014386147348458807,Dopant-related (Cr)
+mace_k128_L2,14,S-Cr_n33_l0,0,3,3,0.013930120806550983,Dopant-related (Cr)
+mace_k128_L2,15,S-Mo_n32_l1,1,3,2,0.012373318901211856,Host-only
+mace_k128_L2,16,S-Cr_n32_l1,1,3,2,0.011488291146192759,Dopant-related (Cr)
+mace_k128_L2,17,Cr-Mo_n31_l3,3,3,1,0.011447032012444812,Dopant-related (Cr)
+mace_k128_L2,18,S-S_n44_l3,3,4,4,0.008769942643699213,Host-only
+mace_k128_L2,19,S-Cr_n43_l1,1,4,3,0.008763442330350849,Dopant-related (Cr)
+mace_k128_L2,20,S-Cr_n42_l2,2,4,2,0.008581109490251013,Dopant-related (Cr)

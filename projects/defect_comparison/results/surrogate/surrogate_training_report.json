@@ -1,0 +1,65 @@
+{
+  "test_xyz": "data/processed/defect_test_1200K.xyz",
+  "n_structures": 50,
+  "soap": {
+    "species": [
+      "S",
+      "Cr",
+      "Mo"
+    ],
+    "r_cut_angstrom": 5.0,
+    "n_max": 4,
+    "l_max": 4,
+    "average": "inner",
+    "periodic": true,
+    "n_features": 390,
+    "feature_name_format": "ElementA-ElementB_n{n1}{n2}_l{l}; radial indices are one-based"
+  },
+  "surrogate": {
+    "estimator": "sklearn.ensemble.GradientBoostingRegressor",
+    "n_estimators": 200,
+    "learning_rate": 0.05,
+    "max_depth": 8,
+    "random_state": 42,
+    "target": "absolute total-energy error |E_MACE - E_REF_energy| in eV",
+    "fit_metrics_note": "In-sample diagnostics; no surrogate holdout split is used."
+  },
+  "models": [
+    {
+      "model": "mace_k128_L0",
+      "frames": 50,
+      "mean_abs_energy_error_eV": 0.9637067030615174,
+      "max_abs_energy_error_eV": 3.689817334450993,
+      "surrogate_fit_rmse_eV": 2.459911347557866e-05,
+      "surrogate_fit_mae_eV": 1.6599294688979248e-05,
+      "surrogate_file": "mace_k128_L0_soap_surrogate.joblib"
+    },
+    {
+      "model": "mace_k32_L0",
+      "frames": 50,
+      "mean_abs_energy_error_eV": 0.6449672328461645,
+      "max_abs_energy_error_eV": 3.240332456707222,
+      "surrogate_fit_rmse_eV": 2.28237144027262e-05,
+      "surrogate_fit_mae_eV": 1.4342044496015172e-05,
+      "surrogate_file": "mace_k32_L0_soap_surrogate.joblib"
+    },
+    {
+      "model": "mace_k128_L2",
+      "frames": 50,
+      "mean_abs_energy_error_eV": 0.9717828500710846,
+      "max_abs_energy_error_eV": 3.954324799206802,
+      "surrogate_fit_rmse_eV": 2.5687030479603714e-05,
+      "surrogate_fit_mae_eV": 1.716727572963317e-05,
+      "surrogate_file": "mace_k128_L2_soap_surrogate.joblib"
+    },
+    {
+      "model": "mace_k32_L2",
+      "frames": 50,
+      "mean_abs_energy_error_eV": 0.8566557767517667,
+      "max_abs_energy_error_eV": 3.497527900813168,
+      "surrogate_fit_rmse_eV": 2.3530688297426646e-05,
+      "surrogate_fit_mae_eV": 1.5739532794827317e-05,
+      "surrogate_file": "mace_k32_L2_soap_surrogate.joblib"
+    }
+  ]
+}

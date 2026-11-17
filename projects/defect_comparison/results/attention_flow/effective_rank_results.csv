@@ -1,0 +1,9 @@
+model,k,layer,n_atoms,effective_rank,channel_utilization_percent
+mace_k32_L0,32,node_embedding,1008,1.823437063,5.698240821
+mace_k32_L0,32,final_product_scalar,1008,11.27232193,35.22600604
+mace_k32_L2,32,node_embedding,1008,1.827585799,5.711205623
+mace_k32_L2,32,final_product_scalar,1008,12.47183013,38.97446917
+mace_k128_L0,128,node_embedding,1008,1.844950016,1.4413672
+mace_k128_L0,128,final_product_scalar,1008,21.42905307,16.74144771
+mace_k128_L2,128,node_embedding,1008,1.849560446,1.444969098
+mace_k128_L2,128,final_product_scalar,1008,16.63679575,12.99749668

@@ -4,7 +4,7 @@
 2. Add or update the relevant project under `projects/`.
 3. Run `uv sync --extra dev`.
 4. Run `make lint` and `make test`.
-5. Regenerate outputs with `make reproduce` if outputs are part of the change.
+5. Run the affected project's documented reproduction command if outputs are part of the change.
 6. Open a PR with a clear description and result links.
 
 ## Adding a new experiment

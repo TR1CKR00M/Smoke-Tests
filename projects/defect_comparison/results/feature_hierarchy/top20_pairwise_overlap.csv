@@ -1,0 +1,5 @@
+model,mace_k32_L0,mace_k32_L2,mace_k128_L0,mace_k128_L2
+mace_k32_L0,20,2,4,0
+mace_k32_L2,2,20,9,8
+mace_k128_L0,4,9,20,7
+mace_k128_L2,0,8,7,20
