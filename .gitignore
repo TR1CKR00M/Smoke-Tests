@@ -8,3 +8,15 @@ coverage.xml
 .DS_Store
 *.egg-info/
 outputs/
+
+# Large binary models and simulation artifacts should stay out of Git.
+*.model
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.traj
+*.xyz
+*.zip
+*.tar
+*.tar.gz

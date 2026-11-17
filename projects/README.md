@@ -5,7 +5,6 @@ Each experiment is an independent project. The only shared code is under `src/co
 | Folder | Scope |
 | --- | --- |
 | [`defect_comparison`](defect_comparison) | Defect-data comparison workflow |
-| [`dualx`](dualx) | DUAL-X research experiments |
 | [`mace-md-test`](mace-md-test) | MACE molecular-dynamics tests |
 | [`polar_benchmark`](polar_benchmark) | Polar benchmark experiments |
 

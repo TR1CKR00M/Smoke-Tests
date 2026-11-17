@@ -5,7 +5,6 @@ The repository is a workspace, not a single experiment. Each project owns its ow
 | Project | Scope |
 | --- | --- |
 | `defect_comparison` | Defect-data comparison workflow |
-| `dualx` | DUAL-X research experiments |
 | `mace-md-test` | MACE molecular-dynamics tests |
 | `polar_benchmark` | Polar benchmark experiments |
 
