@@ -1,0 +1,63 @@
+run_id: run_20261027_152440_ac8744e8
+timestamp: '20261027_152440'
+status: completed
+parameters:
+  model: medium-mpa-0
+  temperature: 600.0
+  steps: 1980
+  requested_total_steps: 2000
+  total_accumulated_steps: 2000
+  seed: 42
+  rng_state_restored: true
+  timestep: 1.0
+  friction: 0.02
+  device: ''
+  device_selected: cpu
+  dtype: float32
+  log_every: 20
+checkpoint:
+  completed_steps: 2000
+  frames: 101
+integrator:
+  name: ASE Langevin
+  fix_center_of_mass: true
+  temperature_definition: 2 * kinetic_energy / (3 * atom_count * kB)
+  pressure_definition: negative mean of three diagonal virial stresses, converted
+    to GPa
+lineage:
+  is_restart: true
+  parent_run_dir: results/runs/run_20261027_152257_64aa858f
+  parent_run_id: run_20261027_152257_64aa858f
+  legacy_parent_unverified: false
+software_versions:
+  python: 3.10.20
+  platform: macOS-27.0.1-arm64-arm-64bit
+  machine: arm64
+  ase: 3.29.0
+  mace-torch: 0.3.16
+  torch: 2.14.0
+  numpy: 2.2.6
+  scipy: 1.15.2
+  pyyaml: 6.0.3
+  cuda_available: 'False'
+  rocm_version: unknown
+  mps_available: 'True'
+model_provenance:
+  requested: medium-mpa-0
+  source_kind: mace_mp_alias
+  source_url: https://github.com/ACEsuit/mace-mp/releases/download/mace_mpa_0/mace-mpa-0-medium.model
+  resolved_path: /Users/trickroom/.cache/mace/macempa0mediummodel
+  sha256: 75428afe3a1d7d8062e19bcaabd5c433623cabf308242ec9fb493e38604fb638
+rng_state_after_run:
+  bit_generator: PCG64
+  state:
+    state: 67891249664902352358953389010084047266
+    inc: 332724090758049132448979897138935081983
+  has_uint32: 0
+  uinteger: 0
+hashes:
+  input_source: results/runs/run_20261027_152257_64aa858f/trajectory.traj
+  input_sha256: 5cf84001c37ee8855882646b6bad374a41f738c3dc507b8776370fd11ee3a935
+  outputs:
+    trajectory.traj: 16b088e5c0d95556b20b066d0013fc6291561f12f4f1942b029d63b178be0f97
+    thermo_log.csv: 3079385380a75f6f0533bfcb04cfa7c1322202ea7aa2d70a3213cb5a02937abe

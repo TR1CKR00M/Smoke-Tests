@@ -1,0 +1,44 @@
+ SYSTEM = Sb2Se3                 
+ Startparameter for this Run:
+  NWRITE =      1;   LPETIM=F    write-flag & time
+  ISTART =      0    job   : 0-new  1-cont  2-samecu
+  LWAVE = F
+ LCHARG = F 
+  ISPIN=2 
+# NELECT = 330  #neutral defects
+ 
+  LPLANE = .TRUE.
+  KPAR = 8
+  NCORE   = 8              
+ 
+ GGA = PE
+ IVDW=12
+ ISYM=0
+
+
+Electronic Relaxation 1
+
+   NELM   =    100
+   NELMIN =   5
+   EDIFFG = -0.01
+   EDIFF  = 1E-5
+   PREC   =  A 
+ ISIF=2
+ Ionic Relaxation
+   NSW    = 500   for static cal/.
+   NBLOCK =      1 ;   KBLOCK =      5    inner block; outer block 
+   IBRION =    2  ionic relax: 0-MD 1-quasi-New 2-CG
+   POTIM  =  0.5
+   LCORR  =      T    Harris-correction to forces
+   ENCUT  = 350 
+
+ DOS related values:
+   ISMEAR = 0
+   SIGMA = 0.01
+
+ Electronic Relaxation 2
+ 
+    ALGO  =     N ! Normal     algorithm
+   LDIAG  =      T    sub-space diagonalisation
+   LREAL = A
+
