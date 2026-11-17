@@ -1,0 +1,8 @@
+{
+  "project": "data_cleaning_practice",
+  "timestamp": "2026-09-21T17:15:00Z",
+  "dataset": {
+    "raw_file": "data/raw/raw_data.csv",
+    "sha256": "36788f8707b50fbf797fdbf12ca37c02d3c2cf8d0aea2b0e3b88864f522d9839"
+  }
+}
