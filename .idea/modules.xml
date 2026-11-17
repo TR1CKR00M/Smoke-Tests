@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/polar-benchmark.iml" filepath="$PROJECT_DIR$/.idea/polar-benchmark.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/smoke-tests.iml" filepath="$PROJECT_DIR$/.idea/smoke-tests.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/xforce.iml" filepath="$PROJECT_DIR$/.idea/xforce.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/xforce@1.iml" filepath="$PROJECT_DIR$/.idea/xforce@1.iml" />
     </modules>
   </component>
 </project>
