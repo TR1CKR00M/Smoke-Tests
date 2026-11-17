@@ -1,0 +1,9 @@
+ase
+dscribe
+joblib
+matplotlib
+mace-torch
+numpy
+scikit-learn
+shap
+torch

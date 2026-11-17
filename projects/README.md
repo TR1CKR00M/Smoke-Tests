@@ -4,10 +4,10 @@ Each experiment is an independent project. The only shared code is under `src/co
 
 | Folder | Scope |
 | --- | --- |
-| [`house_prices_shap`](house_prices_shap) | Kaggle House Prices model comparison and SHAP interpretability |
-| [`jarvis_volume`](jarvis_volume) | MACE/JARVIS equilibrium-volume benchmarking |
-| [`mace-off`](mace-off) | MACE-OFF23 evaluation on SPICE data and constrained torsion scans |
-| [`data_cleaning_practice`](data_cleaning_practice) | Basic data cleaning and preprocessing exercise |
+| [`defect_comparison`](defect_comparison) | Defect-data comparison workflow |
+| [`dualx`](dualx) | DUAL-X research experiments |
+| [`mace-md-test`](mace-md-test) | MACE molecular-dynamics tests |
+| [`polar_benchmark`](polar_benchmark) | Polar benchmark experiments |
 
 
 New experiments should be added as a new folder with the same structure:

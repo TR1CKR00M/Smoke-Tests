@@ -1,49 +1,37 @@
 # Smoke Tests: reproducible research workspace
 
-This repository is a long-lived workspace for reproducible data-to-paper workflows. It currently contains two fully separated research projects:
+This repository is a long-lived workspace for reproducible data-to-paper workflows. Each project is isolated with its own data, configuration, code, outputs, and tests.
 
 | Project | Goal | Status |
 | --- | --- | --- |
-| [`house_prices_shap`](projects/house_prices_shap) | Train XGBoost, RandomForest, and MLP regressors on Kaggle House Prices and analyze SHAP explanations. | Reproduced with fixed seeds. |
-| [`jarvis_volume`](projects/jarvis_volume) | Compare MACE-predicted equilibrium volumes against JARVIS-DFT `dft_3d`. | Downstream evaluation reproduced. |
-| [`data_cleaning_practice`](data_cleaning_practice) | Basic data cleaning and preprocessing exercise |
-
-The two projects have no shared dataset, target, or experiment. They live in separate folders and have separate configs, outputs, reports, and tests.
+See [`projects/README.md`](projects/README.md) for the current project registry.
 
 ## End-to-end reproduction
 
 ```bash
 uv sync --extra dev
-make reproduce
 make test
 make lint
 ```
 
-`make reproduce` writes raw outputs, processed metrics, manifests, figures, and reports under each project's `results/` folder. Every run also writes a `run_manifest.json` with dataset hashes, split settings, row counts, and environment metadata.
+Project-specific commands write raw outputs, processed metrics, manifests, figures, and reports under the relevant project's `results/` folder.
 
 ## Repository layout
 
 ```text
 projects/
-  house_prices_shap/
+  <project>/
+    README.md
     configs/
     data/raw/
-    notebooks/
-    src/house_prices_shap/
-    results/{raw,processed,figures,reports}
-    tests/
-  jarvis_volume/
-    configs/
-    data/raw/
-    legacy/
-    src/jarvis_volume/
+    src/<package>/
     results/{raw,processed,figures,reports}
     tests/
 src/common/
 docs/
 ```
 
-Each project has its own README, [`projects/README.md`](projects/README.md) gives the project layout, and [`docs/PROJECTS.md`](docs/PROJECTS.md) records the project registry and isolation rules. The top-level docs define the architecture, provenance policy, exact reproduction commands, evaluation findings, and governance standards.
+Each project has its own README. The top-level docs define the architecture, provenance policy, reproduction guidance, and governance standards.
 
 ## Provenance chain
 
@@ -57,9 +45,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). New experiments should get a new folder 
 
 ## Current limitations and blockers
 
-- `train.csv` was absent upstream. This branch uses a downloaded mirror and records its SHA-256.
-- The original notebook's MLP had no fixed random seed, so this branch fixes the seed for reproducibility.
-- The JARVIS workflow's raw prediction file lacks upstream generation metadata.
-- The original notebook labels XGBoost's printed MAE as “Mean Squared Error”; this branch computes both metrics explicitly.
-
-See [`docs/EVALUATION.md`](docs/EVALUATION.md) for the full audit.
+See the individual project README and [`docs/PROJECTS.md`](docs/PROJECTS.md) for project-specific status and reproduction guidance.

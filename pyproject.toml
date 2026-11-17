@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "smoke-tests"
 version = "0.1.0"
-description = "Reproducible research workspace with two independent projects: SHAP model comparison and MACE/JARVIS volume benchmarking."
+description = "Reproducible research workspace with isolated research projects."
 requires-python = ">=3.11"
 dependencies = [
   "pandas>=2.2,<3",
@@ -27,16 +27,14 @@ dev = [
 ]
 
 [tool.setuptools]
-packages = ["house_prices_shap", "jarvis_volume", "common"]
+packages = ["common"]
 
 [tool.setuptools.package-dir]
-house_prices_shap = "projects/house_prices_shap/src/house_prices_shap"
-jarvis_volume = "projects/jarvis_volume/src/jarvis_volume"
 common = "src/common"
 
 [tool.pytest.ini_options]
 addopts = "-ra"
-testpaths = ["projects/house_prices_shap/tests", "projects/jarvis_volume/tests", "projects/mace-md-test/tests"]
+testpaths = ["projects/mace-md-test/tests"]
 markers = [
   "slow: full end-to-end reproduction test",
   "shap: SHAP explanation tests",

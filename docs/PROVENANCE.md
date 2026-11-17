@@ -14,9 +14,6 @@ Raw data and generated reference caches live under each project's `data/raw/`. R
 
 Do not edit processed results directly. Regenerate them with the documented commands.
 
-## Known provenance blockers
+## Project-specific blockers
 
-1. `projects/house_prices_shap/data/raw/train.csv` is a public mirror; canonical Kaggle source and license need owner confirmation.
-2. `projects/house_prices_shap/data/raw/test.csv` is committed for context but is not used by the current training pipeline.
-3. `projects/jarvis_volume/data/raw/equilibrium_volume_results.csv` lacks upstream generation metadata.
-4. The original notebook's MLP was unseeded, so its exact historical result is not uniquely reproducible.
+Record unresolved source, licensing, generation, or reproducibility issues in the relevant project's README and results report.

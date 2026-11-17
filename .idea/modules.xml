@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/polar-benchmark.iml" filepath="$PROJECT_DIR$/.idea/polar-benchmark.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/smoke-tests.iml" filepath="$PROJECT_DIR$/.idea/smoke-tests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/xforce.iml" filepath="$PROJECT_DIR$/.idea/xforce.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/xforce@1.iml" filepath="$PROJECT_DIR$/.idea/xforce@1.iml" />
+    </modules>
+  </component>
+</project>

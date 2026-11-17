@@ -2,10 +2,12 @@
 
 The repository is a workspace, not a single experiment. Each project owns its own data, config, code, outputs, tests, and report.
 
-| Project | Scope | Production entry point | Historical artifacts |
-| --- | --- | --- | --- |
-| `house_prices_shap` | Kaggle House Prices model comparison and SHAP interpretation | `projects/house_prices_shap/src/house_prices_shap/pipeline.py` | `projects/house_prices_shap/notebooks/original_SHAP_Analysis_Practice.ipynb` |
-| `jarvis_volume` | MACE-predicted equilibrium volumes compared with JARVIS-DFT | `projects/jarvis_volume/src/jarvis_volume/pipeline.py` | `projects/jarvis_volume/legacy/` |
+| Project | Scope |
+| --- | --- |
+| `defect_comparison` | Defect-data comparison workflow |
+| `dualx` | DUAL-X research experiments |
+| `mace-md-test` | MACE molecular-dynamics tests |
+| `polar_benchmark` | Polar benchmark experiments |
 
 ## Isolation rules
 
