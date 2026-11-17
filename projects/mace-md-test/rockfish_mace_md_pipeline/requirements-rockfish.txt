@@ -1,0 +1,3 @@
+ase
+numpy
+mace-torch
