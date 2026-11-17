@@ -1,0 +1,23 @@
+# Keep input and generated scan data local.
+/data/*
+!/data/.gitkeep
+!/data/README.md
+
+# Model checkpoints are local; keep only the directory marker and instructions.
+/models/*
+!/models/README.md
+!/models/mace_off23/
+/models/mace_off23/*
+!/models/mace_off23/.gitkeep
+
+# Keep generated numerical results local, while tracking figures.
+/results/metrics/*
+!/results/metrics/.gitkeep
+/results/torsion_relax/*
+!/results/torsion_relax/.gitkeep
+
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+venv/
