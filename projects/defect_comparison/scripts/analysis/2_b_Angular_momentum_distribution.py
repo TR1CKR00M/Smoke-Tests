@@ -19,7 +19,6 @@ import numpy as np
 import pandas as pd
 import shap
 
-
 DEFAULT_MODELS = ["mace_k32_L0", "mace_k32_L2", "mace_k128_L0", "mace_k128_L2"]
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_INPUT_DIR = PROJECT_ROOT / "results" / "surrogate"
@@ -30,9 +29,17 @@ RANGE_NAMES = ["Short Range", "Medium Range", "Long Range"]
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input-dir", default=str(DEFAULT_INPUT_DIR), help="Artifacts created by script 2_a")
-    parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR), help="Directory for SHAP tables and figures")
-    parser.add_argument("--models", nargs="+", default=DEFAULT_MODELS, help="Surrogate model name prefixes")
+    parser.add_argument(
+        "--input-dir", default=str(DEFAULT_INPUT_DIR), help="Artifacts created by script 2_a"
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=str(DEFAULT_OUTPUT_DIR),
+        help="Directory for SHAP tables and figures",
+    )
+    parser.add_argument(
+        "--models", nargs="+", default=DEFAULT_MODELS, help="Surrogate model name prefixes"
+    )
     parser.add_argument(
         "--range-aggregation",
         choices=["sum", "mean"],
@@ -49,7 +56,10 @@ def parse_args() -> argparse.Namespace:
         "--medium-max-mean-n",
         type=float,
         default=3.0,
-        help="Medium range if mean radial index is above short threshold and at or below this threshold",
+        help=(
+            "Medium range if mean radial index is above short threshold "
+            "and at or below this threshold"
+        ),
     )
     return parser.parse_args()
 
@@ -145,13 +155,19 @@ def main() -> None:
         save_csv(
             shap_path,
             ["frame_index", *feature_names],
-            [[int(frame_idx), *row.tolist()] for frame_idx, row in zip(feature_table["frame_index"], shap_matrix)],
+            [
+                [int(frame_idx), *row.tolist()]
+                for frame_idx, row in zip(feature_table["frame_index"], shap_matrix, strict=True)
+            ],
         )
 
     save_csv(
         output_dir / "global_feature_importance.csv",
         ["feature_name", *args.models],
-        [[name, *[importance_by_model[model][i] for model in args.models]] for i, name in enumerate(feature_names)],
+        [
+            [name, *[importance_by_model[model][i] for model in args.models]]
+            for i, name in enumerate(feature_names)
+        ],
     )
 
     category_scores: dict[str, dict[str, float]] = {}
@@ -160,24 +176,33 @@ def main() -> None:
         for category_name in category_names:
             values = importance[np.asarray(categories) == category_name]
             category_scores[model_name][category_name] = (
-                float(np.sum(values)) if args.range_aggregation == "sum" else float(np.mean(values)) if len(values) else 0.0
+                float(np.sum(values))
+                if args.range_aggregation == "sum"
+                else float(np.mean(values))
+                if len(values)
+                else 0.0
             )
 
     save_csv(
         output_dir / "six_category_importance.csv",
         ["category", *args.models],
-        [[category, *[category_scores[model][category] for model in args.models]] for category in category_names],
+        [
+            [category, *[category_scores[model][category] for model in args.models]]
+            for category in category_names
+        ],
     )
 
     # Figure 4: six category panels, each with one bar per MACE model.
     fig, axes = plt.subplots(2, 3, figsize=(15, 8), constrained_layout=True)
     colors = ["#4C78A8", "#F58518", "#54A24B", "#E45756"]
-    for ax, category_name in zip(axes.flat, category_names):
+    for ax, category_name in zip(axes.flat, category_names, strict=True):
         values = [category_scores[model][category_name] for model in args.models]
         ax.bar(range(len(args.models)), values, color=colors[: len(args.models)])
         ax.set_title(category_name)
         ax.set_xticks(range(len(args.models)))
-        ax.set_xticklabels([name.replace("mace_", "") for name in args.models], rotation=35, ha="right")
+        ax.set_xticklabels(
+            [name.replace("mace_", "") for name in args.models], rotation=35, ha="right"
+        )
         ax.set_ylabel(f"{args.range_aggregation.title()} mean |SHAP|")
         ax.grid(axis="y", alpha=0.25)
     fig.suptitle("Global SOAP feature importance by radial and angular category")
@@ -194,7 +219,15 @@ def main() -> None:
             n1, n2, ell = metadata[feature_index]
             counts[ell] += 1
             top_rows.append(
-                [model_name, rank, feature_names[feature_index], ell, n1, n2, float(importance[feature_index])]
+                [
+                    model_name,
+                    rank,
+                    feature_names[feature_index],
+                    ell,
+                    n1,
+                    n2,
+                    float(importance[feature_index]),
+                ]
             )
         angular_counts[model_name] = counts
 
@@ -205,12 +238,19 @@ def main() -> None:
     )
     save_csv(
         output_dir / "top20_angular_momentum_distribution.csv",
-        ["model", *[f"l={ell}_count" for ell in range(5)], *[f"l={ell}_percent" for ell in range(5)]],
+        [
+            "model",
+            *[f"l={ell}_count" for ell in range(5)],
+            *[f"l={ell}_percent" for ell in range(5)],
+        ],
         [
             [
                 model,
                 *[angular_counts[model][ell] for ell in range(5)],
-                *[100.0 * angular_counts[model][ell] / sum(angular_counts[model].values()) for ell in range(5)],
+                *[
+                    100.0 * angular_counts[model][ell] / sum(angular_counts[model].values())
+                    for ell in range(5)
+                ],
             ]
             for model in args.models
         ],
@@ -231,12 +271,19 @@ def main() -> None:
     ax.set_title("Angular-momentum composition of each model's Top-20 SOAP features")
     ax.legend(title="SOAP angular channel", ncol=5)
     ax.grid(axis="y", alpha=0.25)
-    fig.savefig(output_dir / "Top20_angular_momentum_distribution.png", dpi=300, bbox_inches="tight")
+    fig.savefig(
+        output_dir / "Top20_angular_momentum_distribution.png", dpi=300, bbox_inches="tight"
+    )
     plt.close(fig)
 
-    print(f"Computed SHAP matrices for {features.shape[0]} structures and {features.shape[1]} SOAP features.")
-    print(f"Radial grouping: mean(n1,n2) <= {args.short_max_mean_n:g} = short; "
-          f"<= {args.medium_max_mean_n:g} = medium; above = long.")
+    print(
+        f"Computed SHAP matrices for {features.shape[0]} structures "
+        f"and {features.shape[1]} SOAP features."
+    )
+    print(
+        f"Radial grouping: mean(n1,n2) <= {args.short_max_mean_n:g} = short; "
+        f"<= {args.medium_max_mean_n:g} = medium; above = long."
+    )
     print(f"Category aggregation: {args.range_aggregation} of global mean absolute SHAP.")
     print("\nTop-20 angular-momentum frequencies:")
     print(f"{'Model':<16} | " + " | ".join(f"l={ell}" for ell in range(5)))

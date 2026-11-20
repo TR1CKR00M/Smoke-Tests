@@ -16,7 +16,6 @@ from ase.io import read
 from mace.data import AtomicData, config_from_atoms
 from mace.tools import AtomicNumberTable, torch_geometric
 
-
 DEFAULT_MODELS = [
     "mace_k128_L0",
     "mace_k32_L0",
@@ -30,9 +29,17 @@ MODEL_DIR = PROJECT_ROOT / "models"
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--train", default=str(DATA_DIR / "defect_train_300K.xyz"), help="Training XYZ")
-    parser.add_argument("--val", default=str(DATA_DIR / "defect_val_300K.xyz"), help="Validation XYZ")
-    parser.add_argument("--test", default=str(DATA_DIR / "defect_test_1200K.xyz"), help="Test XYZ (default: 1200 K OOD set)")
+    parser.add_argument(
+        "--train", default=str(DATA_DIR / "defect_train_300K.xyz"), help="Training XYZ"
+    )
+    parser.add_argument(
+        "--val", default=str(DATA_DIR / "defect_val_300K.xyz"), help="Validation XYZ"
+    )
+    parser.add_argument(
+        "--test",
+        default=str(DATA_DIR / "defect_test_1200K.xyz"),
+        help="Test XYZ (default: 1200 K OOD set)",
+    )
     parser.add_argument(
         "--models",
         nargs="+",
@@ -80,7 +87,9 @@ def read_dataset(path: str) -> list:
     return frames
 
 
-def evaluate_model(model: torch.nn.Module, frames: list, device: torch.device) -> tuple[float, float]:
+def evaluate_model(
+    model: torch.nn.Module, frames: list, device: torch.device
+) -> tuple[float, float]:
     model_dtype = next(model.parameters()).dtype
     z_table = AtomicNumberTable([int(z) for z in model.atomic_numbers])
     cutoff = float(model.r_max)
@@ -114,7 +123,9 @@ def evaluate_model(model: torch.nn.Module, frames: list, device: torch.device) -
         force_component_count += int(reference_forces.size)
 
     energy_rmse_mev_atom = float(np.sqrt(np.mean(energy_squared_errors)) * 1000.0)
-    force_rmse_mev_angstrom = float(np.sqrt(force_squared_error_sum / force_component_count) * 1000.0)
+    force_rmse_mev_angstrom = float(
+        np.sqrt(force_squared_error_sum / force_component_count) * 1000.0
+    )
     return energy_rmse_mev_atom, force_rmse_mev_angstrom
 
 
@@ -130,7 +141,10 @@ def main() -> None:
         ("test (1200 K)", read_dataset(args.test)),
     ]
 
-    print(f"{'Model':<16} | {'Dataset':<18} | {'Frames':>6} | {'Energy RMSE (meV/atom)':>23} | {'Force RMSE (meV/Å)':>20}")
+    print(
+        f"{'Model':<16} | {'Dataset':<18} | {'Frames':>6} | "
+        f"{'Energy RMSE (meV/atom)':>23} | {'Force RMSE (meV/Å)':>20}"
+    )
     print("-" * 97)
     for model_name in args.models:
         model_path = MODEL_DIR / f"{model_name}_stagetwo.model"

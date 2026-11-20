@@ -14,6 +14,7 @@ from pathlib import Path
 warnings.filterwarnings("ignore")
 
 import numpy as np
+import shap
 import torch
 from ase.io import read
 from ase.neighborlist import neighbor_list
@@ -21,7 +22,6 @@ from dscribe.descriptors import SOAP
 from mace.data import AtomicData, config_from_atoms
 from mace.tools import AtomicNumberTable, torch_geometric
 from sklearn.ensemble import GradientBoostingRegressor
-import shap
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = PROJECT_ROOT / "data" / "processed"
@@ -30,15 +30,21 @@ MODEL_DIR = PROJECT_ROOT / "models"
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--train", default=str(DATA_DIR / "defect_train_300K.xyz"), help="300 K training XYZ")
-    parser.add_argument("--test", default=str(DATA_DIR / "defect_test_1200K.xyz"), help="1200 K test XYZ")
+    parser.add_argument(
+        "--train", default=str(DATA_DIR / "defect_train_300K.xyz"), help="300 K training XYZ"
+    )
+    parser.add_argument(
+        "--test", default=str(DATA_DIR / "defect_test_1200K.xyz"), help="1200 K test XYZ"
+    )
     parser.add_argument(
         "--models",
         nargs="+",
         default=["mace_k128_L0", "mace_k32_L0", "mace_k128_L2", "mace_k32_L2"],
         help="Model name prefixes (expects <name>_stagetwo.model)",
     )
-    parser.add_argument("--train-frames", type=int, default=30, help="Number of initial training frames")
+    parser.add_argument(
+        "--train-frames", type=int, default=30, help="Number of initial training frames"
+    )
     return parser.parse_args()
 
 
@@ -109,10 +115,12 @@ def evaluate_and_gradcam(model_path: Path, frames, device: torch.device):
             activation_norm = torch.linalg.vector_norm(activation, ord=2, dim=-1)
             cam = (grad_norm * activation_norm).detach().cpu().numpy()
 
-            cr_indices = [i for i, symbol in enumerate(atoms.get_chemical_symbols()) if symbol == "Cr"]
+            cr_indices = [
+                i for i, symbol in enumerate(atoms.get_chemical_symbols()) if symbol == "Cr"
+            ]
             i_list, j_list = neighbor_list("ij", atoms, cutoff=3.5)
             defect_zone = set(cr_indices)
-            for i_atom, j_atom in zip(i_list, j_list):
+            for i_atom, j_atom in zip(i_list, j_list, strict=True):
                 if i_atom in cr_indices:
                     defect_zone.add(j_atom)
             bulk_zone = [i for i in range(len(atoms)) if i not in defect_zone]
