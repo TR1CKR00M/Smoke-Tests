@@ -129,3 +129,28 @@ This reports force errors, a defect-region activation score, and a SOAP/GBDT/SHA
 - SHAP values describe the fitted surrogate's attribution on the supplied test structures; they are not direct causal explanations of MACE physics.
 - Effective rank depends on the selected structures, centering, and the chosen layer output. It is a representation statistic, not a standalone accuracy metric.
 - Generated datasets, trained model files, and analysis results are included in their named directories as the current project artifacts.
+
+## Known limitations
+
+This project is kept as a practice / archived exercise. Its conclusions should not be
+cited as evidence without the fixes below.
+
+- **Labels are not DFT.** `REF_energy` / `REF_forces` come from MACE-MP-0 Large
+  (`generate_defect_data.py`), so every "error" is an error relative to another MLIP,
+  not to first principles.
+- **The surrogate is evaluated in-sample.** `2_a_Surrogate_Model_Training.py` fits one
+  `GradientBoostingRegressor` per MACE model on all 50 test structures and reports the
+  fit RMSE/MAE on the same structures (no holdout, no cross-validation). With ~50
+  samples and a high-dimensional SOAP vector the surrogate can memorise the targets,
+  so the SHAP attributions in `2_b`/`2_c` describe an over-fitted model and are **not
+  valid evidence** about which features drive the MACE errors.
+- **The 1200 K set has two roles.** `defect_test_1200K.xyz` is the `--test_file` in
+  `scripts/train_grid.sh` (reported during training) and also the analysis set for the
+  surrogate, SHAP and attention-flow scripts. Results reported on it are therefore not
+  from an untouched set; keep a separate analysis split if this is revisited.
+- **Single seed.** Data generation and training both use seed 42 only, so differences
+  between the four architectures have no uncertainty estimate.
+
+A holdout / cross-validation option for the surrogate was deliberately not added here;
+if the project is revived, add k-fold CV (reporting out-of-fold error and SHAP on
+held-out folds) and several training seeds first.
