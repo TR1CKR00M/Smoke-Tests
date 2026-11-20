@@ -368,7 +368,7 @@ def write_metadata(args, model_specs, path: Path) -> None:
         models.append(
             {
                 "name": name,
-                "spec": spec,
+                "spec": _cell(local) if local.is_file() else spec,
                 "sha256": sha256_file(local) if local.is_file() else None,
             }
         )

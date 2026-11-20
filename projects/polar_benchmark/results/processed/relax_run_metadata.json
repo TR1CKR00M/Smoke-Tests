@@ -1,0 +1,61 @@
+{
+  "command": "python projects/polar_benchmark/script/mace_relax_comparison.py --device cpu",
+  "timestamp_utc": "2026-11-20T07:21:03+00:00",
+  "platform": "macOS-14.2.1-arm64-arm-64bit",
+  "python": "3.11.0",
+  "versions": {
+    "mace-torch": "0.3.17",
+    "torch": "2.15.0",
+    "ase": "3.29.0",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "torch-dftd": "0.5.3"
+  },
+  "models": [
+    {
+      "name": "MACE-MH-1",
+      "spec": "model/mace-mh-1.model",
+      "sha256": "a522eb7f59c7879963d41586528f4980baf33e086c94aa92e3eafdeccad3be47"
+    }
+  ],
+  "settings": {
+    "data_root": "data/1_FM_benchmark/V_Sb1/DFT_PBE",
+    "model": null,
+    "device": "cpu",
+    "dtype": "float64",
+    "head": "omat_pbe",
+    "dispersion": "none",
+    "charges": [
+      "mi3",
+      "mi2",
+      "mi1",
+      "neu",
+      "pl1"
+    ],
+    "distortions": [
+      "D_-60",
+      "D_-50",
+      "D_-40",
+      "D_-30",
+      "D_-20",
+      "D_-10",
+      "D_0",
+      "D_10",
+      "D_20",
+      "D_30",
+      "D_40",
+      "D_50",
+      "D_60"
+    ],
+    "max_structures": null,
+    "fmax": 0.05,
+    "steps": 200,
+    "local_cutoff": 4.0,
+    "defect_site": null,
+    "set_total_charge": true,
+    "include_unconverged_refs": false,
+    "output_dir": "results",
+    "output": null,
+    "show": false
+  }
+}
