@@ -6,6 +6,12 @@ __pycache__/
 .coverage
 coverage.xml
 .DS_Store
+
+# IDE / editor metadata
+.idea/
+.vscode/
+WelcomeScreen/
+*.iml
 *.egg-info/
 outputs/
 
