@@ -1,0 +1,6 @@
+model,charge_label,charge,n_structures,n_failed,n_bfgs_unconverged,n_dft_excluded,n_candidates,mlip_ground_state,dft_ground_state,ground_state_hit,rmsd_gs_all_A,rmsd_gs_local_A,spearman_rho,spearman_p,mlip_gs_minus_dft_gs_relative_energy_eV,diag_min_rmsd_same_distortion_A,diag_min_rmsd_distortion
+MACE-MH-1,mi3,-3,13,0,0,0,13,D_-30,D_0,False,0.2148815816,0.4320270485,-0.5494505495,0.05177062556,0.00191956,0.07921610214,D_10
+MACE-MH-1,mi2,-2,13,0,0,0,13,D_-50,D_10,False,0.2104608171,0.4335475441,-0.3626373626,0.2233157203,0.10768359,0.0639805019,D_10
+MACE-MH-1,mi1,-1,13,0,0,0,13,D_-30,D_-50,False,0.08645792553,0.1482049205,0.7252747253,0.005023237655,4.64e-05,0.08466997624,D_-30
+MACE-MH-1,neu,0,13,0,0,0,13,D_-30,D_-40,False,0.2860710206,0.6396645226,0.1703296703,0.5779754288,0.00016837,0.06919299016,D_60
+MACE-MH-1,pl1,1,13,0,0,1,12,D_-30,D_-20,False,0.2873014074,0.6553518546,0.1818181818,0.5717012385,0.00062244,0.1002318729,D_10
