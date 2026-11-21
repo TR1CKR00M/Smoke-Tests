@@ -1,0 +1,5 @@
+path,size_bytes,sha256,role,source_url,version,license,training_config,training_log,notes
+data/2_global_embedding/Charge_embedded_MACE/MACE_vse1_five_wb_swa_e1000.model,40749450,5dd5c9915d2762fad1f9340f793235b25e89ee3ec61d8c856559b50ef917f49c,TODO,TODO,TODO,TODO,TODO,TODO,TODO
+data/3_MF/MF/MF_MACE/VSe1_neu/Training/MACE_vse1_neu.model,40684982,193686f7d02ece32f2ef9eda3412adf55571c0f822c026268f5d925f1faa1db2,TODO,TODO,TODO,TODO,TODO,TODO,TODO
+data/3_MF/MF/MF_MACE/VSe1_pl1/MACE_vse1_pl1.model,40684982,df65718920a4fa61a6e33c51a0147818cf0ab8f0ca1d99d9abb69e88c9b009d7,TODO,TODO,TODO,TODO,TODO,TODO,TODO
+model/mace-mh-1.model,59208139,a522eb7f59c7879963d41586528f4980baf33e086c94aa92e3eafdeccad3be47,TODO,TODO,TODO,TODO,TODO,TODO,TODO

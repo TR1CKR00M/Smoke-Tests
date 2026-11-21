@@ -80,7 +80,18 @@ setup, or `--xyz`, `--csv`, and `--figure` to override paths.
 
 ## Training templates
 
-The shell files under `scripts/training/` contain MACE training command templates. Replace the `/path/to/...` dataset and statistics placeholders with paths valid in your environment before running them. The templates share a common configuration and currently use the same experiment name; set a distinct `--name` for separate runs.
+The shell files under `scripts/training/` contain MACE training command templates. Replace the `/path/to/...` dataset and statistics placeholders with paths valid in your environment before running them.
+
+> **Note:** `small.sh`, `medium.sh` and `large.sh` are currently byte-identical.
+> All three encode the same architecture (`--num_channels=128`, `--max_L=1`,
+> `--correlation=3`, `--r_max=5.0`) and the same `--name="SPICE_medium_neut_E0"`,
+> so they do **not** reproduce the small/medium/large MACE-OFF23 variants.
+> No training has been run from them in this project; the evaluation uses the
+> published MACE-OFF23 checkpoints.
+>
+> TODO (Yile): set the per-size hyperparameters from the MACE-OFF23 paper/SI
+> (with a citation next to each value) and a distinct `--name` per file, or
+> delete the two duplicates.
 
 ## Reference torsion scans
 
@@ -135,6 +146,26 @@ calculated.
 The currently included `results/figures/fig2_torsion_partial_n10.png` is a
 partial preview based on 10 molecules per dataset. Its legend shows the sample
 size; it is not a full-dataset benchmark figure.
+
+How it was produced is **not recorded (unverified)**. It was most likely made with:
+
+```bash
+python scripts/relax_torsion_grid.py tnet500 --device cpu --limit 10
+python scripts/relax_torsion_grid.py biaryl --device cpu --limit 10
+python scripts/analyze_torsion_results.py --allow-partial \
+    --figure results/figures/fig2_torsion_partial_n10.png
+```
+
+TODO (Yile): confirm or correct this command, and record the mace-torch version
+and checkpoint sha256 used (see `MANIFEST.template.csv`).
+
+## Provenance
+
+`MANIFEST.template.csv` lists every external input (SPICE files, torsion-scan
+folders, the three MACE-OFF23 checkpoints) with columns for the source URL/DOI,
+version, license and sha256. The values are intentionally left as `TODO` until
+they are verified against the files actually used. Fill it in and rename it to
+`MANIFEST.csv`; compute hashes with `shasum -a 256 <file>`.
 
 ## Notes
 

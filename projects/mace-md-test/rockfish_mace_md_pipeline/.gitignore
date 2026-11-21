@@ -2,3 +2,6 @@
 *.err
 __pycache__/
 config.*.json
+# Documented example configs must be committable.
+!config.example.json
+!config.*.example.json

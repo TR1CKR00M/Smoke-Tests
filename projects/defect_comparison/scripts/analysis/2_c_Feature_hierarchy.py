@@ -15,7 +15,6 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
-
 DEFAULT_MODELS = ["mace_k32_L0", "mace_k32_L2", "mace_k128_L0", "mace_k128_L2"]
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_INPUT_DIR = PROJECT_ROOT / "results" / "angular_momentum"
@@ -24,11 +23,24 @@ DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "results" / "feature_hierarchy"
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input-dir", default=str(DEFAULT_INPUT_DIR), help="Directory created by analysis script 2_b")
-    parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR), help="Directory for plots and tables")
-    parser.add_argument("--models", nargs="+", default=DEFAULT_MODELS, help="Model prefixes, in desired display order")
+    parser.add_argument(
+        "--input-dir",
+        default=str(DEFAULT_INPUT_DIR),
+        help="Directory created by analysis script 2_b",
+    )
+    parser.add_argument(
+        "--output-dir", default=str(DEFAULT_OUTPUT_DIR), help="Directory for plots and tables"
+    )
+    parser.add_argument(
+        "--models",
+        nargs="+",
+        default=DEFAULT_MODELS,
+        help="Model prefixes, in desired display order",
+    )
     parser.add_argument("--top-n", type=int, default=20, help="Number of ranked features per model")
-    parser.add_argument("--dopant", default="Cr", help="Element symbol used to mark dopant-related features")
+    parser.add_argument(
+        "--dopant", default="Cr", help="Element symbol used to mark dopant-related features"
+    )
     return parser.parse_args()
 
 
@@ -78,8 +90,7 @@ def main() -> None:
     # Pairwise set-intersection cardinality. Feature labels are unique SOAP
     # descriptor names, so identical labels indicate the same input feature.
     feature_sets = {
-        model: {row["feature_name"] for row in top_features[model]}
-        for model in args.models
+        model: {row["feature_name"] for row in top_features[model]} for model in args.models
     }
     overlap = np.zeros((len(args.models), len(args.models)), dtype=int)
     for i, model_i in enumerate(args.models):
@@ -90,7 +101,7 @@ def main() -> None:
     with overlap_path.open("w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
         writer.writerow(["model", *args.models])
-        for model, row in zip(args.models, overlap):
+        for model, row in zip(args.models, overlap, strict=True):
             writer.writerow([model, *row.tolist()])
 
     fig, ax = plt.subplots(figsize=(7.5, 6.5), constrained_layout=True)
@@ -119,17 +130,35 @@ def main() -> None:
             )
             row["feature_class"] = feature_class
             feature_rows.append(row)
-    with (output_dir / "top20_feature_hierarchy.csv").open("w", newline="", encoding="utf-8") as file:
-        writer = csv.DictWriter(file, fieldnames=["model", "rank", "feature_name", "l", "n1", "n2", "mean_abs_shap", "feature_class"])
+    with (output_dir / "top20_feature_hierarchy.csv").open(
+        "w", newline="", encoding="utf-8"
+    ) as file:
+        writer = csv.DictWriter(
+            file,
+            fieldnames=[
+                "model",
+                "rank",
+                "feature_name",
+                "l",
+                "n1",
+                "n2",
+                "mean_abs_shap",
+                "feature_class",
+            ],
+        )
         writer.writeheader()
         writer.writerows(feature_rows)
 
     class_colors = {f"Dopant-related ({args.dopant})": "#E45756", "Host-only": "#4C78A8"}
     fig, axes = plt.subplots(2, 2, figsize=(17, 13), constrained_layout=True)
-    for ax, model in zip(axes.flat, args.models):
+    for ax, model in zip(axes.flat, args.models, strict=False):
         subset = sorted(top_features[model], key=lambda row: row["rank"], reverse=True)
         bar_colors = [class_colors[row["feature_class"]] for row in subset]
-        ax.barh([row["feature_name"] for row in subset], [row["mean_abs_shap"] for row in subset], color=bar_colors)
+        ax.barh(
+            [row["feature_name"] for row in subset],
+            [row["mean_abs_shap"] for row in subset],
+            color=bar_colors,
+        )
         ax.set_title(model)
         ax.set_xlabel("Mean |SHAP value|")
         ax.set_ylabel("SOAP feature (ranked; highest at top)")
@@ -146,7 +175,7 @@ def main() -> None:
 
     print(f"Top-{args.top_n} pairwise feature overlap:")
     print("            " + "  ".join(f"{model:>14}" for model in args.models))
-    for model, row in zip(args.models, overlap):
+    for model, row in zip(args.models, overlap, strict=True):
         print(f"{model:<12}" + "  ".join(f"{value:>14d}" for value in row))
     print(f"\nSaved overlap matrix, feature ranking table, and figures under: {output_dir}")
 

@@ -13,13 +13,14 @@
 
 set -euo pipefail
 
-cd /path/to/mace-md-test
+# Override with --export=ALL,MACE_MD_ROOT=...,MACE_MD_VENV=... (defaults unchanged).
+cd "${MACE_MD_ROOT:-/path/to/mace-md-test}"
 mkdir -p logs results/runs
 
 # 按集群实际环境选择：module、conda 或 venv。
 # 例如：
 # module load CUDA/<集群提供的版本>
-source /pclancy3/elliot/mace-md-test/slurm/venv/bin/activate
+source "${MACE_MD_VENV:-/pclancy3/elliot/mace-md-test/slurm/venv}/bin/activate"
 
 export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}"
 export MKL_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}"

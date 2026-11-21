@@ -166,3 +166,31 @@ python src/offset_analysis.py \
   --files results/raw/md_medium-mpa-0_600K_log.csv results/raw/md_medium_600K_log.csv \
   --var pressure --burn-in 0.20 --save-dir results/figures --no-show
 ```
+
+## Known portability / consistency issues (to resolve)
+
+These are documented only; nothing below changes the simulation settings.
+
+- **Rockfish example configs are missing.** `rockfish_mace_md_pipeline/README.md`
+  documents `config.example.json` and `config.medium*.example.json`, but none of them
+  is committed (the folder's `.gitignore` used to exclude every `config.*.json`). The
+  `.gitignore` now has `!config.example.json` / `!config.*.example.json` exceptions;
+  the example files themselves still need to be added (without private paths).
+- **Langevin friction differs:** the Rockfish pipeline README states friction `0.01`
+  (matching MigrationBench), while `src/run_md.py` defaults to `--friction 0.02` and all
+  committed manifests record `friction: 0.02`. Decide which value is the benchmark
+  setting before comparing runs across the two pipelines.
+- **torch version differs:** `requirements.txt` pins `torch==2.14.0` (with
+  `mace-torch==0.3.16`), while the Rockfish slurm scripts load the
+  `pytorch/2.10.0-b200-py3.11` module.
+- **Machine-specific paths in manifests:** `results/runs/*/manifest.yaml` record
+  `resolved_path` values such as `/Users/<user>/.cache/mace/...` and
+  `/weka/home/<user>/.cache/mace/...`. The checkpoint sha256 in the manifest is the
+  portable identifier; the path is informational only.
+- **Slurm paths:** `slurm/run_short_md.slurm` now reads `MACE_MD_ROOT` and
+  `MACE_MD_VENV` from the environment
+  (`sbatch --export=ALL,MACE_MD_ROOT=$PWD,MACE_MD_VENV=/path/to/venv ...`); the previous
+  hardcoded `/path/to/mace-md-test` and `/pclancy3/...` venv remain as fallbacks.
+- **Run lengths:** the four models do not yet share a common trajectory length; bring
+  them to a common length (>= 200 ps) and add steady-state statistics with burn-in
+  detection before comparing.

@@ -10,13 +10,13 @@ import torch
 torch.set_default_dtype(torch.float64)
 
 import numpy as np
+import shap
 from ase.io import read
 from ase.neighborlist import neighbor_list
-from mace.data import AtomicData, config_from_atoms
-from mace.tools import torch_geometric, AtomicNumberTable
 from dscribe.descriptors import SOAP
+from mace.data import AtomicData, config_from_atoms
+from mace.tools import AtomicNumberTable, torch_geometric
 from sklearn.ensemble import GradientBoostingRegressor
-import shap
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = PROJECT_ROOT / "data" / "processed"
@@ -48,9 +48,9 @@ for s1_i in range(len(species)):
     for s2_i in range(s1_i, len(species)):
         n_max_pairs = 6 * (6 + 1) // 2 if s1_i == s2_i else 6 * 6
         for n_pair in range(n_max_pairs):
-            for l in range(4):
-                feat_names.append(f"{species[s1_i]}-{species[s2_i]}_n{n_pair}_l{l}")
-feat_names = feat_names[:X_soap.shape[1]]
+            for ell in range(4):
+                feat_names.append(f"{species[s1_i]}-{species[s2_i]}_n{n_pair}_l{ell}")
+feat_names = feat_names[: X_soap.shape[1]]
 
 
 def evaluate_and_gradcam(model_path, frames):
@@ -112,7 +112,7 @@ def evaluate_and_gradcam(model_path, frames):
         cr_idx = [i for i, s in enumerate(atoms.get_chemical_symbols()) if s == "Cr"]
         i_list, j_list = neighbor_list("ij", atoms, cutoff=3.5)
         defect_zone = set(cr_idx)
-        for i_a, j_a in zip(i_list, j_list):
+        for i_a, j_a in zip(i_list, j_list, strict=True):
             if i_a in cr_idx:
                 defect_zone.add(j_a)
         bulk_zone = [i for i in range(len(atoms)) if i not in defect_zone]
@@ -125,7 +125,9 @@ def evaluate_and_gradcam(model_path, frames):
 
 
 print(
-    f"{'Model Name':<15} | {'300K F-RMSE':<12} | {'1200K F-RMSE':<12} | {'Overfit Ratio':<13} | {'Grad-CAM S_def':<14} | {'SHAP Cr(l>=2) Share'}")
+    f"{'Model Name':<15} | {'300K F-RMSE':<12} | {'1200K F-RMSE':<12} | "
+    f"{'Overfit Ratio':<13} | {'Grad-CAM S_def':<14} | {'SHAP Cr(l>=2) Share'}"
+)
 print("-" * 95)
 
 for m_name in models:
@@ -145,4 +147,6 @@ for m_name in models:
     cr_high_l_share = shap_vals[cr_high_l_mask].sum() / (shap_vals.sum() + 1e-8) * 100
 
     print(
-        f"{m_name:<15} | {np.mean(f_train):>8.1f} meV/A | {np.mean(f_1200):>8.1f} meV/A | {overfit_ratio:>11.2f}x | {s_def:>12.2f}x | {cr_high_l_share:>10.1f}%")
+        f"{m_name:<15} | {np.mean(f_train):>8.1f} meV/A | {np.mean(f_1200):>8.1f} meV/A | "
+        f"{overfit_ratio:>11.2f}x | {s_def:>12.2f}x | {cr_high_l_share:>10.1f}%"
+    )

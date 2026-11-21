@@ -1,0 +1,16 @@
+# Python >= 3.11. Runtime environment for script/mace_relax_comparison.py (MLIP relaxations).
+# The manifest builder, plotting script and tests only need the root
+# environment (`uv sync --extra dev` at the repository root).
+#
+# Versions used for the committed results/ (see results/processed/relax_run_metadata.json):
+#   python 3.11, mace-torch 0.3.17, torch 2.15.0 (CPU), ase 3.29.0, torch-dftd (see metadata)
+# Pin these exactly once the MACE-Polar runs are added.
+mace-torch>=0.3.17
+torch
+ase>=3.23
+numpy
+scipy
+matplotlib
+pandas
+# Optional: only for --dispersion d3-zero / d3-bj
+torch-dftd

@@ -1,6 +1,8 @@
 # step1_generate_defect_data.py
-import numpy as np
 from pathlib import Path
+
+import numpy as np
+import torch
 from ase.build import mx2
 from ase.io import write
 from mace.calculators import mace_mp
@@ -10,15 +12,15 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = PROJECT_ROOT / "data" / "processed"
 
 # 1. 构建 4x4x1 MoS2 超胞 (48 原子) 并引入 2 个相邻 Cr 替位点缺陷
-base_atoms = mx2(formula='MoS2', kind='2H', a=3.18, thickness=3.19, size=(4, 4, 1), vacuum=10.0)
+base_atoms = mx2(formula="MoS2", kind="2H", a=3.18, thickness=3.19, size=(4, 4, 1), vacuum=10.0)
 base_atoms.set_pbc([True, True, True])
 
 # 将中心区域的两个相邻 Mo 原子替换为 Cr (制造 Cr-Cr 掺杂对活性中心)
-mo_indices = [i for i, sym in enumerate(base_atoms.get_chemical_symbols()) if sym == 'Mo']
+mo_indices = [i for i, sym in enumerate(base_atoms.get_chemical_symbols()) if sym == "Mo"]
 defect_sites = [mo_indices[5], mo_indices[6]]
 symbols = base_atoms.get_chemical_symbols()
 for idx in defect_sites:
-    symbols[idx] = 'Cr'
+    symbols[idx] = "Cr"
 base_atoms.set_chemical_symbols(symbols)
 
 # 2. 加载官方 MACE-MP-0 Large (k=128, L_max=2) 作为高阶物理 Oracle
@@ -26,15 +28,13 @@ print("正在加载 MACE-MP-0 (large) 作为 Ground Truth 生成器...")
 # MACE/PyTorch builds that expose MPS may still lack torch.mps.current_device,
 # which some MACE versions call internally. Prefer CUDA when available and
 # otherwise use CPU rather than selecting an unsupported MPS path.
-import torch
-
 compute_device = "cuda" if torch.cuda.is_available() else "cpu"
 oracle_calc = mace_mp(model="large", device=compute_device, default_dtype="float32")
 
 
 def generate_frames(n_frames, rattle_std, temp_label):
     frames = []
-    for i in range(n_frames):
+    for _ in range(n_frames):
         atoms = base_atoms.copy()
         # 施加随机热位移
         atoms.rattle(stdev=rattle_std, seed=np.random.randint(1e6))

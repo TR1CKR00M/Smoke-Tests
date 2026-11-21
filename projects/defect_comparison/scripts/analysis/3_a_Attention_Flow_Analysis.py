@@ -20,7 +20,6 @@ from ase.io import read
 from mace.data import AtomicData, config_from_atoms
 from mace.tools import AtomicNumberTable, torch_geometric
 
-
 DEFAULT_MODELS = ["mace_k32_L0", "mace_k32_L2", "mace_k128_L0", "mace_k128_L2"]
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = PROJECT_ROOT / "data" / "processed"
@@ -30,17 +29,37 @@ DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "results" / "attention_flow"
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--test", default=str(DATA_DIR / "defect_test_1200K.xyz"), help="Test structures used for all models")
+    parser.add_argument(
+        "--test",
+        default=str(DATA_DIR / "defect_test_1200K.xyz"),
+        help="Test structures used for all models",
+    )
     parser.add_argument("--models", nargs="+", default=DEFAULT_MODELS, help="Model name prefixes")
     parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR), help="Output directory")
-    parser.add_argument("--min-atoms", type=int, default=1000, help="Minimum pooled atom rows for each feature matrix")
-    parser.add_argument("--min-configs", type=int, default=10, help="Minimum number of test configurations")
-    parser.add_argument("--preferred-max-configs", type=int, default=20, help="Preferred maximum; may be exceeded to meet --min-atoms")
-    parser.add_argument("--device", default="cpu", choices=["cpu", "cuda"], help="MACE inference device")
+    parser.add_argument(
+        "--min-atoms",
+        type=int,
+        default=1000,
+        help="Minimum pooled atom rows for each feature matrix",
+    )
+    parser.add_argument(
+        "--min-configs", type=int, default=10, help="Minimum number of test configurations"
+    )
+    parser.add_argument(
+        "--preferred-max-configs",
+        type=int,
+        default=20,
+        help="Preferred maximum; may be exceeded to meet --min-atoms",
+    )
+    parser.add_argument(
+        "--device", default="cpu", choices=["cpu", "cuda"], help="MACE inference device"
+    )
     return parser.parse_args()
 
 
-def select_configurations(frames: list, min_atoms: int, min_configs: int, preferred_max_configs: int) -> tuple[list, list[int]]:
+def select_configurations(
+    frames: list, min_atoms: int, min_configs: int, preferred_max_configs: int
+) -> tuple[list, list[int]]:
     if len(frames) < min_configs:
         raise ValueError(f"Test set has {len(frames)} frames; at least {min_configs} are required")
     if min_atoms < 1 or min_configs < 1 or preferred_max_configs < min_configs:
@@ -116,7 +135,11 @@ def locate_node_embedding(model):
     module = getattr(model, "node_embedding", None)
     if isinstance(module, torch.nn.Module):
         return module
-    matches = [(name, submodule) for name, submodule in model.named_modules() if "node_embedding" in name.lower()]
+    matches = [
+        (name, submodule)
+        for name, submodule in model.named_modules()
+        if "node_embedding" in name.lower()
+    ]
     if matches:
         return matches[0][1]
     raise AttributeError("Could not locate MACE node_embedding module")
@@ -136,7 +159,9 @@ def locate_last_product_block(model):
     raise AttributeError("Could not locate the final EquivariantProductBasisBlock")
 
 
-def capture_feature_matrices(model: torch.nn.Module, frames: list, width: int, device: torch.device) -> tuple[np.ndarray, np.ndarray]:
+def capture_feature_matrices(
+    model: torch.nn.Module, frames: list, width: int, device: torch.device
+) -> tuple[np.ndarray, np.ndarray]:
     node_outputs = []
     product_outputs = []
 
@@ -182,7 +207,8 @@ def capture_feature_matrices(model: torch.nn.Module, frames: list, width: int, d
                 )
             if product.ndim != 2 or product.shape[1] < width:
                 raise ValueError(
-                    f"Product block output must have at least {width} columns; got {tuple(product.shape)}"
+                    f"Product block output must have at least {width} columns; "
+                    f"got {tuple(product.shape)}"
                 )
             if node.shape[0] != len(atoms) or product.shape[0] != len(atoms):
                 raise ValueError("Hook output atom count does not match input structure")
@@ -251,10 +277,15 @@ def main() -> None:
         model_path = MODEL_DIR / f"{model_name}_stagetwo.model"
         print(f"Analyzing {model_name} (k={width})...")
         model = load_model(model_path, device)
-        node_matrix, product_matrix = capture_feature_matrices(model, selected_frames, width, device)
+        node_matrix, product_matrix = capture_feature_matrices(
+            model, selected_frames, width, device
+        )
         del model
 
-        for layer_name, matrix in [("node_embedding", node_matrix), ("final_product_scalar", product_matrix)]:
+        for layer_name, matrix in [
+            ("node_embedding", node_matrix),
+            ("final_product_scalar", product_matrix),
+        ]:
             effective_rank, utilization, singular_values = spectral_effective_rank(matrix)
             np.save(output_dir / f"{model_name}_{layer_name}_singular_values.npy", singular_values)
             results.append(
@@ -295,7 +326,9 @@ def main() -> None:
     axes[0].set_ylabel("Effective rank")
     axes[0].tick_params(axis="x", rotation=25)
     axes[0].grid(axis="y", alpha=0.25)
-    axes[1].bar(labels, [row["channel_utilization_percent"] for row in deep_results], color="#F58518")
+    axes[1].bar(
+        labels, [row["channel_utilization_percent"] for row in deep_results], color="#F58518"
+    )
     axes[1].set_title("Final Product Block: Channel Utilization")
     axes[1].set_ylabel("ERank / k (%)")
     axes[1].set_ylim(0, 100)
