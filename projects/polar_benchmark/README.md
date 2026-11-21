@@ -2,6 +2,21 @@
 
 **Main line of the repository.**
 
+> **Active development has moved to
+> [TR1CKR00M/Polar_bench_test](https://github.com/TR1CKR00M/Polar_bench_test).** That
+> repository holds the 6-model static benchmark, the MACE-Polar fine-tuning pipeline
+> and the 600 K MD runs. This folder keeps the original data snapshot, the data
+> manifest, the model registry and a minimal relaxation and RMSD reference
+> implementation with tests. Before adding new results here, decide with the mentor
+> which of the two repositories is canonical.
+
+**Reference data source** (as cited in Polar_bench_test's `TASK_REPORT.md`):
+Wang, Mosquera-Lois and Walsh, *PRX Energy* **5**, 043001 (2026),
+doi:10.1103/tzwd-cl3y. Supporting data: Zenodo record
+[22756145](https://zenodo.org/records/22756145). The stage 2/3 `MACE_vse1_*.model`
+files appear to be that paper's published models, not models trained here. This
+still needs confirming file by file, and so does the dataset license.
+
 ## Question
 
 Can MACE-Polar foundation models, zero-shot and after fine-tuning on public DFT
@@ -81,6 +96,13 @@ Models: see [`MODEL_REGISTRY.md`](MODEL_REGISTRY.md) / `MODEL_REGISTRY.csv`.
   match IVDW=11. **Default is no dispersion** (backward compatible); the `omat_pbe`
   head is plain PBE, so the default is *not* like-for-like with the PBE+D3 reference.
 * MACE-Polar: `--model NAME=polar:<key-or-path>`, e.g. `--model Polar-1-S=polar:polar-1-s`.
+  **Do not add `--d3` to zero-shot MACE-Polar.** MACE-POLAR-1 is trained on OMol25
+  (molecules, ωB97M-V), whose labels already include VV10 non-local dispersion. A
+  fine-tuned Polar model trained on PBE+D3 labels has also learned dispersion
+  already. For the same reason, compare zero-shot Polar energies only after an
+  offset correction, since they come from a different level of theory (ωB97M-V vs
+  PBE+D3). Source: the arXiv preprint 2602.19411, not yet peer reviewed. Check
+  against the official ACEsuit/mace documentation.
 
 Outputs: `results/processed/relax_per_structure.csv`, `relax_per_charge.csv`,
 `relax_run_metadata.json` (command, versions, model sha256), relaxed structures in
@@ -128,9 +150,12 @@ builder. They need only the root environment (no mace/torch).
 * **No finite-size / charge corrections** are applied to the DFT energies (only
   distortions *within* one charge state are compared here, where they cancel).
 * **Target system**: data are Sb2Se3 (V_Sb1, V_Se1), the project target is Sb2Te3.
-* **Dataset citation / license** of the public Sb2Se3 data is missing — add DOI and license.
-* **MACE-Polar results and the five fine-tuning runs** (configs, logs, seeds) are not
-  in the repository yet.
+* **Dataset license**: the citation is above, but the Zenodo license and a
+  file-by-file match against record 22756145 are still to be confirmed.
+* **MACE-Polar results** live in Polar_bench_test. Its fine-tuning set is built from
+  the same 67 V_Sb1 relaxation trajectories that the benchmark evaluates, with a
+  trajectory-level 85/15 split. Most benchmark targets are therefore in the training
+  set, so fine-tuned scores are in-sample until a held-out evaluation exists.
 * **E0 mismatch**: `Charge_embedded_MACE/run.sh` uses E0(Se) = −2.05295446 eV, while
   `3_MF/.../e0s_hse.json` has E0(Se) = −2.05791249 eV (Sb agrees to 2e-7 eV). Confirm
   which isolated-atom energies are correct.
