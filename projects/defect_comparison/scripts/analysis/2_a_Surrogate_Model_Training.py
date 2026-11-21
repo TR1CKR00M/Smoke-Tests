@@ -23,7 +23,6 @@ from mace.data import AtomicData, config_from_atoms
 from mace.tools import AtomicNumberTable, torch_geometric
 from sklearn.ensemble import GradientBoostingRegressor
 
-
 DEFAULT_MODELS = [
     "mace_k128_L0",
     "mace_k32_L0",
@@ -38,15 +37,25 @@ DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "results" / "surrogate"
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--test", default=str(DATA_DIR / "defect_test_1200K.xyz"), help="Test structures with REF_energy labels")
+    parser.add_argument(
+        "--test",
+        default=str(DATA_DIR / "defect_test_1200K.xyz"),
+        help="Test structures with REF_energy labels",
+    )
     parser.add_argument(
         "--models",
         nargs="+",
         default=DEFAULT_MODELS,
         help="MACE model prefixes; expects <prefix>_stagetwo.model",
     )
-    parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR), help="Directory for features, targets, and models")
-    parser.add_argument("--device", default="cpu", choices=["cpu", "cuda"], help="MACE inference device")
+    parser.add_argument(
+        "--output-dir",
+        default=str(DEFAULT_OUTPUT_DIR),
+        help="Directory for features, targets, and models",
+    )
+    parser.add_argument(
+        "--device", default="cpu", choices=["cpu", "cuda"], help="MACE inference device"
+    )
     return parser.parse_args()
 
 
@@ -102,7 +111,9 @@ def build_soap(frames) -> tuple[np.ndarray, list[str]]:
     features = np.asarray(descriptor.create(frames), dtype=np.float64)
     feature_names = make_soap_feature_names(species, n_max=4, l_max=4)
     if features.ndim != 2 or features.shape[0] != len(frames):
-        raise RuntimeError(f"Unexpected SOAP matrix shape {features.shape}; expected one vector per structure")
+        raise RuntimeError(
+            f"Unexpected SOAP matrix shape {features.shape}; expected one vector per structure"
+        )
     if features.shape[1] != len(feature_names):
         raise RuntimeError(
             "SOAP feature-name count does not match DScribe output: "
@@ -133,13 +144,15 @@ def load_model(path: Path, device: torch.device) -> torch.nn.Module:
     return model
 
 
-def predict_absolute_energy_errors(model: torch.nn.Module, frames: list, device: torch.device) -> np.ndarray:
+def predict_absolute_energy_errors(
+    model: torch.nn.Module, frames: list, device: torch.device
+) -> np.ndarray:
     model_dtype = next(model.parameters()).dtype
     z_table = AtomicNumberTable([int(z) for z in model.atomic_numbers])
     cutoff = float(model.r_max)
     errors = []
 
-    for frame_index, atoms in enumerate(frames):
+    for atoms in frames:
         data = AtomicData.from_config(config_from_atoms(atoms), z_table=z_table, cutoff=cutoff)
         batch = torch_geometric.Batch.from_data_list([data]).to(device)
         batch_dict = batch.to_dict()
@@ -251,7 +264,10 @@ def main() -> None:
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
     print("\nSurrogate training summary (in-sample fit):")
-    print(f"{'MACE model':<16} | {'Mean ΔE (eV)':>13} | {'Max ΔE (eV)':>12} | {'Fit RMSE (eV)':>13} | {'Fit MAE (eV)':>12}")
+    print(
+        f"{'MACE model':<16} | {'Mean ΔE (eV)':>13} | {'Max ΔE (eV)':>12} | "
+        f"{'Fit RMSE (eV)':>13} | {'Fit MAE (eV)':>12}"
+    )
     print("-" * 82)
     for row in report_rows:
         print(
@@ -259,7 +275,9 @@ def main() -> None:
             f"{row['max_abs_energy_error_eV']:>12.6f} | {row['surrogate_fit_rmse_eV']:>13.6f} | "
             f"{row['surrogate_fit_mae_eV']:>12.6f}"
         )
-    print(f"\nSaved SOAP features, error targets, fitted surrogates, and report under: {output_dir}")
+    print(
+        f"\nSaved SOAP features, error targets, fitted surrogates, and report under: {output_dir}"
+    )
 
 
 if __name__ == "__main__":
