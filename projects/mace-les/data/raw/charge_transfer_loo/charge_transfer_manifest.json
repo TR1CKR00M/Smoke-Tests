@@ -1,0 +1,461 @@
+{
+  "protocol": "leave-one-charge-state-out from frozen trajectory-disjoint split",
+  "charge_values": [
+    -3,
+    -2,
+    -1,
+    0,
+    1
+  ],
+  "source_files": {
+    "train": {
+      "path": "train.xyz",
+      "sha256": "734a14de824192896c532043a03ff5d83fe1b2f28c10daff63f0de0195be45e4"
+    },
+    "valid": {
+      "path": "valid.xyz",
+      "sha256": "cf34802ce04cb41630e0d9bdafe7fe137bb4acca078053ba2149c4af51dbc1f0"
+    },
+    "test": {
+      "path": "test.xyz",
+      "sha256": "f96b3bd70efa223d083ac509dc0870e83109837b9fc756fc1401637ee2f15f39"
+    }
+  },
+  "folds": {
+    "-3": {
+      "heldout_charge": -3,
+      "train": {
+        "path": "q_m3/train.xyz",
+        "frames": 1784,
+        "charge_counts": {
+          "-2": 432,
+          "-1": 413,
+          "0": 503,
+          "1": 436
+        },
+        "trajectory_ids": [
+          "q+0/D_-10",
+          "q+0/D_-30",
+          "q+0/D_-40",
+          "q+0/D_-50",
+          "q+0/D_0",
+          "q+0/D_10",
+          "q+0/D_30",
+          "q+0/D_50",
+          "q+0/D_60",
+          "q+1/D_-20",
+          "q+1/D_-30",
+          "q+1/D_-50",
+          "q+1/D_10",
+          "q+1/D_30",
+          "q+1/D_40",
+          "q+1/D_50",
+          "q+1/D_60",
+          "q-1/D_-30",
+          "q-1/D_-40",
+          "q-1/D_-50",
+          "q-1/D_-60",
+          "q-1/D_0",
+          "q-1/D_20",
+          "q-1/D_30",
+          "q-1/D_40",
+          "q-1/D_50",
+          "q-2/D_-30",
+          "q-2/D_-40",
+          "q-2/D_-50",
+          "q-2/D_-60",
+          "q-2/D_0",
+          "q-2/D_10",
+          "q-2/D_20",
+          "q-2/D_50",
+          "q-2/D_60"
+        ],
+        "sha256": "77bce7e99ff1548ebdff7d91e8d49a164cfd9665c044a4712a82012647afbcc7"
+      },
+      "validation": {
+        "path": "q_m3/valid.xyz",
+        "frames": 458,
+        "charge_counts": {
+          "-2": 91,
+          "-1": 90,
+          "0": 157,
+          "1": 120
+        },
+        "trajectory_ids": [
+          "q+0/D_-60",
+          "q+0/D_40",
+          "q+1/D_-40",
+          "q+1/D_20",
+          "q-1/D_10",
+          "q-1/D_60",
+          "q-2/D_-20",
+          "q-2/D_40"
+        ],
+        "sha256": "c36fdcdc76d3cc624190faa1c2bcc8b2e64fb64aad05cf2842f52f2bedb56da8"
+      },
+      "test": {
+        "path": "q_m3/test.xyz",
+        "frames": 91,
+        "charge_counts": {
+          "-3": 91
+        },
+        "trajectory_ids": [
+          "q-3/D_-30",
+          "q-3/D_-50"
+        ],
+        "sha256": "c416f79d4b4c30746f04122fccea7b95f967ed863faf2c2a342304fe4569edfb"
+      }
+    },
+    "-2": {
+      "heldout_charge": -2,
+      "train": {
+        "path": "q_m2/train.xyz",
+        "frames": 1989,
+        "charge_counts": {
+          "-3": 637,
+          "-1": 413,
+          "0": 503,
+          "1": 436
+        },
+        "trajectory_ids": [
+          "q+0/D_-10",
+          "q+0/D_-30",
+          "q+0/D_-40",
+          "q+0/D_-50",
+          "q+0/D_0",
+          "q+0/D_10",
+          "q+0/D_30",
+          "q+0/D_50",
+          "q+0/D_60",
+          "q+1/D_-20",
+          "q+1/D_-30",
+          "q+1/D_-50",
+          "q+1/D_10",
+          "q+1/D_30",
+          "q+1/D_40",
+          "q+1/D_50",
+          "q+1/D_60",
+          "q-1/D_-30",
+          "q-1/D_-40",
+          "q-1/D_-50",
+          "q-1/D_-60",
+          "q-1/D_0",
+          "q-1/D_20",
+          "q-1/D_30",
+          "q-1/D_40",
+          "q-1/D_50",
+          "q-3/D_-10",
+          "q-3/D_-40",
+          "q-3/D_-60",
+          "q-3/D_0",
+          "q-3/D_10",
+          "q-3/D_20",
+          "q-3/D_30",
+          "q-3/D_40",
+          "q-3/D_60",
+          "q-3/Rattled",
+          "q-3/Unperturbed"
+        ],
+        "sha256": "6777e76c6117fc401e2e5ae75d1456dcadce3c7e2befa6af735755b19bda1817"
+      },
+      "validation": {
+        "path": "q_m2/valid.xyz",
+        "frames": 465,
+        "charge_counts": {
+          "-3": 98,
+          "-1": 90,
+          "0": 157,
+          "1": 120
+        },
+        "trajectory_ids": [
+          "q+0/D_-60",
+          "q+0/D_40",
+          "q+1/D_-40",
+          "q+1/D_20",
+          "q-1/D_10",
+          "q-1/D_60",
+          "q-3/D_-20",
+          "q-3/D_50"
+        ],
+        "sha256": "8c613c8eddcac9a3286d19135aa1434c57333b10679e32181237ef032df0b277"
+      },
+      "test": {
+        "path": "q_m2/test.xyz",
+        "frames": 78,
+        "charge_counts": {
+          "-2": 78
+        },
+        "trajectory_ids": [
+          "q-2/D_-10",
+          "q-2/D_30"
+        ],
+        "sha256": "cec3b3dfc6009d324b95aa76f9be26806309d724e9a3c3ce258f1f4dafbdd106"
+      }
+    },
+    "-1": {
+      "heldout_charge": -1,
+      "train": {
+        "path": "q_m1/train.xyz",
+        "frames": 2008,
+        "charge_counts": {
+          "-3": 637,
+          "-2": 432,
+          "0": 503,
+          "1": 436
+        },
+        "trajectory_ids": [
+          "q+0/D_-10",
+          "q+0/D_-30",
+          "q+0/D_-40",
+          "q+0/D_-50",
+          "q+0/D_0",
+          "q+0/D_10",
+          "q+0/D_30",
+          "q+0/D_50",
+          "q+0/D_60",
+          "q+1/D_-20",
+          "q+1/D_-30",
+          "q+1/D_-50",
+          "q+1/D_10",
+          "q+1/D_30",
+          "q+1/D_40",
+          "q+1/D_50",
+          "q+1/D_60",
+          "q-2/D_-30",
+          "q-2/D_-40",
+          "q-2/D_-50",
+          "q-2/D_-60",
+          "q-2/D_0",
+          "q-2/D_10",
+          "q-2/D_20",
+          "q-2/D_50",
+          "q-2/D_60",
+          "q-3/D_-10",
+          "q-3/D_-40",
+          "q-3/D_-60",
+          "q-3/D_0",
+          "q-3/D_10",
+          "q-3/D_20",
+          "q-3/D_30",
+          "q-3/D_40",
+          "q-3/D_60",
+          "q-3/Rattled",
+          "q-3/Unperturbed"
+        ],
+        "sha256": "50f5a32bcf702b5aa26040cd77375f48799b510bd701e4caeb427f7eb2443b09"
+      },
+      "validation": {
+        "path": "q_m1/valid.xyz",
+        "frames": 466,
+        "charge_counts": {
+          "-3": 98,
+          "-2": 91,
+          "0": 157,
+          "1": 120
+        },
+        "trajectory_ids": [
+          "q+0/D_-60",
+          "q+0/D_40",
+          "q+1/D_-40",
+          "q+1/D_20",
+          "q-2/D_-20",
+          "q-2/D_40",
+          "q-3/D_-20",
+          "q-3/D_50"
+        ],
+        "sha256": "c95c2922c97372c4c1e4f5e161bfeb4eb7e2655c8ee45a096b86a4eb6fc92006"
+      },
+      "test": {
+        "path": "q_m1/test.xyz",
+        "frames": 76,
+        "charge_counts": {
+          "-1": 76
+        },
+        "trajectory_ids": [
+          "q-1/D_-10",
+          "q-1/D_-20"
+        ],
+        "sha256": "d02a9231c0fdcd42a3ec653fb5de22bba22ce4bf81445cd9ed9aa1b76b9aac43"
+      }
+    },
+    "0": {
+      "heldout_charge": 0,
+      "train": {
+        "path": "q_p0/train.xyz",
+        "frames": 1918,
+        "charge_counts": {
+          "-3": 637,
+          "-2": 432,
+          "-1": 413,
+          "1": 436
+        },
+        "trajectory_ids": [
+          "q+1/D_-20",
+          "q+1/D_-30",
+          "q+1/D_-50",
+          "q+1/D_10",
+          "q+1/D_30",
+          "q+1/D_40",
+          "q+1/D_50",
+          "q+1/D_60",
+          "q-1/D_-30",
+          "q-1/D_-40",
+          "q-1/D_-50",
+          "q-1/D_-60",
+          "q-1/D_0",
+          "q-1/D_20",
+          "q-1/D_30",
+          "q-1/D_40",
+          "q-1/D_50",
+          "q-2/D_-30",
+          "q-2/D_-40",
+          "q-2/D_-50",
+          "q-2/D_-60",
+          "q-2/D_0",
+          "q-2/D_10",
+          "q-2/D_20",
+          "q-2/D_50",
+          "q-2/D_60",
+          "q-3/D_-10",
+          "q-3/D_-40",
+          "q-3/D_-60",
+          "q-3/D_0",
+          "q-3/D_10",
+          "q-3/D_20",
+          "q-3/D_30",
+          "q-3/D_40",
+          "q-3/D_60",
+          "q-3/Rattled",
+          "q-3/Unperturbed"
+        ],
+        "sha256": "278e464997e6074626964028bfe43de963d924a2a967078159362c9a63f6a6a6"
+      },
+      "validation": {
+        "path": "q_p0/valid.xyz",
+        "frames": 399,
+        "charge_counts": {
+          "-3": 98,
+          "-2": 91,
+          "-1": 90,
+          "1": 120
+        },
+        "trajectory_ids": [
+          "q+1/D_-40",
+          "q+1/D_20",
+          "q-1/D_10",
+          "q-1/D_60",
+          "q-2/D_-20",
+          "q-2/D_40",
+          "q-3/D_-20",
+          "q-3/D_50"
+        ],
+        "sha256": "de9da07bed867f6b700b00678ac3a4ad2e045e8016d4a46bfaf6e355225c132f"
+      },
+      "test": {
+        "path": "q_p0/test.xyz",
+        "frames": 149,
+        "charge_counts": {
+          "0": 149
+        },
+        "trajectory_ids": [
+          "q+0/D_-20",
+          "q+0/D_20"
+        ],
+        "sha256": "fc01c446e094d42df3bb6eb47719e52ea04c8d422ac6e6f16991016c06221737"
+      }
+    },
+    "1": {
+      "heldout_charge": 1,
+      "train": {
+        "path": "q_p1/train.xyz",
+        "frames": 1985,
+        "charge_counts": {
+          "-3": 637,
+          "-2": 432,
+          "-1": 413,
+          "0": 503
+        },
+        "trajectory_ids": [
+          "q+0/D_-10",
+          "q+0/D_-30",
+          "q+0/D_-40",
+          "q+0/D_-50",
+          "q+0/D_0",
+          "q+0/D_10",
+          "q+0/D_30",
+          "q+0/D_50",
+          "q+0/D_60",
+          "q-1/D_-30",
+          "q-1/D_-40",
+          "q-1/D_-50",
+          "q-1/D_-60",
+          "q-1/D_0",
+          "q-1/D_20",
+          "q-1/D_30",
+          "q-1/D_40",
+          "q-1/D_50",
+          "q-2/D_-30",
+          "q-2/D_-40",
+          "q-2/D_-50",
+          "q-2/D_-60",
+          "q-2/D_0",
+          "q-2/D_10",
+          "q-2/D_20",
+          "q-2/D_50",
+          "q-2/D_60",
+          "q-3/D_-10",
+          "q-3/D_-40",
+          "q-3/D_-60",
+          "q-3/D_0",
+          "q-3/D_10",
+          "q-3/D_20",
+          "q-3/D_30",
+          "q-3/D_40",
+          "q-3/D_60",
+          "q-3/Rattled",
+          "q-3/Unperturbed"
+        ],
+        "sha256": "bf752f87ab7c043a5dba64366ebdaf5ecb09cae5aa5c15c2653c01f255a19978"
+      },
+      "validation": {
+        "path": "q_p1/valid.xyz",
+        "frames": 436,
+        "charge_counts": {
+          "-3": 98,
+          "-2": 91,
+          "-1": 90,
+          "0": 157
+        },
+        "trajectory_ids": [
+          "q+0/D_-60",
+          "q+0/D_40",
+          "q-1/D_10",
+          "q-1/D_60",
+          "q-2/D_-20",
+          "q-2/D_40",
+          "q-3/D_-20",
+          "q-3/D_50"
+        ],
+        "sha256": "9f1ab98c2e05c3cd09b3444b3f789318162b636f28645f83281a9bf869f6b0ef"
+      },
+      "test": {
+        "path": "q_p1/test.xyz",
+        "frames": 98,
+        "charge_counts": {
+          "1": 98
+        },
+        "trajectory_ids": [
+          "q+1/D_-10",
+          "q+1/D_0"
+        ],
+        "sha256": "e6932e97c9da6c97115e77570f5d70a872b9862ec9f1699c4ab5ef8badb5c1c9"
+      }
+    }
+  },
+  "limitations": [
+    "held-out charge is absent from both training and validation",
+    "test trajectories are the two paths per charge from split_seed_20261122",
+    "no validation energy offset exists for the unseen charge; evaluate raw energy errors, forces, ranking, and selection regret",
+    "same 59-atom V_Sb1 cell; this does not test defect-type or supercell-size transfer"
+  ]
+}

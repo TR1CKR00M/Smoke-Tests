@@ -1,0 +1,1574 @@
+{
+  "campaign_id": "charged_defect_lr_20261120_r01",
+  "created_local_date": "2026-11-20",
+  "repository_decision": "pending Yile; local audit only, suggested destination Polar_bench_test",
+  "data": {
+    "citation": "Wang, Mosquera-Lois, Walsh, PRX Energy 5, 043001 (2026), DOI 10.1103/tzwd-cl3y; Zenodo 22756145",
+    "source_tree": "projects/polar_benchmark/data/1_FM_benchmark/V_Sb1/DFT_PBE",
+    "split_manifest": "review/charged_defect_campaign_20261120/split_manifest.json",
+    "split_seed": 20261120,
+    "split_unit": "complete distortion trajectory",
+    "counts": {
+      "converged_trajectories": 66,
+      "excluded_nonconverged_trajectories": 1,
+      "raw_frames_from_converged_trajectories": 3488,
+      "filtered_high_force_frames": 19,
+      "retained_frames": 3469,
+      "train_frames": 2261,
+      "validation_frames": 685,
+      "test_frames": 523
+    },
+    "generated_files_sha256": {
+      "train.xyz": "54e42e2bb822ba5baab7abb5b567a4faad8e2cef10951554a3b8cd62c7f3e879",
+      "valid.xyz": "db7eac83baa0c5f2159a153d835dbc41c8037e5dee7d3301b6302f253a29f08d",
+      "test.xyz": "7a9070f1abe0506ebfa1a0dbc033cda8f8ccec246805ad3ef2a5af85654e6826"
+    },
+    "per_charge_frame_counts_q_minus3_to_plus1": {
+      "train": [
+        533,
+        399,
+        416,
+        504,
+        409
+      ],
+      "validation": [
+        214,
+        85,
+        77,
+        178,
+        131
+      ],
+      "test": [
+        79,
+        117,
+        86,
+        127,
+        114
+      ]
+    },
+    "polar_total_spin_label_audit": {
+      "frames": 3469,
+      "missing": 0,
+      "invalid_multiplicity_not_1_or_2": 0
+    },
+    "additional_split": {
+      "label": "group_split_2",
+      "split_manifest": "review/charged_defect_campaign_20261120/data/split_seed_20261122/split_manifest.json",
+      "split_seed": 20261122,
+      "split_unit": "complete distortion trajectory",
+      "test_trajectories_disjoint_from_primary_test": true,
+      "split_frame_counts": {
+        "train": 2421,
+        "validation": 556,
+        "test": 492
+      },
+      "generated_files_sha256": {
+        "train.xyz": "734a14de824192896c532043a03ff5d83fe1b2f28c10daff63f0de0195be45e4",
+        "valid.xyz": "cf34802ce04cb41630e0d9bdafe7fe137bb4acca078053ba2149c4af51dbc1f0",
+        "test.xyz": "f96b3bd70efa223d083ac509dc0870e83109837b9fc756fc1401637ee2f15f39",
+        "split_manifest.json": "33f413c60e06d39262972a2d62da021ca8d07b81330a7336e80365d5bda3d665"
+      },
+      "rockfish_local_hashes_match": true,
+      "selection_note": "seed 20261121 was rejected before training because q=+1 shared D_-30 with the primary test; 20261122 is the first subsequent seed with disjoint test paths for all charges. Selection used path overlap only, not model performance.",
+      "protocol_sha256": "63edbb6e21afaea2a63c553818d00fa4f42ce1e402ada3a18a3aa4095b21661d",
+      "generated_by": "prepare_heldout_dataset.py",
+      "local_generation_software": {
+        "ase": "3.29.0",
+        "numpy": "1.26.4"
+      }
+    },
+    "charge_transfer_loo": {
+      "protocol": "CHARGE_TRANSFER_PROTOCOL.md",
+      "split_source": "data/split_seed_20261122",
+      "manifest": "review/charged_defect_campaign_20261120/data/charge_transfer_loo/charge_transfer_manifest.json",
+      "manifest_sha256": "50c4eae0b05421e109d1cbdf1028d869f79b034f3a79298a56d021b66d3c5529",
+      "remote_manifest_sha256": "50c4eae0b05421e109d1cbdf1028d869f79b034f3a79298a56d021b66d3c5529",
+      "local_remote_manifest_hashes_match": true,
+      "folds": {
+        "-3": {
+          "heldout_charge": -3,
+          "train": {
+            "path": "q_m3/train.xyz",
+            "frames": 1784,
+            "charge_counts": {
+              "-2": 432,
+              "-1": 413,
+              "0": 503,
+              "1": 436
+            },
+            "trajectory_ids": [
+              "q+0/D_-10",
+              "q+0/D_-30",
+              "q+0/D_-40",
+              "q+0/D_-50",
+              "q+0/D_0",
+              "q+0/D_10",
+              "q+0/D_30",
+              "q+0/D_50",
+              "q+0/D_60",
+              "q+1/D_-20",
+              "q+1/D_-30",
+              "q+1/D_-50",
+              "q+1/D_10",
+              "q+1/D_30",
+              "q+1/D_40",
+              "q+1/D_50",
+              "q+1/D_60",
+              "q-1/D_-30",
+              "q-1/D_-40",
+              "q-1/D_-50",
+              "q-1/D_-60",
+              "q-1/D_0",
+              "q-1/D_20",
+              "q-1/D_30",
+              "q-1/D_40",
+              "q-1/D_50",
+              "q-2/D_-30",
+              "q-2/D_-40",
+              "q-2/D_-50",
+              "q-2/D_-60",
+              "q-2/D_0",
+              "q-2/D_10",
+              "q-2/D_20",
+              "q-2/D_50",
+              "q-2/D_60"
+            ],
+            "sha256": "77bce7e99ff1548ebdff7d91e8d49a164cfd9665c044a4712a82012647afbcc7"
+          },
+          "validation": {
+            "path": "q_m3/valid.xyz",
+            "frames": 458,
+            "charge_counts": {
+              "-2": 91,
+              "-1": 90,
+              "0": 157,
+              "1": 120
+            },
+            "trajectory_ids": [
+              "q+0/D_-60",
+              "q+0/D_40",
+              "q+1/D_-40",
+              "q+1/D_20",
+              "q-1/D_10",
+              "q-1/D_60",
+              "q-2/D_-20",
+              "q-2/D_40"
+            ],
+            "sha256": "c36fdcdc76d3cc624190faa1c2bcc8b2e64fb64aad05cf2842f52f2bedb56da8"
+          },
+          "test": {
+            "path": "q_m3/test.xyz",
+            "frames": 91,
+            "charge_counts": {
+              "-3": 91
+            },
+            "trajectory_ids": [
+              "q-3/D_-30",
+              "q-3/D_-50"
+            ],
+            "sha256": "c416f79d4b4c30746f04122fccea7b95f967ed863faf2c2a342304fe4569edfb"
+          }
+        },
+        "-2": {
+          "heldout_charge": -2,
+          "train": {
+            "path": "q_m2/train.xyz",
+            "frames": 1989,
+            "charge_counts": {
+              "-3": 637,
+              "-1": 413,
+              "0": 503,
+              "1": 436
+            },
+            "trajectory_ids": [
+              "q+0/D_-10",
+              "q+0/D_-30",
+              "q+0/D_-40",
+              "q+0/D_-50",
+              "q+0/D_0",
+              "q+0/D_10",
+              "q+0/D_30",
+              "q+0/D_50",
+              "q+0/D_60",
+              "q+1/D_-20",
+              "q+1/D_-30",
+              "q+1/D_-50",
+              "q+1/D_10",
+              "q+1/D_30",
+              "q+1/D_40",
+              "q+1/D_50",
+              "q+1/D_60",
+              "q-1/D_-30",
+              "q-1/D_-40",
+              "q-1/D_-50",
+              "q-1/D_-60",
+              "q-1/D_0",
+              "q-1/D_20",
+              "q-1/D_30",
+              "q-1/D_40",
+              "q-1/D_50",
+              "q-3/D_-10",
+              "q-3/D_-40",
+              "q-3/D_-60",
+              "q-3/D_0",
+              "q-3/D_10",
+              "q-3/D_20",
+              "q-3/D_30",
+              "q-3/D_40",
+              "q-3/D_60",
+              "q-3/Rattled",
+              "q-3/Unperturbed"
+            ],
+            "sha256": "6777e76c6117fc401e2e5ae75d1456dcadce3c7e2befa6af735755b19bda1817"
+          },
+          "validation": {
+            "path": "q_m2/valid.xyz",
+            "frames": 465,
+            "charge_counts": {
+              "-3": 98,
+              "-1": 90,
+              "0": 157,
+              "1": 120
+            },
+            "trajectory_ids": [
+              "q+0/D_-60",
+              "q+0/D_40",
+              "q+1/D_-40",
+              "q+1/D_20",
+              "q-1/D_10",
+              "q-1/D_60",
+              "q-3/D_-20",
+              "q-3/D_50"
+            ],
+            "sha256": "8c613c8eddcac9a3286d19135aa1434c57333b10679e32181237ef032df0b277"
+          },
+          "test": {
+            "path": "q_m2/test.xyz",
+            "frames": 78,
+            "charge_counts": {
+              "-2": 78
+            },
+            "trajectory_ids": [
+              "q-2/D_-10",
+              "q-2/D_30"
+            ],
+            "sha256": "cec3b3dfc6009d324b95aa76f9be26806309d724e9a3c3ce258f1f4dafbdd106"
+          }
+        },
+        "-1": {
+          "heldout_charge": -1,
+          "train": {
+            "path": "q_m1/train.xyz",
+            "frames": 2008,
+            "charge_counts": {
+              "-3": 637,
+              "-2": 432,
+              "0": 503,
+              "1": 436
+            },
+            "trajectory_ids": [
+              "q+0/D_-10",
+              "q+0/D_-30",
+              "q+0/D_-40",
+              "q+0/D_-50",
+              "q+0/D_0",
+              "q+0/D_10",
+              "q+0/D_30",
+              "q+0/D_50",
+              "q+0/D_60",
+              "q+1/D_-20",
+              "q+1/D_-30",
+              "q+1/D_-50",
+              "q+1/D_10",
+              "q+1/D_30",
+              "q+1/D_40",
+              "q+1/D_50",
+              "q+1/D_60",
+              "q-2/D_-30",
+              "q-2/D_-40",
+              "q-2/D_-50",
+              "q-2/D_-60",
+              "q-2/D_0",
+              "q-2/D_10",
+              "q-2/D_20",
+              "q-2/D_50",
+              "q-2/D_60",
+              "q-3/D_-10",
+              "q-3/D_-40",
+              "q-3/D_-60",
+              "q-3/D_0",
+              "q-3/D_10",
+              "q-3/D_20",
+              "q-3/D_30",
+              "q-3/D_40",
+              "q-3/D_60",
+              "q-3/Rattled",
+              "q-3/Unperturbed"
+            ],
+            "sha256": "50f5a32bcf702b5aa26040cd77375f48799b510bd701e4caeb427f7eb2443b09"
+          },
+          "validation": {
+            "path": "q_m1/valid.xyz",
+            "frames": 466,
+            "charge_counts": {
+              "-3": 98,
+              "-2": 91,
+              "0": 157,
+              "1": 120
+            },
+            "trajectory_ids": [
+              "q+0/D_-60",
+              "q+0/D_40",
+              "q+1/D_-40",
+              "q+1/D_20",
+              "q-2/D_-20",
+              "q-2/D_40",
+              "q-3/D_-20",
+              "q-3/D_50"
+            ],
+            "sha256": "c95c2922c97372c4c1e4f5e161bfeb4eb7e2655c8ee45a096b86a4eb6fc92006"
+          },
+          "test": {
+            "path": "q_m1/test.xyz",
+            "frames": 76,
+            "charge_counts": {
+              "-1": 76
+            },
+            "trajectory_ids": [
+              "q-1/D_-10",
+              "q-1/D_-20"
+            ],
+            "sha256": "d02a9231c0fdcd42a3ec653fb5de22bba22ce4bf81445cd9ed9aa1b76b9aac43"
+          }
+        },
+        "0": {
+          "heldout_charge": 0,
+          "train": {
+            "path": "q_p0/train.xyz",
+            "frames": 1918,
+            "charge_counts": {
+              "-3": 637,
+              "-2": 432,
+              "-1": 413,
+              "1": 436
+            },
+            "trajectory_ids": [
+              "q+1/D_-20",
+              "q+1/D_-30",
+              "q+1/D_-50",
+              "q+1/D_10",
+              "q+1/D_30",
+              "q+1/D_40",
+              "q+1/D_50",
+              "q+1/D_60",
+              "q-1/D_-30",
+              "q-1/D_-40",
+              "q-1/D_-50",
+              "q-1/D_-60",
+              "q-1/D_0",
+              "q-1/D_20",
+              "q-1/D_30",
+              "q-1/D_40",
+              "q-1/D_50",
+              "q-2/D_-30",
+              "q-2/D_-40",
+              "q-2/D_-50",
+              "q-2/D_-60",
+              "q-2/D_0",
+              "q-2/D_10",
+              "q-2/D_20",
+              "q-2/D_50",
+              "q-2/D_60",
+              "q-3/D_-10",
+              "q-3/D_-40",
+              "q-3/D_-60",
+              "q-3/D_0",
+              "q-3/D_10",
+              "q-3/D_20",
+              "q-3/D_30",
+              "q-3/D_40",
+              "q-3/D_60",
+              "q-3/Rattled",
+              "q-3/Unperturbed"
+            ],
+            "sha256": "278e464997e6074626964028bfe43de963d924a2a967078159362c9a63f6a6a6"
+          },
+          "validation": {
+            "path": "q_p0/valid.xyz",
+            "frames": 399,
+            "charge_counts": {
+              "-3": 98,
+              "-2": 91,
+              "-1": 90,
+              "1": 120
+            },
+            "trajectory_ids": [
+              "q+1/D_-40",
+              "q+1/D_20",
+              "q-1/D_10",
+              "q-1/D_60",
+              "q-2/D_-20",
+              "q-2/D_40",
+              "q-3/D_-20",
+              "q-3/D_50"
+            ],
+            "sha256": "de9da07bed867f6b700b00678ac3a4ad2e045e8016d4a46bfaf6e355225c132f"
+          },
+          "test": {
+            "path": "q_p0/test.xyz",
+            "frames": 149,
+            "charge_counts": {
+              "0": 149
+            },
+            "trajectory_ids": [
+              "q+0/D_-20",
+              "q+0/D_20"
+            ],
+            "sha256": "fc01c446e094d42df3bb6eb47719e52ea04c8d422ac6e6f16991016c06221737"
+          }
+        },
+        "1": {
+          "heldout_charge": 1,
+          "train": {
+            "path": "q_p1/train.xyz",
+            "frames": 1985,
+            "charge_counts": {
+              "-3": 637,
+              "-2": 432,
+              "-1": 413,
+              "0": 503
+            },
+            "trajectory_ids": [
+              "q+0/D_-10",
+              "q+0/D_-30",
+              "q+0/D_-40",
+              "q+0/D_-50",
+              "q+0/D_0",
+              "q+0/D_10",
+              "q+0/D_30",
+              "q+0/D_50",
+              "q+0/D_60",
+              "q-1/D_-30",
+              "q-1/D_-40",
+              "q-1/D_-50",
+              "q-1/D_-60",
+              "q-1/D_0",
+              "q-1/D_20",
+              "q-1/D_30",
+              "q-1/D_40",
+              "q-1/D_50",
+              "q-2/D_-30",
+              "q-2/D_-40",
+              "q-2/D_-50",
+              "q-2/D_-60",
+              "q-2/D_0",
+              "q-2/D_10",
+              "q-2/D_20",
+              "q-2/D_50",
+              "q-2/D_60",
+              "q-3/D_-10",
+              "q-3/D_-40",
+              "q-3/D_-60",
+              "q-3/D_0",
+              "q-3/D_10",
+              "q-3/D_20",
+              "q-3/D_30",
+              "q-3/D_40",
+              "q-3/D_60",
+              "q-3/Rattled",
+              "q-3/Unperturbed"
+            ],
+            "sha256": "bf752f87ab7c043a5dba64366ebdaf5ecb09cae5aa5c15c2653c01f255a19978"
+          },
+          "validation": {
+            "path": "q_p1/valid.xyz",
+            "frames": 436,
+            "charge_counts": {
+              "-3": 98,
+              "-2": 91,
+              "-1": 90,
+              "0": 157
+            },
+            "trajectory_ids": [
+              "q+0/D_-60",
+              "q+0/D_40",
+              "q-1/D_10",
+              "q-1/D_60",
+              "q-2/D_-20",
+              "q-2/D_40",
+              "q-3/D_-20",
+              "q-3/D_50"
+            ],
+            "sha256": "9f1ab98c2e05c3cd09b3444b3f789318162b636f28645f83281a9bf869f6b0ef"
+          },
+          "test": {
+            "path": "q_p1/test.xyz",
+            "frames": 98,
+            "charge_counts": {
+              "1": 98
+            },
+            "trajectory_ids": [
+              "q+1/D_-10",
+              "q+1/D_0"
+            ],
+            "sha256": "e6932e97c9da6c97115e77570f5d70a872b9862ec9f1699c4ab5ef8badb5c1c9"
+          }
+        }
+      },
+      "conditioning": {
+        "total_charge": "continuous scalar graph feature; MLP embedding, in_dim=1, emb_dim=16",
+        "total_spin": "categorical graph feature, 2 classes, emb_dim=8, offset=-1"
+      },
+      "training_matrix": "MACE-Q and MACELES-Q; held-out q=-3,-2,-1,0,+1; seeds 42 and 43 (20 fits)",
+      "test_protocol": "No per-q validation offset; test only held-out q frames from two split-2 trajectories.",
+      "four_path_test_expansion": {
+        "manifest": "review/charged_defect_campaign_20261120/data/charge_transfer_loo_4path/charge_transfer_manifest.json",
+        "manifest_sha256": "57bee0758ee95009e53462df906ea41509ee4256b9d74e352ed6ee4d73043b93",
+        "remote_manifest_sha256": "57bee0758ee95009e53462df906ea41509ee4256b9d74e352ed6ee4d73043b93",
+        "local_remote_manifest_hashes_match": true,
+        "test_trajectories_per_charge": 4,
+        "test_frames_by_charge": {
+          "-3": 170,
+          "-2": 195,
+          "-1": 162,
+          "0": 276,
+          "1": 212
+        },
+        "train_validation_byte_identical_to_two_path_folds": true,
+        "test_geometry_matches_other_charge_train_valid": {
+          "-3": "3/170 across 3 paths",
+          "-2": "0/195",
+          "-1": "0/162",
+          "0": "4/276 across 4 paths",
+          "1": "0/212"
+        },
+        "evaluation_job": "33260492_[0-19%8]"
+      }
+    }
+  },
+  "software": [
+    {
+      "name": "MACE",
+      "url": "https://github.com/ACEsuit/mace",
+      "commit": "4f55e0b5b6b8a9fabe6521ef3fa48fe3171b7530",
+      "archive_sha256": "c3db60cb6e56e1f956ae6f28efc4271fe1c14c8599060f25edbd75d53fb83959"
+    },
+    {
+      "name": "LES",
+      "url": "https://github.com/ChengUCB/les",
+      "commit": "35b971a650cf30adb84fef7138761e81aa47b3a2",
+      "archive_sha256": "9f50ab923581ec70872b44d778503db5790a647c889f1bc28a042a8dca7da3fd"
+    },
+    {
+      "name": "graph_electrostatics (graph_longrange)",
+      "url": "https://github.com/WillBaldwin0/graph_electrostatics",
+      "commit": "6a86de5e3ed35fd86a55fc046aa085fe48a72764",
+      "version": "0.4.4",
+      "archive_sha256": "067ba22c67e18f699843b48ee4a7cdbd7459568793bfcf673610b6b4b1760acc"
+    },
+    {
+      "name": "les_fit",
+      "url": "https://github.com/ChengUCB/les_fit",
+      "commit": "a886785caa4182a0effb95d95f0e402881adfc4d",
+      "license": "CC BY-NC 4.0",
+      "use": "method reference and published training example; not redistributed as a model"
+    }
+  ],
+  "reference_models": [
+    {
+      "name": "MACE-POLAR-1-M",
+      "url": "https://github.com/ACEsuit/mace-foundations/releases/download/mace_polar_1/MACE-POLAR-1-M.model",
+      "release": "mace_polar_1",
+      "sha256": "fab8b8713c832f31a2a853aaa22fd638be8a369cbf5095e6b3e982a18d10e93a",
+      "size_bytes": 68133235,
+      "license": "ASL",
+      "training_dataset": "OMol25, omegaB97M-V",
+      "campaign_status": "zero-shot baseline; periodic Sb2Se3 out-of-domain"
+    }
+  ],
+  "rockfish": {
+    "host": "rockfish (SSH alias to login.rockfish.jhu.edu)",
+    "user": "ycao73",
+    "campaign_root": "/scratch16/pclancy3/ycao73/charged_defect_lr_20261120_r01",
+    "python_module": "python/3.11.9",
+    "torch_module": "pytorch/2.4.1 base module; campaign venv pins torch 2.5.1+cu124 and torchvision 0.20.1+cu124",
+    "user_site_packages": "disabled (PYTHONNOUSERSITE=1)",
+    "campaign_packages": {
+      "mace-torch": "0.3.18",
+      "les": "0.2.0",
+      "graph-longrange": "0.4.4",
+      "ase": "3.29.0",
+      "e3nn": "0.4.4",
+      "torchmetrics": "1.9.0",
+      "packaging": "25.0",
+      "setuptools": "80.9.0"
+    },
+    "vasp_available": false,
+    "jobs_submitted": [
+      {
+        "job_id": "33259988",
+        "purpose": "one-epoch MACELES/Q interface preflight before Torch pin",
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:00:41",
+        "torch": "2.4.1+cu124",
+        "result": "finite energy/force; direct latent-Q audit submitted separately; TorchScript compiled artifact not produced for GenericJointEmbedding"
+      },
+      {
+        "job_id": "33259994",
+        "purpose": "direct MACELES latent-charge output audit for job 33259988",
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:00:09",
+        "torch": "2.4.1+cu124",
+        "result": "finite energies/forces; latent-charge sums measured but unconstrained; exploratory only"
+      },
+      {
+        "job_id": "33260007",
+        "purpose": "repeat one-epoch MACELES/Q smoke with declared-minimum Torch 2.5.1+cu124",
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:00:34",
+        "torch": "2.5.1+cu124",
+        "model_sha256": "2a80ae831098a357151c9a29bc841815aeb5d6e65023d79bfd7605126f66f52a",
+        "result": "finite energy/forces across all five Q values; raw checkpoint loads and exposes latent charges; TorchScript compiled artifact not produced for GenericJointEmbedding"
+      },
+      {
+        "job_id": "33260015",
+        "purpose": "MACE-POLAR-1-M zero-shot audit on one charge-matched validation frame per Q",
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:00:19",
+        "torch": "2.5.1+cu124",
+        "result": "finite periodic predictions; partial charge sums match requested Q within numerical precision; force component RMSE 0.68–1.37 eV/A; cross-functional absolute energy error excluded from interpretation"
+      },
+      {
+        "job_id": "33260018",
+        "purpose": "MACE with categorical total-Q one-epoch interface smoke",
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed": "00:00:26",
+        "torch": "2.5.1+cu124",
+        "model_sha256": "cdda04dedda5210ea24d9bc60feeced0c2c1d0ad7dcbf793255b1370a19ab761",
+        "result": "finite energy/forces; changing total-Q changes predicted energy; same-geometry smoke only, not accuracy evidence"
+      },
+      {
+        "job_id": "33260051_[0-2]",
+        "purpose": "C1 training array: from-scratch MACE/Q, from-scratch MACELES/Q, and MACE-POLAR fine-tuning on identical trajectory-disjoint train/valid split",
+        "state": "MACE_Q_AND_LES_COMPLETED; POLAR_TIMEOUT_AND_RECOVERY_RUNNING",
+        "submitted": "2026-11-20",
+        "seed": 42,
+        "max_epochs": 100,
+        "early_stopping_patience": 15,
+        "planned_test_split": "data/test.xyz; 523 frames; held-out trajectory-disjoint; evaluation waits for successful model outputs",
+        "elapsed_observed": "00:26:02 at 2026-11-21 06:48 UTC"
+      },
+      {
+        "job_id": "33260083",
+        "purpose": "QE 7.3.1 PBE-D3 zero-damping neutral q=0 cross-code single point on the final VASP geometry",
+        "state": "FAILED_BEFORE_QE_TASK_LAUNCH",
+        "partition": "parallel",
+        "account": "pclancy3",
+        "ntasks": 32,
+        "ecutwfc_Ry": 60,
+        "ecutrho_Ry": 480,
+        "spin_magnetization_e": 1,
+        "pseudopotential_hashes": {
+          "Sb": "da5796d3bf5d2475c0b3aaa2f03f4df0111c68339fae0565bdf65b41123b3832",
+          "Se": "92c94ecdb4217de69da39e4c36e96c178e38da9c7b574ef83df317b16d9e403c"
+        },
+        "interpretation": "cross-code pilot only; keep QE labels separate from VASP until forces/relative energies are calibrated",
+        "dispersion": "pairwise Grimme D3 zero damping; three-body term disabled to match VASP IVDW=11",
+        "input_sha256": "fe112ef76bdd425ed42fb86d336cd6494ee40d375b2df8acb81445f85e9f1cf1",
+        "reference_json_sha256": "dcc97be9fbc7f4a7dd3bd539dc3be11cac9833204f63fbf7b7aba9e42cc5dc16",
+        "exit_code": "1:0",
+        "elapsed": "00:10:39",
+        "error": "srun timed out waiting for task launch; 0 of 32 tasks started; no QE calculation/result.",
+        "retry": "not submitted pending scope/repository coordination"
+      },
+      {
+        "job_id": "33260086_[0-2]",
+        "purpose": "held-out evaluation array for the seed42 MACE-Q, MACELES-Q, and PolarMACE C1 models",
+        "state": "CANCELLED_REPLACED",
+        "dependency": "afterok:33260051",
+        "metrics": "per-charge energy, force, rank, and held-out minimum-selection regret",
+        "note": "replaced with narrower dependencies to avoid Polar walltime blocking unrelated benchmark stages"
+      },
+      {
+        "job_id": "33260089_[0-1]",
+        "purpose": "paired MACE-Q/MACELES-Q ablation enabling MACE use_embedding_readout to add a geometry-independent charge-energy channel",
+        "state": "CANCELLED_REPLACED",
+        "dependency": "afterok:33260051",
+        "seed": 42,
+        "max_epochs": 100,
+        "early_stopping_patience": 15,
+        "note": "replaced with narrower dependencies to avoid Polar walltime blocking unrelated benchmark stages"
+      },
+      {
+        "job_id": "33260090_[0-1]",
+        "purpose": "held-out evaluation array for the MACE-Q/MACELES-Q embedding-readout ablation",
+        "state": "CANCELLED_REPLACED",
+        "dependency": "afterok:33260089",
+        "note": "replaced with narrower dependencies to avoid Polar walltime blocking unrelated benchmark stages"
+      },
+      {
+        "job_id": "33260098",
+        "purpose": "guarded PolarMACE checkpoint continuation; skips if the original training produces its final model, otherwise resumes the latest checkpoint",
+        "state": "COMPLETED_EXIT_0",
+        "dependency": "afterany:33260051_2",
+        "time_limit": "08:00:00",
+        "script": "recover_polar_if_needed.slurm",
+        "latest_validation_epoch": 98,
+        "latest_validation_energy_rmse_meV_per_atom": 47.99,
+        "latest_validation_force_rmse_eV_per_A": 0.08532,
+        "saved_checkpoint_epoch": 28,
+        "final_model_written": true,
+        "heldout_job": "33260146_2 COMPLETED_EXIT_0",
+        "raw_model_sha256": "e46dbab0dee7d28d68bf7067c92bce4e8f01556f50e9d04a72f7f8a58ce82a4c",
+        "final_raw_model_written": true,
+        "torchscript_compile": "failed on unknown type name o3.Irreps; not required by raw-model evaluator",
+        "elapsed": "04:04:37"
+      },
+      {
+        "job_id": "33260099_[0-2]",
+        "purpose": "held-out evaluation array for seed42 MACE-Q, MACELES-Q, and PolarMACE C1 models",
+        "state": "CANCELLED_REPLACED_BY_SPLIT_EVALUATION",
+        "dependency": "afterok:33260051_0,33260051_1,33260098",
+        "metrics": "per-charge energy, force, rank, minimum-selection regret, and Polar charge-sum audit",
+        "note": "split into baseline evaluation and Polar evaluation so the slower continuation does not delay MACE/MACELES results"
+      },
+      {
+        "job_id": "33260100_[0-1]",
+        "purpose": "paired MACE-Q/MACELES-Q direct embedding-readout ablation",
+        "state": "COMPLETED_EXIT_0",
+        "dependency": "afterok:33260051_0,33260051_1",
+        "seed": 42
+      },
+      {
+        "job_id": "33260102_[0-1]",
+        "purpose": "held-out evaluation for the MACE-Q/MACELES-Q embedding-readout ablation",
+        "state": "COMPLETED_EXIT_0",
+        "dependency": "afterok:33260100"
+      },
+      {
+        "job_id": "33260145_[0-1]",
+        "purpose": "held-out C1 test evaluation for MACE-Q and MACELES-Q",
+        "state": "COMPLETED_EXIT_0",
+        "dependency": "afterok:33260051_0,33260051_1",
+        "metrics": "per-charge energy, force, rank, minimum-selection regret"
+      },
+      {
+        "job_id": "33260146_2",
+        "purpose": "held-out C1 test evaluation for PolarMACE fine-tune",
+        "state": "COMPLETED_EXIT_0",
+        "dependency": "afterok:33260098",
+        "metrics": "per-charge energy, force, rank, minimum-selection regret, predicted charge-sum audit",
+        "elapsed": "00:02:19",
+        "test_sha256": "7a9070f1abe0506ebfa1a0dbc033cda8f8ccec246805ad3ef2a5af85654e6826",
+        "metrics_sha256": "dcaf7324b08335584fbae0b83901fe4db30349cbf79b82d3a3563b27a0401b7f",
+        "predictions_sha256": "a02066a57496e700db72e9cba3b08cf7a8efebc60fa3d66ef5ddedddc0fcd6e9"
+      },
+      {
+        "job_id": "33260217_[0-1]",
+        "purpose": "independent seed43 MACE-Q/MACELES-Q fits on the frozen C1 split",
+        "state": "COMPLETED_EXIT_0",
+        "seed": 43,
+        "dependency": null,
+        "max_epochs": 100
+      },
+      {
+        "job_id": "33260218_[0-1]",
+        "purpose": "held-out C1 evaluation for seed43 MACE-Q/MACELES-Q",
+        "state": "COMPLETED_EXIT_0",
+        "dependency": "afterok:33260217",
+        "training_seed": 43
+      },
+      {
+        "job_id": "33260322_[0-3]",
+        "purpose": "second independent trajectory-split C1 training array: MACE-Q and MACELES-Q, seeds 42 and 43",
+        "state": "COMPLETED_EXIT_0",
+        "data_split": "data/split_seed_20261122",
+        "dependency": null,
+        "elapsed_by_task": {
+          "33260322_0": "01:18:11",
+          "33260322_1": "02:06:29",
+          "33260322_2": "01:30:05",
+          "33260322_3": "02:04:40"
+        }
+      },
+      {
+        "job_id": "33260323_[0-3]",
+        "purpose": "held-out evaluation of second trajectory-split C1 models",
+        "state": "COMPLETED_EXIT_0",
+        "data_split": "data/split_seed_20261122",
+        "dependency": "afterok:33260322_[0-3]",
+        "elapsed_by_task": {
+          "33260323_0": "00:00:54",
+          "33260323_1": "00:01:28",
+          "33260323_2": "00:01:18",
+          "33260323_3": "00:01:04"
+        }
+      },
+      {
+        "job_id": "33260310_[0-3]",
+        "purpose": "split-2 C1 training preflight, did not start training",
+        "state": "FAILED module init ENABLE_LMOD unset under nounset"
+      },
+      {
+        "job_id": "33260311_[0-3]",
+        "purpose": "split-2 C1 held-out evaluation dependency array",
+        "state": "CANCELLED after training preflight failed"
+      },
+      {
+        "job_id": "33260317_[0-3]",
+        "purpose": "split-2 C1 training preflight, did not start training",
+        "state": "FAILED module load RF_CONDA_SITE unset under nounset"
+      },
+      {
+        "job_id": "33260318_[0-3]",
+        "purpose": "split-2 C1 held-out evaluation dependency array",
+        "state": "CANCELLED after training preflight failed"
+      },
+      {
+        "job_id": "33260426",
+        "purpose": "one-epoch continuous-Q MACE interface preflight, including unseen q=-2 inference",
+        "state": "COMPLETED_EXIT_0",
+        "elapsed": "00:02:42",
+        "local_remote_hashes_match": true,
+        "model_sha256": "8861956a5e5ab82bc0ff861a98b07cd85073e79c75c1aa84cba7a9602b0cf20f",
+        "metrics_sha256": "52747625c38b3d308e48aa1055eba639d4783d8cad974677c6449d42998898e1",
+        "predictions_sha256": "ea98d3c48d996836f91fa81d690ec74103df42d74cfd185ce4a7e1d768bd69ea",
+        "note": "One training epoch only; output verifies finite training/evaluation and interface, not accuracy."
+      },
+      {
+        "job_id": "33260438_[0-19%8]",
+        "purpose": "continuous-Q MACE-Q/MACELES-Q leave-one-charge-out training; 5 held-out charge folds, seeds 42/43",
+        "state": "TASKS_0_1_2_3_4_5_6_7_COMPLETED; TASKS_8_15_RUNNING; TASKS_16_19_PENDING",
+        "dependency": null,
+        "time_limit": "04:00:00",
+        "max_concurrent_tasks": 8,
+        "data_manifest_sha256": "50c4eae0b05421e109d1cbdf1028d869f79b034f3a79298a56d021b66d3c5529",
+        "completed_tasks": {
+          "33260438_0": {
+            "state": "COMPLETED_EXIT_0",
+            "model": "runs/c1_mace_ct_qm3_seed42/mace_ct_qm3_seed42.model"
+          },
+          "33260438_1": {
+            "state": "COMPLETED_EXIT_0",
+            "model": "runs/c1_mace_ct_qm3_seed43/mace_ct_qm3_seed43.model"
+          },
+          "33260438_2": {
+            "state": "COMPLETED_EXIT_0",
+            "model": "runs/c1_maceles_ct_qm3_seed42/maceles_ct_qm3_seed42.model"
+          },
+          "33260438_3": {
+            "state": "COMPLETED_EXIT_0",
+            "model": "runs/c1_maceles_ct_qm3_seed43/maceles_ct_qm3_seed43.model"
+          },
+          "33260438_4": {
+            "state": "COMPLETED_EXIT_0",
+            "model": "runs/c1_mace_ct_qm2_seed42/mace_ct_qm2_seed42.model"
+          },
+          "33260438_5": {
+            "state": "COMPLETED_EXIT_0",
+            "model": "runs/c1_mace_ct_qm2_seed43/mace_ct_qm2_seed43.model"
+          },
+          "33260438_6": {
+            "state": "COMPLETED_EXIT_0",
+            "model": "runs/c1_maceles_ct_qm2_seed42/maceles_ct_qm2_seed42.model"
+          },
+          "33260438_7": {
+            "state": "COMPLETED_EXIT_0",
+            "model": "runs/c1_maceles_ct_qm2_seed43/maceles_ct_qm2_seed43.model"
+          }
+        },
+        "completed_artifacts": {
+          "mace_ct_qm3_seed42": {
+            "training_task": "33260438_0",
+            "model_sha256": "c1514c5fe4faaf9138049f10cefe1211d96b1af0255015ba550b2f0424836e5e",
+            "training_output_sha256": "6aeee05e8d5a55bf66b7e7c2f296c5f07422ba961e508e0471039f788bf13138",
+            "local_remote_hashes_match": true,
+            "heldout": "pending"
+          },
+          "mace_ct_qm3_seed43": {
+            "training_task": "33260438_1",
+            "model_sha256": "7b8df35109692a365b918db28b552ed14e0945b875d62c808f7b0d3dc4672b18",
+            "training_output_sha256": "dbe41800f5b1272a36ccd77f00c0afb4031ed95676de21bd0150d75553e762c2",
+            "local_remote_hashes_match": true,
+            "heldout": "pending"
+          },
+          "maceles_ct_qm3_seed42": {
+            "training_task": "33260438_2",
+            "model_sha256": "cbfce146d4b1db024fb31df025f933cd5b599792dcce550116af4f4cbf4f409f",
+            "training_output_sha256": "13df983477f226842a1898181b52145ede8fe8e496d695e87dfb4189bac9a2dd",
+            "local_remote_hashes_match": true,
+            "heldout": "pending"
+          },
+          "maceles_ct_qm3_seed43": {
+            "training_task": "33260438_3",
+            "model_sha256": "da3d6d6d6688365a8ecb520e89fda82ef2c450e19ef3843c56939b313a4c48ed",
+            "training_output_sha256": "0a8bddf700f4b3af6ce383774f359e9b7cda0195b1d163059f5ffdfab8802869",
+            "local_remote_hashes_match": true,
+            "heldout": "pending"
+          },
+          "mace_ct_qm2_seed42": {
+            "training_task": "33260438_4",
+            "model_sha256": "ce12814dc08dcb5429dfb043c0bcefa0d9e821cf80bfa4cb50d66501439d8934",
+            "training_output_sha256": "f025a38bd41d28514f5fa3d18854aa0668ce7ad2372fd8a9df456d7ecc0c7900",
+            "local_remote_hashes_match": true,
+            "heldout": "pending"
+          },
+          "mace_ct_qm2_seed43": {
+            "training_task": "33260438_5",
+            "model_sha256": "e16925c306858fb2cbffd4c793194ce64eec1e3151a80f10116e2d9bad453a68",
+            "training_output_sha256": "7bfc674d4da9d216609d52a3aaf7481995590f411eb29170ac53505dabf0a418",
+            "local_remote_hashes_match": true,
+            "heldout": "pending"
+          },
+          "maceles_ct_qm2_seed42": {
+            "training_task": "33260438_6",
+            "model_sha256": "622014baad181f4f8a7a5f8376607dc1ff081b24bb9152664792da66a2717f58",
+            "training_output_sha256": "6962c4b661f13de6a1c47460f73160473fb9aad0d0a3815044fc88e2dcc60425",
+            "local_remote_hashes_match": true,
+            "heldout": "pending"
+          },
+          "maceles_ct_qm2_seed43": {
+            "training_task": "33260438_7",
+            "model_sha256": "582054da3134597bbd3439b6f9562ec36d377c540ce46d713c8de4fa96c946bf",
+            "training_output_sha256": "8a56207eb04639941ed2e05e4e574ff4f2ef0037f42277c507bede73c3f12d81",
+            "local_remote_hashes_match": true,
+            "heldout": "pending"
+          }
+        }
+      },
+      {
+        "job_id": "33260439_[0-19%8]",
+        "purpose": "held-out unseen-charge evaluation with per-trajectory audit",
+        "state": "CANCELLED_REPLACED_BEFORE_START",
+        "dependency": "afterok:33260438_[0-19%8]",
+        "data_manifest_sha256": "50c4eae0b05421e109d1cbdf1028d869f79b034f3a79298a56d021b66d3c5529",
+        "note": "Two-path test array cancelled before start after test-only expansion; training data unchanged."
+      },
+      {
+        "job_id": "33260492_[0-19%8]",
+        "purpose": "four-path held-out unseen-charge evaluation with per-trajectory audit",
+        "state": "PENDING_AFTEROK",
+        "dependency": "afterok:33260438_[0-19%8]",
+        "data_manifest_sha256": "57bee0758ee95009e53462df906ea41509ee4256b9d74e352ed6ee4d73043b93",
+        "test_paths_per_charge": 4
+      }
+    ],
+    "raw_data_staging": {
+      "total_files": 203,
+      "OUTCAR_files": 67,
+      "POSCAR_files": 67,
+      "CONTCAR_files": 67,
+      "split_file_sha256_verified_on_remote": true
+    },
+    "qe_available": {
+      "module": "qe/7.3.1-cpu",
+      "binary": "/data/apps/extern/qe/7.3.1-cpu/bin/pw.x",
+      "cpu_partitions": [
+        "parallel",
+        "shared",
+        "express"
+      ],
+      "vasp_available": false
+    },
+    "qe_pseudopotentials": [
+      {
+        "element": "Sb",
+        "filename": "Sb.pbe-n-kjpaw_psl.1.0.0.UPF",
+        "source": "Quantum ESPRESSO PSlibrary official table",
+        "url": "https://pseudopotentials.quantum-espresso.org/upf_files/Sb.pbe-n-kjpaw_psl.1.0.0.UPF",
+        "sha256": "da5796d3bf5d2475c0b3aaa2f03f4df0111c68339fae0565bdf65b41123b3832",
+        "z_valence": 5,
+        "recommended_cutoff_wfc_Ry": 27,
+        "recommended_cutoff_rho_Ry": 136
+      },
+      {
+        "element": "Se",
+        "filename": "Se.pbe-n-kjpaw_psl.1.0.0.UPF",
+        "source": "Quantum ESPRESSO PSlibrary official table",
+        "url": "https://pseudopotentials.quantum-espresso.org/upf_files/Se.pbe-n-kjpaw_psl.1.0.0.UPF",
+        "sha256": "92c94ecdb4217de69da39e4c36e96c178e38da9c7b574ef83df317b16d9e403c",
+        "z_valence": 6,
+        "recommended_cutoff_wfc_Ry": 22,
+        "recommended_cutoff_rho_Ry": 117
+      }
+    ]
+  },
+  "campaign_scripts": {
+    "run_c1_training.slurm": {
+      "sha256": "77567504d84414dd929fbde0dbb2f0ccd5cd15d70a1663acfd2e83afe9a48407",
+      "purpose": "one-seed C1 array training"
+    },
+    "evaluate_c1.py": {
+      "sha256": "3d5cfdbd4c709ee40398244b29c117c4bc6070d6a706257053ecc57923ed1ac8",
+      "purpose": "held-out per-charge energy/force/ranking/selection metrics with frame provenance and Polar charge audit"
+    },
+    "evaluate_c1.slurm": {
+      "sha256": "43193a880fd593d3ef37fa8434d8263d44389f02be49424d68ad2d3df89c60e3",
+      "purpose": "GPU evaluation entry point"
+    },
+    "prepare_qe_crosscode.py": {
+      "sha256": "51407bf88b8eb824bbe2952fcd06cc2e8c7f1c514336ddff95ad67b9d61fd540",
+      "purpose": "QE PBE-D3 cross-code single-point calibration"
+    },
+    "compare_qe_crosscode.py": {
+      "sha256": "53d2b2987071b325d14d455f42ba54a0b13781394dd8d64506b82459eeccf0af",
+      "purpose": "QE PBE-D3 cross-code single-point calibration"
+    },
+    "run_qe_crosscode.slurm": {
+      "sha256": "c824f99ec4f61585fb072cba310e1acf8df5b0ec1e8a61a9804daed96ff1463a",
+      "purpose": "QE PBE-D3 cross-code single-point calibration"
+    },
+    "run_c1_embedding_readout.slurm": {
+      "sha256": "1ad487c19870196e96de481091921619a4774d5bf27d417506406bcfceda70b4",
+      "purpose": "paired MACE/Q and MACELES/Q direct charge-energy-readout ablation"
+    },
+    "evaluate_c1_readout_array.slurm": {
+      "sha256": "1f7273c0b56b391a4907c0b5e39118c159372fa26e0b28ef4bc7e30b4c0553dd",
+      "purpose": "paired MACE/Q and MACELES/Q direct charge-energy-readout ablation"
+    },
+    "recover_polar_if_needed.slurm": {
+      "sha256": "bd6e298ed8f2a881cd4aa475fb4070dd2e362df57d022d0acee21560fc151b26",
+      "purpose": "afterany guarded PolarMACE checkpoint continuation with 8-hour limit"
+    },
+    "run_c1_seed43.slurm": {
+      "sha256": "3382fe1f203ab62f9a4ae78c33c32059a1ee01d74813499206c89b9e289cc867",
+      "purpose": "independent seed43 MACE-Q/MACELES-Q training on the frozen C1 split"
+    },
+    "evaluate_c1_seed43.slurm": {
+      "sha256": "4580dc2f60c323090e080a4d481d4cb13a6cc9b22a426146ecd3d4a958f03f0a",
+      "purpose": "held-out evaluation of seed43 MACE-Q/MACELES-Q on the unchanged C1 test split"
+    },
+    "run_c1_split2.slurm": {
+      "sha256": "2388cd62865ad5e25be885cd14f7e9c348de0064ad492d1c83ad91b2c2a47da9",
+      "purpose": "paired MACE-Q/MACELES-Q fits on independent trajectory split, seeds 42 and 43"
+    },
+    "evaluate_c1_split2.slurm": {
+      "sha256": "85447af6e012b1e63fac4a617e4600a82ff637c67a7514d76270b5c7edb42d8e",
+      "purpose": "held-out C1 evaluation on independent trajectory split"
+    },
+    "summarize_c1_split_stability.py": {
+      "sha256": "177fb52b226bc5dddc144b9a7d1dbf3fb6077d750f7d6046e7bbdf12c1821691",
+      "purpose": "split-specific C1 metrics and per-trajectory ranking/regret audit"
+    },
+    "prepare_c1_charge_transfer.py": {
+      "sha256": "0088a45e89d3690a0342c7f8191476a46640ec0f1c17c35d0e5af9990f888ba9",
+      "purpose": "generate five leave-one-charge-out folds, validate provenance and charge/spin inputs, and count cross-q geometry matches"
+    },
+    "evaluate_c1_charge_transfer.py": {
+      "sha256": "1fc55f9653e63482e4d84254a637280d42e62bda236464711aa49806a9254c01",
+      "purpose": "held-out unseen-charge energy, force, ranking, regret, and centered per-trajectory metrics with explicit calculator info-key mapping"
+    },
+    "run_c1_charge_transfer.slurm": {
+      "sha256": "d959f1cd16297730db6d0c5f13f95f1af798cc6a8fb835afdd89fa44872a8eed",
+      "purpose": "20-fit continuous-Q MACE/MACELES array, 5 q folds x 2 families x 2 seeds"
+    },
+    "evaluate_c1_charge_transfer.slurm": {
+      "sha256": "ee1a3d1929f6bd88134d0f8cb3d3fd0a88c2b7fd07727bce161ecd717ad28d70",
+      "purpose": "afterok four-path held-out evaluation array for continuous-Q charge transfer"
+    },
+    "run_c1_charge_transfer_smoke.slurm": {
+      "sha256": "66c7673ea153b0f45f4ed3febf2bdf3e0a78924f28c2f9a26881a69abe2e91a4",
+      "purpose": "one-epoch continuous-Q and unseen-charge inference preflight"
+    },
+    "summarize_c1_charge_transfer.py": {
+      "sha256": "494e665db85812a0511b9783337c613ac56f937c9ff64a7768518cb89b775c75",
+      "purpose": "summarize per-charge and per-trajectory charge-transfer metrics without pooling folds"
+    }
+  },
+  "latest_status_snapshot": {
+    "observed_utc": "2026-11-23T08:16:29Z",
+    "seed42_baseline": "MACE-Q, MACELES-Q and held-out jobs completed exit 0",
+    "readout_ablation": "training and held-out jobs completed exit 0; hashes verified; q=0/+1 rank failure unchanged",
+    "seed43": "MACE-Q/MACELES-Q training and held-out evaluations completed exit 0; hashes verified; same split as seed42",
+    "group_split_2": {
+      "status": "training 33260322_[0-3] and held-out evaluation 33260323_[0-3] COMPLETED_EXIT_0",
+      "test_sha256": "f96b3bd70efa223d083ac509dc0870e83109837b9fc756fc1401637ee2f15f39",
+      "model_metrics_prediction_hashes_match_rockfish": true,
+      "headline": "Primary split q=0/+1 ranking failures do not reproduce on split2; per-charge results are in the independent split audit.",
+      "q0_spearman_range": [
+        0.9886622426,
+        0.9979122037
+      ],
+      "q0_whole_test_regret_eV_range": [
+        0.0,
+        0.0
+      ],
+      "qplus1_spearman_range": [
+        0.9254564929,
+        0.9574301235
+      ],
+      "qplus1_whole_test_regret_eV_range": [
+        0.0,
+        0.00030318
+      ],
+      "caveat": "Two held-out paths per charge per split, from the same 66-trajectory source pool; do not pool split metrics."
+    },
+    "polar_seed42": {
+      "training_33260051_2": "TIMEOUT at four hours after epoch 73; validation only",
+      "recovery_33260098": "COMPLETED_EXIT_0",
+      "latest_validation_log_epoch": 98,
+      "latest_validation_energy_rmse_meV_per_atom": 47.99,
+      "latest_validation_force_rmse_eV_per_A": 0.08532,
+      "latest_saved_checkpoint_epoch": 28,
+      "final_raw_model_written": true,
+      "raw_model_sha256": "e46dbab0dee7d28d68bf7067c92bce4e8f01556f50e9d04a72f7f8a58ce82a4c",
+      "torchscript_compile": "failed on o3.Irreps annotation; raw model is available to mace_polar",
+      "heldout_33260146_2": "COMPLETED_EXIT_0",
+      "observed_elapsed": "04:00:55",
+      "metrics_sha256": "dcaf7324b08335584fbae0b83901fe4db30349cbf79b82d3a3563b27a0401b7f",
+      "predictions_sha256": "a02066a57496e700db72e9cba3b08cf7a8efebc60fa3d66ef5ddedddc0fcd6e9",
+      "local_remote_hashes_match": true,
+      "q0_spearman": 0.322038341943455,
+      "q0_selection_regret_eV": 0.25252296,
+      "qplus1_spearman": 0.6661941483384194,
+      "qplus1_selection_regret_eV": 0.10472254,
+      "charge_sum_max_abs_error_e": 7.599592208862305e-07
+    },
+    "qe_crosscode_33260083": "FAILED_BEFORE_QE_TASK_LAUNCH; srun timeout with 0/32 tasks started; no QE reference result; no retry submitted",
+    "charge_transfer_loo": {
+      "data_manifest_sha256": "57bee0758ee95009e53462df906ea41509ee4256b9d74e352ed6ee4d73043b93",
+      "local_remote_manifest_hashes_match": true,
+      "preflight_33260426": "COMPLETED_EXIT_0; continuous-Q model trained one epoch and predicted unseen q=-2 test frames; interface only",
+      "training_33260438": "ALL_20_TASKS_COMPLETED_EXIT_0; 20 models and training outputs archived locally",
+      "matrix": "20 fits: MACE-Q/MACELES-Q, five held-out q states, seeds 42/43",
+      "evaluation_33260439": "CANCELLED_BEFORE_START_REPLACED_BY_33260492",
+      "evaluation_33260492": "ALL_20_TASKS_COMPLETED_EXIT_0; all held-out metric and prediction files archived locally",
+      "completed_models": {
+        "mace_ct_qm3_seed42": {
+          "training_task": "33260438_0",
+          "model_sha256": "c1514c5fe4faaf9138049f10cefe1211d96b1af0255015ba550b2f0424836e5e",
+          "training_output_sha256": "6aeee05e8d5a55bf66b7e7c2f296c5f07422ba961e508e0471039f788bf13138",
+          "local_remote_hashes_match": true,
+          "heldout": "pending"
+        },
+        "mace_ct_qm3_seed43": {
+          "training_task": "33260438_1",
+          "model_sha256": "7b8df35109692a365b918db28b552ed14e0945b875d62c808f7b0d3dc4672b18",
+          "training_output_sha256": "dbe41800f5b1272a36ccd77f00c0afb4031ed95676de21bd0150d75553e762c2",
+          "local_remote_hashes_match": true,
+          "heldout": "pending"
+        },
+        "maceles_ct_qm3_seed42": {
+          "training_task": "33260438_2",
+          "model_sha256": "cbfce146d4b1db024fb31df025f933cd5b599792dcce550116af4f4cbf4f409f",
+          "training_output_sha256": "13df983477f226842a1898181b52145ede8fe8e496d695e87dfb4189bac9a2dd",
+          "local_remote_hashes_match": true,
+          "heldout": "pending"
+        },
+        "maceles_ct_qm3_seed43": {
+          "training_task": "33260438_3",
+          "model_sha256": "da3d6d6d6688365a8ecb520e89fda82ef2c450e19ef3843c56939b313a4c48ed",
+          "training_output_sha256": "0a8bddf700f4b3af6ce383774f359e9b7cda0195b1d163059f5ffdfab8802869",
+          "local_remote_hashes_match": true,
+          "heldout": "pending"
+        },
+        "mace_ct_qm2_seed42": {
+          "training_task": "33260438_4",
+          "model_sha256": "ce12814dc08dcb5429dfb043c0bcefa0d9e821cf80bfa4cb50d66501439d8934",
+          "training_output_sha256": "f025a38bd41d28514f5fa3d18854aa0668ce7ad2372fd8a9df456d7ecc0c7900",
+          "local_remote_hashes_match": true,
+          "heldout": "pending"
+        },
+        "mace_ct_qm2_seed43": {
+          "training_task": "33260438_5",
+          "model_sha256": "e16925c306858fb2cbffd4c793194ce64eec1e3151a80f10116e2d9bad453a68",
+          "training_output_sha256": "7bfc674d4da9d216609d52a3aaf7481995590f411eb29170ac53505dabf0a418",
+          "local_remote_hashes_match": true,
+          "heldout": "pending"
+        },
+        "maceles_ct_qm2_seed42": {
+          "training_task": "33260438_6",
+          "model_sha256": "622014baad181f4f8a7a5f8376607dc1ff081b24bb9152664792da66a2717f58",
+          "training_output_sha256": "6962c4b661f13de6a1c47460f73160473fb9aad0d0a3815044fc88e2dcc60425",
+          "local_remote_hashes_match": true,
+          "heldout": "pending"
+        },
+        "maceles_ct_qm2_seed43": {
+          "training_task": "33260438_7",
+          "model_sha256": "582054da3134597bbd3439b6f9562ec36d377c540ce46d713c8de4fa96c946bf",
+          "training_output_sha256": "8a56207eb04639941ed2e05e4e574ff4f2ef0037f42277c507bede73c3f12d81",
+          "local_remote_hashes_match": true,
+          "heldout": "pending"
+        },
+        "mace_ct_qm1_seed43": {
+          "training_task": "33260438_9",
+          "model_sha256": "08f26b4d12ac96a3870e8981d1988fc631eb58121ec0ca539e55afe817ad79f1",
+          "training_output_sha256": "7c11e2b9e48423dd7dc154f747db5aae3d95372d81206038e4fc531fd6a8c8d3",
+          "local_remote_hashes_match": true,
+          "heldout": "pending"
+        },
+        "mace_ct_qm1_seed42": {
+          "training_task": "33260438_8",
+          "model_sha256": "1ac1efe0ad860fb99bb12fd3cfd61a7947878c5f7dab24767c8a93a7260f1e0f",
+          "training_output_sha256": "7e0141a61e4f3e85eb6651bdf8bc1fc1347ce8d34cad79df8fb387bf088df899",
+          "local_remote_hashes_match": true,
+          "heldout": "pending"
+        },
+        "mace_ct_qp0_seed42": {
+          "training_task": "33260438_12",
+          "model_sha256": "f6d30bbe0621c145ebffa15398d826246470eb48ba29de60bc67babe5a3d1c1c",
+          "training_output_sha256": "198c073241c59269ed3a3bb62df66f0c2ff970b6e8638bcea3867cb0fc7ac5d1",
+          "local_remote_hashes_match": true,
+          "heldout": "pending"
+        },
+        "mace_ct_qp0_seed43": {
+          "training_task": "33260438_13",
+          "model_sha256": "7e720bb618441c0a3c5e7538cb07e503712ae93678b9124ed9657f1baf4417d6",
+          "training_output_sha256": "c7b2fb2aed9a2f7b10b14a9638a763de678049034e95ed2745d0895753c6074e",
+          "local_remote_hashes_match": true,
+          "heldout": "pending"
+        },
+        "maceles_ct_qm1_seed42": {
+          "training_task": "33260438_10",
+          "model_sha256": "95c796758b66d290237e207b4b6fa6b2089433dbf817c0e433c992031c5b4adb",
+          "training_output_sha256": "bf0c4a105087ba01bcbbc799d391b3a4ebcdefcd014946fa7c7ec1534b7decc5",
+          "local_remote_hashes_match": true,
+          "heldout": "pending"
+        },
+        "maceles_ct_qm1_seed43": {
+          "training_task": "33260438_11",
+          "model_sha256": "17ed7dde81cbcbcd61cc889f7e9e39c9d3312f6f528e421e154f6370558058e2",
+          "training_output_sha256": "18c07a8db3fb6c35fef685711ac6ddf6ecbe7bffb43813a7268d32991f6d98b4",
+          "local_remote_hashes_match": true,
+          "heldout": "pending"
+        },
+        "maceles_ct_qp0_seed42": {
+          "training_task": "33260438_14",
+          "model_sha256": "5afc2934bab479737923b36689d598a44b3e22e0b7cdb81953376b88554687c0",
+          "training_output_sha256": "05a164dba9cf2b288c77ce00e60f248f808f6044d29ff4a0ffc88af35d98c66c",
+          "local_remote_hashes_match": true,
+          "heldout": "pending"
+        }
+      },
+      "all_60_model_metrics_prediction_hashes_match_rockfish": true,
+      "summary_report_sha256": "d3724a5203a04e7b37335679e6c225f05e1ec3735a241cb31c2943e3f6392512",
+      "summary_metrics_csv_sha256": "dad3e94e26cf56283de508d3483b46f5be62ae5dd853c6b58e65ac04490f2008",
+      "summary_trajectory_csv_sha256": "810549e8c75a658e99f13c2ea222bb7bdac688570cce19d7b76cdbdbd68db68d"
+    }
+  },
+  "repository_status_checked_utc": "2026-11-21",
+  "repository_status": {
+    "smoke_tests_pr23": "OPEN; body says it consolidates the work of PRs 20-22 into one branch",
+    "smoke_tests_pr20": "CLOSED; work consolidated into PR 23 branch",
+    "smoke_tests_pr21": "CLOSED; work consolidated into PR 23 branch",
+    "smoke_tests_pr22": "CLOSED; work consolidated into PR 23 branch",
+    "polar_bench_test_pr3": "OPEN; posted comment visible",
+    "new_result_repository": "pending Yile decision; PR 23 suggests Polar_bench_test"
+  },
+  "trained_models": {
+    "mace_q_seed42": {
+      "state": "TRAINED; HELDOUT_EVALUATED_ONE_SEED",
+      "path": "/scratch16/pclancy3/ycao73/charged_defect_lr_20261120_r01/runs/c1_mace_q_seed42/mace_q_seed42.model",
+      "sha256": "f60368bbd918fa1b05f658381d153b4ae8742068ffaa7a79398aaa68267af452",
+      "heldout_job": "33260145_[0-1]"
+    },
+    "maceles_q_seed42": {
+      "state": "TRAINED; HELDOUT_EVALUATED_ONE_SEED",
+      "path": "/scratch16/pclancy3/ycao73/charged_defect_lr_20261120_r01/runs/c1_maceles_q_seed42/maceles_q_seed42.model",
+      "sha256": "176cb5ccddebe7a6ad1fb16adc484bcfe3069574b097e2833061cd61ff3ef2af",
+      "heldout_job": "33260145_1"
+    },
+    "mace_q_seed43": {
+      "state": "TRAINED; HELDOUT_EVALUATED_TWO_SEEDS",
+      "path": "/scratch16/pclancy3/ycao73/charged_defect_lr_20261120_r01/runs/c1_mace_q_seed43/mace_q_seed43.model",
+      "sha256": "7de681a2ffb139dc75faf33e8e7ccb9be795f5c90ed7d66e273a31c9cd894d6c",
+      "training_job": "33260217_0",
+      "heldout_job": "33260218_0",
+      "local_copy": "results/c1_seed43/models/mace_q_seed43.model",
+      "local_copy_sha256_matches_remote": true,
+      "training_output_sha256": "3f99b58ddbdc30e87d0f6c54694bd0bf5d3bf28ab960f14dc63653c66d5ae672",
+      "metrics_sha256": "cd90ffd3c9af99182ad259d567400a3d20f3522f1726e15586da871f6303f53d",
+      "predictions_sha256": "d5cde89aa7f7613408e3114409e46ba388a424f10f3504276da9dde0d05162ee",
+      "test_sha256": "7a9070f1abe0506ebfa1a0dbc033cda8f8ccec246805ad3ef2a5af85654e6826"
+    },
+    "maceles_q_seed43": {
+      "state": "TRAINED; HELDOUT_EVALUATED_TWO_SEEDS",
+      "path": "/scratch16/pclancy3/ycao73/charged_defect_lr_20261120_r01/runs/c1_maceles_q_seed43/maceles_q_seed43.model",
+      "sha256": "dfdddf58660fa5c5cc902938428922e17514bb5fd5e8ddeb82cd42cf3af08f6d",
+      "training_job": "33260217_1",
+      "heldout_job": "33260218_1",
+      "local_copy": "results/c1_seed43/models/maceles_q_seed43.model",
+      "local_copy_sha256_matches_remote": true,
+      "training_output_sha256": "5ba8df7504e08c059f6f388169305c4568afe1d0d60e6f4cf5f3a3daff01974b",
+      "metrics_sha256": "67e909001fb38004ea103e4b9bba3af06ab659cc839469e72d3ba2391f4ef0c6",
+      "predictions_sha256": "89e3292d63800d3f90bd4c8954be652fd0539f68c8bcae075c518c90202d6124",
+      "test_sha256": "7a9070f1abe0506ebfa1a0dbc033cda8f8ccec246805ad3ef2a5af85654e6826"
+    },
+    "mace_q_readout_seed42": {
+      "state": "TRAINED; HELDOUT_EVALUATED_ONE_SEED",
+      "path": "/scratch16/pclancy3/ycao73/charged_defect_lr_20261120_r01/runs/c1_mace_q_readout_seed42/mace_q_readout_seed42.model",
+      "sha256": "d81dd460f49dafabdc9f17289a4928eeff3c5dc90a1f37e28962206bacb3bc49",
+      "training_job": "33260100_0",
+      "heldout_job": "33260102_0",
+      "metrics_sha256": "a53d19317f3d0d022e42a3f6d5d821f91ae4d6065ec5632c2b168e2d9fe0680a",
+      "predictions_sha256": "13c5a326edac2875bc3c705cdeea60a9b13a5355fda73e7cb83e71e767ddd8f2",
+      "test_sha256": "7a9070f1abe0506ebfa1a0dbc033cda8f8ccec246805ad3ef2a5af85654e6826",
+      "local_copy_sha256_matches_remote": true
+    },
+    "maceles_q_readout_seed42": {
+      "state": "TRAINED; HELDOUT_EVALUATED_ONE_SEED",
+      "path": "/scratch16/pclancy3/ycao73/charged_defect_lr_20261120_r01/runs/c1_maceles_q_readout_seed42/maceles_q_readout_seed42.model",
+      "sha256": "c2a31b171623d87b7682623bfe3f48a3e7c4fc63c122d38cbc256e3108bb0621",
+      "training_job": "33260100_1",
+      "heldout_job": "33260102_1",
+      "metrics_sha256": "5e860a679fa80901cb5b4f95423352af54f4ae82ad9f3920023ed40aee78af55",
+      "predictions_sha256": "564dffd31a063fe866fe56e1a4ead93d35b5ba19b240170a4ab78aaf53120cd0",
+      "test_sha256": "7a9070f1abe0506ebfa1a0dbc033cda8f8ccec246805ad3ef2a5af85654e6826",
+      "local_copy_sha256_matches_remote": true
+    },
+    "polar_seed42": {
+      "state": "HELDOUT_EVALUATED_ONE_SEED",
+      "path": "/scratch16/pclancy3/ycao73/charged_defect_lr_20261120_r01/runs/c1_polarmace_ft_seed42/polarmace_ft_seed42.model",
+      "latest_observed_epoch": 98,
+      "latest_validation_energy_rmse_meV_per_atom": 47.99,
+      "latest_validation_force_rmse_eV_per_A": 0.08532,
+      "training_job": "33260051_2",
+      "recovery_job": "33260098",
+      "heldout_job": "33260146_2",
+      "latest_training_output_epoch": 98,
+      "final_model_written": true,
+      "sha256": "e46dbab0dee7d28d68bf7067c92bce4e8f01556f50e9d04a72f7f8a58ce82a4c",
+      "final_raw_model_written": true,
+      "torchscript_compile": "failed on o3.Irreps annotation; raw model is used by mace_polar",
+      "raw_model_sha256": "e46dbab0dee7d28d68bf7067c92bce4e8f01556f50e9d04a72f7f8a58ce82a4c",
+      "metrics_sha256": "dcaf7324b08335584fbae0b83901fe4db30349cbf79b82d3a3563b27a0401b7f",
+      "predictions_sha256": "a02066a57496e700db72e9cba3b08cf7a8efebc60fa3d66ef5ddedddc0fcd6e9",
+      "training_output_sha256": "d8d8dea910c79bd167df2649dd82f54863d7d8e910ff8555cd7942ea9bbd2a6f",
+      "heldout_exit_code": "0:0",
+      "local_remote_hashes_match": true,
+      "summary": "q=-3/-2/-1 strong ranks; q=0 weak rank and 0.2525 eV regret; q=+1 0.1047 eV regret; charge sum max error <8e-7 e; one seed only."
+    },
+    "mace_q_split2_seed42": {
+      "state": "TRAINED; HELDOUT_EVALUATED",
+      "model_id": "MACE-Q-Sb2Se3-C1-split2-seed42",
+      "path": "/scratch16/pclancy3/ycao73/charged_defect_lr_20261120_r01/runs/c1_mace_q_split2_seed42/mace_q_split2_seed42.model",
+      "sha256": "0f7bd211ec59e789278688edcf8b399e1e9456eb461bdd88de2797d11d9cb03c",
+      "training_job": "33260322_0",
+      "heldout_job": "33260323_0",
+      "training_output_sha256": "ecc16e59f9469821bf77c087f41810f2095600052924e115d453906ea1daa381",
+      "metrics_sha256": "22775f0be4d48bfd83fc55e3f08c376bdc104a0119a06aadfe572cf7b235963c",
+      "predictions_sha256": "22d66ba531757dc3e843b5237423ac9921e3d9781aebc45609db48394d93f5e3",
+      "test_sha256": "f96b3bd70efa223d083ac509dc0870e83109837b9fc756fc1401637ee2f15f39",
+      "local_copy": "review/charged_defect_campaign_20261120/results/c1_split2/mace_q_split2_seed42.model",
+      "local_remote_hashes_match": true,
+      "family": "MACE"
+    },
+    "maceles_q_split2_seed42": {
+      "state": "TRAINED; HELDOUT_EVALUATED",
+      "model_id": "MACELES-Q-Sb2Se3-C1-split2-seed42",
+      "path": "/scratch16/pclancy3/ycao73/charged_defect_lr_20261120_r01/runs/c1_maceles_q_split2_seed42/maceles_q_split2_seed42.model",
+      "sha256": "179ddd7a003bb1a5abc01bec3164c1eb48497b878acef92d8d37d099759d8bc8",
+      "training_job": "33260322_1",
+      "heldout_job": "33260323_1",
+      "training_output_sha256": "7a0bc524af27961e55b0e8d3353f835439bbb0f49968bfcf1a1f14293fde00e2",
+      "metrics_sha256": "5f78b14e19e62429e10262f2924e3d4d0bfbcb598d7bb9174843708055707df0",
+      "predictions_sha256": "ea7597fd25cdd1465868ec39073d93a86a48a47e8fe2ec8a447a7b5275427237",
+      "test_sha256": "f96b3bd70efa223d083ac509dc0870e83109837b9fc756fc1401637ee2f15f39",
+      "local_copy": "review/charged_defect_campaign_20261120/results/c1_split2/maceles_q_split2_seed42.model",
+      "local_remote_hashes_match": true,
+      "family": "MACELES"
+    },
+    "mace_q_split2_seed43": {
+      "state": "TRAINED; HELDOUT_EVALUATED",
+      "model_id": "MACE-Q-Sb2Se3-C1-split2-seed43",
+      "path": "/scratch16/pclancy3/ycao73/charged_defect_lr_20261120_r01/runs/c1_mace_q_split2_seed43/mace_q_split2_seed43.model",
+      "sha256": "b5449626cb09b357789e60937138ccd5eda02064a09449a307da6d161945a51d",
+      "training_job": "33260322_2",
+      "heldout_job": "33260323_2",
+      "training_output_sha256": "b8dc0ebc008afc02cb39675cff2ae94eaac83ae60a0496fac43ff73c8a158a01",
+      "metrics_sha256": "d8cb00269c685db495df92527b56552b1f32b16a99049f784d0595e154f5f678",
+      "predictions_sha256": "008303447a6c051635606dec1153d75e34aa95caef996895659d706026b52ad5",
+      "test_sha256": "f96b3bd70efa223d083ac509dc0870e83109837b9fc756fc1401637ee2f15f39",
+      "local_copy": "review/charged_defect_campaign_20261120/results/c1_split2/mace_q_split2_seed43.model",
+      "local_remote_hashes_match": true,
+      "family": "MACE"
+    },
+    "maceles_q_split2_seed43": {
+      "state": "TRAINED; HELDOUT_EVALUATED",
+      "model_id": "MACELES-Q-Sb2Se3-C1-split2-seed43",
+      "path": "/scratch16/pclancy3/ycao73/charged_defect_lr_20261120_r01/runs/c1_maceles_q_split2_seed43/maceles_q_split2_seed43.model",
+      "sha256": "8dbacd8dc89a8c210ea9b0d36bb4f92a40be4b33658f62ed9f5a0d781e571fac",
+      "training_job": "33260322_3",
+      "heldout_job": "33260323_3",
+      "training_output_sha256": "172f387c1400c20c43d7259d71305e1020336bb6f31448dc55e00d03b12873e8",
+      "metrics_sha256": "b52e859d62bf436b4e9b9b987520b751df55f95fa5ea8983c41319690f81fb0f",
+      "predictions_sha256": "d97e3bc3cac3826b56b690d30b4202e5aec1ea30bfc5ade2d77b3c6e9da2208b",
+      "test_sha256": "f96b3bd70efa223d083ac509dc0870e83109837b9fc756fc1401637ee2f15f39",
+      "local_copy": "review/charged_defect_campaign_20261120/results/c1_split2/maceles_q_split2_seed43.model",
+      "local_remote_hashes_match": true,
+      "family": "MACELES"
+    }
+  },
+  "benchmark_results": {
+    "scope": "C1 fixed-cell trajectory-disjoint tests in one 59-atom V_Sb1 cell: primary and independent split2, MACE-Q/MACELES-Q seeds 42/43; Polar primary-split heldout pending.",
+    "report": "review/charged_defect_campaign_20261120/results/c1_seed42/PRELIMINARY_RESULTS.md",
+    "files_sha256": {
+      "mace_q_metrics.json": "7b752c1983e944e6891cb6296040fecb5f40e36c8cb070d218a4422313973ffe",
+      "mace_q_test_predictions.csv": "752032db99c226f729b29018231873e283d66776716ab7cd20e819d2c77eebed",
+      "maceles_q_metrics.json": "3889f7892e88a2ce59bfd1a991e7e39ad963a8e6403b8f6803ea862a8e0c5b9c",
+      "maceles_q_test_predictions.csv": "ef51e8ce88eef04c11aedcd9956a1654e01c7175f5375b0129f9f763e62b69d1",
+      "mace_q_model.model": "f60368bbd918fa1b05f658381d153b4ae8742068ffaa7a79398aaa68267af452",
+      "maceles_q_model.model": "176cb5ccddebe7a6ad1fb16adc484bcfe3069574b097e2833061cd61ff3ef2af"
+    },
+    "interpretation": "The primary split q=0/+1 ranking/selection failures do not reproduce on independent split2. Outcomes are strongly trajectory/split-sensitive; do not pool split metrics or claim an overall family winner. Both splits test same-charge distortion trajectories in a fixed cell, not charge, defect, or size transfer.",
+    "report_sha256": "724a6c59db8a5809f631536f942852828f8ab9351dfe2e88303028c8624ce7a0",
+    "additional_reports": {
+      "readout_ablation": "results/c1_readout_seed42/READOUT_ABLATION.md",
+      "four_model_comparison": "results/c1_combined/C1_COMPARISON.md",
+      "comparison_csv": "results/c1_combined/c1_comparison.csv",
+      "two_seed_summary": "results/c1_combined/MULTI_SEED_RESULTS.md",
+      "group_split_2_protocol": "GROUP_SPLIT_2_PROTOCOL.md",
+      "independent_split_audit": "results/c1_split_audit/C1_INDEPENDENT_SPLIT_AUDIT.md",
+      "independent_split_protocol": "GROUP_SPLIT_2_PROTOCOL.md",
+      "independent_split_audit_sha256": "dc597e5c106b5d79eff01f80d9a00cc6ebdd8cb4ad48e7f07706b99d9e55ce21",
+      "split_metrics_csv_sha256": "eca42ce7a7753914b21355939cd762afe77b17b881a040069c05be3da6b50b41",
+      "trajectory_audit_csv_sha256": "35f2c0d275a2c481483b0af89bc3affa17c6a18f7cd54df3f036ec45ee756a81",
+      "charge_transfer_protocol": "CHARGE_TRANSFER_PROTOCOL.md"
+    },
+    "readout_ablation": {
+      "scope": "MACE-Q and MACELES-Q with direct embedding readout; seed42; same frozen C1 test split",
+      "jobs": {
+        "training": "33260100_[0-1]",
+        "heldout": "33260102_[0-1]"
+      },
+      "test_sha256": "7a9070f1abe0506ebfa1a0dbc033cda8f8ccec246805ad3ef2a5af85654e6826",
+      "model_sha256": {
+        "mace_q_readout": "d81dd460f49dafabdc9f17289a4928eeff3c5dc90a1f37e28962206bacb3bc49",
+        "maceles_q_readout": "c2a31b171623d87b7682623bfe3f48a3e7c4fc63c122d38cbc256e3108bb0621"
+      },
+      "local_remote_hashes_match": true,
+      "summary_sha256": "59acc1acfcc8d190fa94a1229c03cd7d0109e0564d67e61029ca30baf5a55e71",
+      "main_finding": "No q=0/+1 ranking improvement; q=0 regret 0.2515 eV for both paired models; q=+1 regret unchanged at 0.5884 eV (MACE) and 0.5120 eV (MACELES)."
+    },
+    "comparison_sha256": {
+      "markdown": "4fa4ed720bf949c14c8c876f167862ef7065c3f4f04491628b145f53ba58b2b9",
+      "csv": "f170da4ccbe0f7ce83fc0b3ea009d94d2ebe9f76de3d7c410a32d49a36c092ff",
+      "two_seed_summary": "2e257e76ff8046c9c3040e437751df207132540b2082d9852341c2e2c21710c4"
+    },
+    "two_seed_results": {
+      "jobs": {
+        "training": "33260217_[0-1]",
+        "heldout": "33260218_[0-1]"
+      },
+      "test_sha256": "7a9070f1abe0506ebfa1a0dbc033cda8f8ccec246805ad3ef2a5af85654e6826",
+      "local_remote_hashes_match": true,
+      "summary": "results/c1_combined/MULTI_SEED_RESULTS.md",
+      "main_finding": "On the primary split, seed43 repeats seed42 q=0/+1 failures for the same held-out paths. The independent split2 reverses that result with strong q=0/+1 rankings, demonstrating trajectory/split sensitivity; no overall family winner is established.",
+      "files_sha256": {
+        "mace_q_seed43_metrics": "cd90ffd3c9af99182ad259d567400a3d20f3522f1726e15586da871f6303f53d",
+        "mace_q_seed43_predictions": "d5cde89aa7f7613408e3114409e46ba388a424f10f3504276da9dde0d05162ee",
+        "maceles_q_seed43_metrics": "67e909001fb38004ea103e4b9bba3af06ab659cc839469e72d3ba2391f4ef0c6",
+        "maceles_q_seed43_predictions": "89e3292d63800d3f90bd4c8954be652fd0539f68c8bcae075c518c90202d6124"
+      }
+    },
+    "group_split_2": {
+      "scope": "Independent trajectory-held-out split from the same 66 V_Sb1 PBE+D3 trajectory pool; train/valid/test 2421/556/492 frames; test paths disjoint from primary test.",
+      "jobs": {
+        "training": "33260322_[0-3]",
+        "heldout": "33260323_[0-3]"
+      },
+      "split_seed": 20261122,
+      "test_sha256": "f96b3bd70efa223d083ac509dc0870e83109837b9fc756fc1401637ee2f15f39",
+      "local_remote_hashes_match": true,
+      "models": {
+        "mace_q_split2_seed42": {
+          "model_sha256": "0f7bd211ec59e789278688edcf8b399e1e9456eb461bdd88de2797d11d9cb03c",
+          "training_output_sha256": "ecc16e59f9469821bf77c087f41810f2095600052924e115d453906ea1daa381",
+          "metrics_sha256": "22775f0be4d48bfd83fc55e3f08c376bdc104a0119a06aadfe572cf7b235963c",
+          "predictions_sha256": "22d66ba531757dc3e843b5237423ac9921e3d9781aebc45609db48394d93f5e3",
+          "training_job": "33260322_0",
+          "heldout_job": "33260323_0"
+        },
+        "maceles_q_split2_seed42": {
+          "model_sha256": "179ddd7a003bb1a5abc01bec3164c1eb48497b878acef92d8d37d099759d8bc8",
+          "training_output_sha256": "7a0bc524af27961e55b0e8d3353f835439bbb0f49968bfcf1a1f14293fde00e2",
+          "metrics_sha256": "5f78b14e19e62429e10262f2924e3d4d0bfbcb598d7bb9174843708055707df0",
+          "predictions_sha256": "ea7597fd25cdd1465868ec39073d93a86a48a47e8fe2ec8a447a7b5275427237",
+          "training_job": "33260322_1",
+          "heldout_job": "33260323_1"
+        },
+        "mace_q_split2_seed43": {
+          "model_sha256": "b5449626cb09b357789e60937138ccd5eda02064a09449a307da6d161945a51d",
+          "training_output_sha256": "b8dc0ebc008afc02cb39675cff2ae94eaac83ae60a0496fac43ff73c8a158a01",
+          "metrics_sha256": "d8cb00269c685db495df92527b56552b1f32b16a99049f784d0595e154f5f678",
+          "predictions_sha256": "008303447a6c051635606dec1153d75e34aa95caef996895659d706026b52ad5",
+          "training_job": "33260322_2",
+          "heldout_job": "33260323_2"
+        },
+        "maceles_q_split2_seed43": {
+          "model_sha256": "8dbacd8dc89a8c210ea9b0d36bb4f92a40be4b33658f62ed9f5a0d781e571fac",
+          "training_output_sha256": "172f387c1400c20c43d7259d71305e1020336bb6f31448dc55e00d03b12873e8",
+          "metrics_sha256": "b52e859d62bf436b4e9b9b987520b751df55f95fa5ea8983c41319690f81fb0f",
+          "predictions_sha256": "d97e3bc3cac3826b56b690d30b4202e5aec1ea30bfc5ade2d77b3c6e9da2208b",
+          "training_job": "33260322_3",
+          "heldout_job": "33260323_3"
+        }
+      },
+      "summary": "q=0 Spearman 0.989-0.998, whole-test regret 0 eV; q=+1 Spearman 0.925-0.957, regret 0-0.000303 eV. Primary split failures do not reproduce.",
+      "report": "results/c1_split_audit/C1_INDEPENDENT_SPLIT_AUDIT.md",
+      "metrics_csv": "results/c1_split_audit/c1_split_metrics.csv",
+      "trajectory_audit_csv": "results/c1_split_audit/c1_trajectory_audit.csv",
+      "protocol_sha256": "63edbb6e21afaea2a63c553818d00fa4f42ce1e402ada3a18a3aa4095b21661d",
+      "summary_sha256": "2e257e76ff8046c9c3040e437751df207132540b2082d9852341c2e2c21710c4",
+      "audit_report_sha256": "dc597e5c106b5d79eff01f80d9a00cc6ebdd8cb4ad48e7f07706b99d9e55ce21",
+      "metrics_csv_sha256": "eca42ce7a7753914b21355939cd762afe77b17b881a040069c05be3da6b50b41",
+      "trajectory_audit_csv_sha256": "35f2c0d275a2c481483b0af89bc3affa17c6a18f7cd54df3f036ec45ee756a81",
+      "qplus1_spearman_range": [
+        0.9254564929,
+        0.9574301235
+      ]
+    },
+    "charge_transfer_loo": {
+      "status": "four-path folds staged locally/remotely; training 33260438 running; evaluation 33260492 pending afterok",
+      "protocol_sha256": "de6a03cabdd3a5ac0a639877a824d4d5acf07911b7c88a34db2befaf29a49bc3",
+      "manifest_sha256": "57bee0758ee95009e53462df906ea41509ee4256b9d74e352ed6ee4d73043b93",
+      "jobs": {
+        "preflight": "33260426",
+        "training": "33260438_[0-19%8]",
+        "evaluation": "33260492_[0-19%8]",
+        "superseded_evaluation": "33260439_[0-19%8] CANCELLED_BEFORE_START"
+      },
+      "preflight": {
+        "model_sha256": "8861956a5e5ab82bc0ff861a98b07cd85073e79c75c1aa84cba7a9602b0cf20f",
+        "metrics_sha256": "52747625c38b3d308e48aa1055eba639d4783d8cad974677c6449d42998898e1",
+        "predictions_sha256": "ea98d3c48d996836f91fa81d690ec74103df42d74cfd185ce4a7e1d768bd69ea",
+        "scope": "one epoch, q=-2 unseen-charge interface check only; large errors are not accuracy evidence"
+      },
+      "model_config": "continuous scalar total_charge plus categorical total_spin; MACE-Q and MACELES-Q",
+      "training_scope": "one held-out charge absent from train/validation; four test trajectories per q from two frozen splits; no test-fitted validation offset"
+    },
+    "polar_seed42": {
+      "state": "HELDOUT_EVALUATED_ONE_SEED",
+      "test_sha256": "7a9070f1abe05006ebfa1a0dbc033cda8f8ccec246805ad3ef2a5af85654e6826",
+      "jobs": {
+        "training_timeout": "33260051_2",
+        "recovery": "33260098",
+        "heldout": "33260146_2"
+      },
+      "metrics_sha256": "dcaf7324b08335584fbae0b83901fe4db30349cbf79b82d3a3563b27a0401b7f",
+      "predictions_sha256": "a02066a57496e700db72e9cba3b08cf7a8efebc60fa3d66ef5ddedddc0fcd6e9",
+      "report": "results/c1_polar_seed42/POLAR_C1_RESULTS.md",
+      "charge_sum_max_abs_error_e": 7.599592208862305e-07,
+      "q0_spearman": 0.322038341943455,
+      "q0_selection_regret_eV": 0.25252296,
+      "qplus1_spearman": 0.6661941483384194,
+      "qplus1_selection_regret_eV": 0.10472254,
+      "caveat": "single seed on primary fixed-cell test split; validation offsets; no transfer or localization claim"
+    }
+  },
+  "roadmap_sha256": "c012cbede2ff7159f85d98897bf986517428818846938961e606adfd0a738f43",
+  "campaign_docs_sha256": {
+    "roadmap_and_status": "dcf3e5061798f65c03366ffea744caa7ca42636e32a365a7ae875eb343cc4335",
+    "gap_report": "e433dc0a3b644a9908bc5c5d669d7828c3ad3e07abb425f661d82fb4196ef5cf",
+    "campaign_readme": "672d326727d59c55bebec7b2d90a204d7a638f70e34b884896a1bcfaa7555dee",
+    "claim_evidence_matrix": "768fba2b19db85bf4c4ff2b10f025d05ae8999348e00a7ac600356d298f4b56f",
+    "model_registry": "bf7684c7376aed3d6ed7e2348073932382d5de10e43b5c08650001b55041517a",
+    "multi_seed_results": "65729b13c5665faaca4b95db69b19053dce813ae88b1bef4584c0f82c3b519d5",
+    "charge_transfer_protocol": "23120f4c18b6671849e696f85d206b06de2b967ed606c823b9bc7936c5844f15"
+  }
+}
