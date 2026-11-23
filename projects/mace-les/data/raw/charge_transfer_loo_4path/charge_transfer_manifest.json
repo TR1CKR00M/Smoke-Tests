@@ -1,0 +1,527 @@
+{
+  "protocol": "leave-one-charge-state-out from frozen trajectory-disjoint split",
+  "charge_values": [
+    -3,
+    -2,
+    -1,
+    0,
+    1
+  ],
+  "spin_multiplicity_by_charge": {
+    "-3": 1,
+    "-2": 2,
+    "-1": 1,
+    "0": 2,
+    "1": 1
+  },
+  "charge_spin_independent_effects_identifiable": false,
+  "source_files": {
+    "train": {
+      "path": "split_seed_20261122/train.xyz",
+      "sha256": "734a14de824192896c532043a03ff5d83fe1b2f28c10daff63f0de0195be45e4"
+    },
+    "valid": {
+      "path": "split_seed_20261122/valid.xyz",
+      "sha256": "cf34802ce04cb41630e0d9bdafe7fe137bb4acca078053ba2149c4af51dbc1f0"
+    },
+    "test": {
+      "path": "split_seed_20261120/test.xyz",
+      "sha256": "7a9070f1abe0506ebfa1a0dbc033cda8f8ccec246805ad3ef2a5af85654e6826"
+    },
+    "test_secondary": {
+      "path": "split_seed_20261122/test.xyz",
+      "sha256": "f96b3bd70efa223d083ac509dc0870e83109837b9fc756fc1401637ee2f15f39"
+    }
+  },
+  "folds": {
+    "-3": {
+      "heldout_charge": -3,
+      "train": {
+        "path": "q_m3/train.xyz",
+        "frames": 1784,
+        "charge_counts": {
+          "-2": 432,
+          "-1": 413,
+          "0": 503,
+          "1": 436
+        },
+        "trajectory_ids": [
+          "q+0/D_-10",
+          "q+0/D_-30",
+          "q+0/D_-40",
+          "q+0/D_-50",
+          "q+0/D_0",
+          "q+0/D_10",
+          "q+0/D_30",
+          "q+0/D_50",
+          "q+0/D_60",
+          "q+1/D_-20",
+          "q+1/D_-30",
+          "q+1/D_-50",
+          "q+1/D_10",
+          "q+1/D_30",
+          "q+1/D_40",
+          "q+1/D_50",
+          "q+1/D_60",
+          "q-1/D_-30",
+          "q-1/D_-40",
+          "q-1/D_-50",
+          "q-1/D_-60",
+          "q-1/D_0",
+          "q-1/D_20",
+          "q-1/D_30",
+          "q-1/D_40",
+          "q-1/D_50",
+          "q-2/D_-30",
+          "q-2/D_-40",
+          "q-2/D_-50",
+          "q-2/D_-60",
+          "q-2/D_0",
+          "q-2/D_10",
+          "q-2/D_20",
+          "q-2/D_50",
+          "q-2/D_60"
+        ],
+        "sha256": "77bce7e99ff1548ebdff7d91e8d49a164cfd9665c044a4712a82012647afbcc7"
+      },
+      "validation": {
+        "path": "q_m3/valid.xyz",
+        "frames": 458,
+        "charge_counts": {
+          "-2": 91,
+          "-1": 90,
+          "0": 157,
+          "1": 120
+        },
+        "trajectory_ids": [
+          "q+0/D_-60",
+          "q+0/D_40",
+          "q+1/D_-40",
+          "q+1/D_20",
+          "q-1/D_10",
+          "q-1/D_60",
+          "q-2/D_-20",
+          "q-2/D_40"
+        ],
+        "sha256": "c36fdcdc76d3cc624190faa1c2bcc8b2e64fb64aad05cf2842f52f2bedb56da8"
+      },
+      "test": {
+        "path": "q_m3/test.xyz",
+        "frames": 170,
+        "charge_counts": {
+          "-3": 170
+        },
+        "trajectory_ids": [
+          "q-3/D_-30",
+          "q-3/D_-50",
+          "q-3/D_60",
+          "q-3/Unperturbed"
+        ],
+        "sha256": "29b3e78fbd830df44df0950c91f5ec5a9f9a0eb742cedb3a03c19548b1840700"
+      },
+      "test_cross_charge_geometry_matches": {
+        "matching_test_frames": 3,
+        "test_frames": 170,
+        "matched_trajectory_ids": [
+          "q-3/D_-30",
+          "q-3/D_-50",
+          "q-3/D_60"
+        ],
+        "criterion": "same cell and sorted atomic numbers/fractional coordinates rounded to 1e-8",
+        "interpretation": "matched geometry across Q is allowed; the held-out Q labels are absent from train/validation"
+      }
+    },
+    "-2": {
+      "heldout_charge": -2,
+      "train": {
+        "path": "q_m2/train.xyz",
+        "frames": 1989,
+        "charge_counts": {
+          "-3": 637,
+          "-1": 413,
+          "0": 503,
+          "1": 436
+        },
+        "trajectory_ids": [
+          "q+0/D_-10",
+          "q+0/D_-30",
+          "q+0/D_-40",
+          "q+0/D_-50",
+          "q+0/D_0",
+          "q+0/D_10",
+          "q+0/D_30",
+          "q+0/D_50",
+          "q+0/D_60",
+          "q+1/D_-20",
+          "q+1/D_-30",
+          "q+1/D_-50",
+          "q+1/D_10",
+          "q+1/D_30",
+          "q+1/D_40",
+          "q+1/D_50",
+          "q+1/D_60",
+          "q-1/D_-30",
+          "q-1/D_-40",
+          "q-1/D_-50",
+          "q-1/D_-60",
+          "q-1/D_0",
+          "q-1/D_20",
+          "q-1/D_30",
+          "q-1/D_40",
+          "q-1/D_50",
+          "q-3/D_-10",
+          "q-3/D_-40",
+          "q-3/D_-60",
+          "q-3/D_0",
+          "q-3/D_10",
+          "q-3/D_20",
+          "q-3/D_30",
+          "q-3/D_40",
+          "q-3/D_60",
+          "q-3/Rattled",
+          "q-3/Unperturbed"
+        ],
+        "sha256": "6777e76c6117fc401e2e5ae75d1456dcadce3c7e2befa6af735755b19bda1817"
+      },
+      "validation": {
+        "path": "q_m2/valid.xyz",
+        "frames": 465,
+        "charge_counts": {
+          "-3": 98,
+          "-1": 90,
+          "0": 157,
+          "1": 120
+        },
+        "trajectory_ids": [
+          "q+0/D_-60",
+          "q+0/D_40",
+          "q+1/D_-40",
+          "q+1/D_20",
+          "q-1/D_10",
+          "q-1/D_60",
+          "q-3/D_-20",
+          "q-3/D_50"
+        ],
+        "sha256": "8c613c8eddcac9a3286d19135aa1434c57333b10679e32181237ef032df0b277"
+      },
+      "test": {
+        "path": "q_m2/test.xyz",
+        "frames": 195,
+        "charge_counts": {
+          "-2": 195
+        },
+        "trajectory_ids": [
+          "q-2/D_-10",
+          "q-2/D_-20",
+          "q-2/D_-40",
+          "q-2/D_30"
+        ],
+        "sha256": "bd0b4a7c4f70f4c690811d83da67b5b9acf72d8b034031eed97b156e7f323788"
+      },
+      "test_cross_charge_geometry_matches": {
+        "matching_test_frames": 0,
+        "test_frames": 195,
+        "matched_trajectory_ids": [],
+        "criterion": "same cell and sorted atomic numbers/fractional coordinates rounded to 1e-8",
+        "interpretation": "matched geometry across Q is allowed; the held-out Q labels are absent from train/validation"
+      }
+    },
+    "-1": {
+      "heldout_charge": -1,
+      "train": {
+        "path": "q_m1/train.xyz",
+        "frames": 2008,
+        "charge_counts": {
+          "-3": 637,
+          "-2": 432,
+          "0": 503,
+          "1": 436
+        },
+        "trajectory_ids": [
+          "q+0/D_-10",
+          "q+0/D_-30",
+          "q+0/D_-40",
+          "q+0/D_-50",
+          "q+0/D_0",
+          "q+0/D_10",
+          "q+0/D_30",
+          "q+0/D_50",
+          "q+0/D_60",
+          "q+1/D_-20",
+          "q+1/D_-30",
+          "q+1/D_-50",
+          "q+1/D_10",
+          "q+1/D_30",
+          "q+1/D_40",
+          "q+1/D_50",
+          "q+1/D_60",
+          "q-2/D_-30",
+          "q-2/D_-40",
+          "q-2/D_-50",
+          "q-2/D_-60",
+          "q-2/D_0",
+          "q-2/D_10",
+          "q-2/D_20",
+          "q-2/D_50",
+          "q-2/D_60",
+          "q-3/D_-10",
+          "q-3/D_-40",
+          "q-3/D_-60",
+          "q-3/D_0",
+          "q-3/D_10",
+          "q-3/D_20",
+          "q-3/D_30",
+          "q-3/D_40",
+          "q-3/D_60",
+          "q-3/Rattled",
+          "q-3/Unperturbed"
+        ],
+        "sha256": "50f5a32bcf702b5aa26040cd77375f48799b510bd701e4caeb427f7eb2443b09"
+      },
+      "validation": {
+        "path": "q_m1/valid.xyz",
+        "frames": 466,
+        "charge_counts": {
+          "-3": 98,
+          "-2": 91,
+          "0": 157,
+          "1": 120
+        },
+        "trajectory_ids": [
+          "q+0/D_-60",
+          "q+0/D_40",
+          "q+1/D_-40",
+          "q+1/D_20",
+          "q-2/D_-20",
+          "q-2/D_40",
+          "q-3/D_-20",
+          "q-3/D_50"
+        ],
+        "sha256": "c95c2922c97372c4c1e4f5e161bfeb4eb7e2655c8ee45a096b86a4eb6fc92006"
+      },
+      "test": {
+        "path": "q_m1/test.xyz",
+        "frames": 162,
+        "charge_counts": {
+          "-1": 162
+        },
+        "trajectory_ids": [
+          "q-1/D_-10",
+          "q-1/D_-20",
+          "q-1/D_10",
+          "q-1/D_20"
+        ],
+        "sha256": "f2302ce727d121cb8b17b7dffa61307ecd155642ef58b3b97a23f53078024d77"
+      },
+      "test_cross_charge_geometry_matches": {
+        "matching_test_frames": 0,
+        "test_frames": 162,
+        "matched_trajectory_ids": [],
+        "criterion": "same cell and sorted atomic numbers/fractional coordinates rounded to 1e-8",
+        "interpretation": "matched geometry across Q is allowed; the held-out Q labels are absent from train/validation"
+      }
+    },
+    "0": {
+      "heldout_charge": 0,
+      "train": {
+        "path": "q_p0/train.xyz",
+        "frames": 1918,
+        "charge_counts": {
+          "-3": 637,
+          "-2": 432,
+          "-1": 413,
+          "1": 436
+        },
+        "trajectory_ids": [
+          "q+1/D_-20",
+          "q+1/D_-30",
+          "q+1/D_-50",
+          "q+1/D_10",
+          "q+1/D_30",
+          "q+1/D_40",
+          "q+1/D_50",
+          "q+1/D_60",
+          "q-1/D_-30",
+          "q-1/D_-40",
+          "q-1/D_-50",
+          "q-1/D_-60",
+          "q-1/D_0",
+          "q-1/D_20",
+          "q-1/D_30",
+          "q-1/D_40",
+          "q-1/D_50",
+          "q-2/D_-30",
+          "q-2/D_-40",
+          "q-2/D_-50",
+          "q-2/D_-60",
+          "q-2/D_0",
+          "q-2/D_10",
+          "q-2/D_20",
+          "q-2/D_50",
+          "q-2/D_60",
+          "q-3/D_-10",
+          "q-3/D_-40",
+          "q-3/D_-60",
+          "q-3/D_0",
+          "q-3/D_10",
+          "q-3/D_20",
+          "q-3/D_30",
+          "q-3/D_40",
+          "q-3/D_60",
+          "q-3/Rattled",
+          "q-3/Unperturbed"
+        ],
+        "sha256": "278e464997e6074626964028bfe43de963d924a2a967078159362c9a63f6a6a6"
+      },
+      "validation": {
+        "path": "q_p0/valid.xyz",
+        "frames": 399,
+        "charge_counts": {
+          "-3": 98,
+          "-2": 91,
+          "-1": 90,
+          "1": 120
+        },
+        "trajectory_ids": [
+          "q+1/D_-40",
+          "q+1/D_20",
+          "q-1/D_10",
+          "q-1/D_60",
+          "q-2/D_-20",
+          "q-2/D_40",
+          "q-3/D_-20",
+          "q-3/D_50"
+        ],
+        "sha256": "de9da07bed867f6b700b00678ac3a4ad2e045e8016d4a46bfaf6e355225c132f"
+      },
+      "test": {
+        "path": "q_p0/test.xyz",
+        "frames": 276,
+        "charge_counts": {
+          "0": 276
+        },
+        "trajectory_ids": [
+          "q+0/D_-20",
+          "q+0/D_-40",
+          "q+0/D_20",
+          "q+0/D_50"
+        ],
+        "sha256": "1f52a9319818a2e08ae5822423fdc0a396fb187320976f190ede4ca04f37029c"
+      },
+      "test_cross_charge_geometry_matches": {
+        "matching_test_frames": 4,
+        "test_frames": 276,
+        "matched_trajectory_ids": [
+          "q+0/D_-20",
+          "q+0/D_-40",
+          "q+0/D_20",
+          "q+0/D_50"
+        ],
+        "criterion": "same cell and sorted atomic numbers/fractional coordinates rounded to 1e-8",
+        "interpretation": "matched geometry across Q is allowed; the held-out Q labels are absent from train/validation"
+      }
+    },
+    "1": {
+      "heldout_charge": 1,
+      "train": {
+        "path": "q_p1/train.xyz",
+        "frames": 1985,
+        "charge_counts": {
+          "-3": 637,
+          "-2": 432,
+          "-1": 413,
+          "0": 503
+        },
+        "trajectory_ids": [
+          "q+0/D_-10",
+          "q+0/D_-30",
+          "q+0/D_-40",
+          "q+0/D_-50",
+          "q+0/D_0",
+          "q+0/D_10",
+          "q+0/D_30",
+          "q+0/D_50",
+          "q+0/D_60",
+          "q-1/D_-30",
+          "q-1/D_-40",
+          "q-1/D_-50",
+          "q-1/D_-60",
+          "q-1/D_0",
+          "q-1/D_20",
+          "q-1/D_30",
+          "q-1/D_40",
+          "q-1/D_50",
+          "q-2/D_-30",
+          "q-2/D_-40",
+          "q-2/D_-50",
+          "q-2/D_-60",
+          "q-2/D_0",
+          "q-2/D_10",
+          "q-2/D_20",
+          "q-2/D_50",
+          "q-2/D_60",
+          "q-3/D_-10",
+          "q-3/D_-40",
+          "q-3/D_-60",
+          "q-3/D_0",
+          "q-3/D_10",
+          "q-3/D_20",
+          "q-3/D_30",
+          "q-3/D_40",
+          "q-3/D_60",
+          "q-3/Rattled",
+          "q-3/Unperturbed"
+        ],
+        "sha256": "bf752f87ab7c043a5dba64366ebdaf5ecb09cae5aa5c15c2653c01f255a19978"
+      },
+      "validation": {
+        "path": "q_p1/valid.xyz",
+        "frames": 436,
+        "charge_counts": {
+          "-3": 98,
+          "-2": 91,
+          "-1": 90,
+          "0": 157
+        },
+        "trajectory_ids": [
+          "q+0/D_-60",
+          "q+0/D_40",
+          "q-1/D_10",
+          "q-1/D_60",
+          "q-2/D_-20",
+          "q-2/D_40",
+          "q-3/D_-20",
+          "q-3/D_50"
+        ],
+        "sha256": "9f1ab98c2e05c3cd09b3444b3f789318162b636f28645f83281a9bf869f6b0ef"
+      },
+      "test": {
+        "path": "q_p1/test.xyz",
+        "frames": 212,
+        "charge_counts": {
+          "1": 212
+        },
+        "trajectory_ids": [
+          "q+1/D_-10",
+          "q+1/D_-20",
+          "q+1/D_-30",
+          "q+1/D_0"
+        ],
+        "sha256": "3d81e66a0dee582e79742a4c9ead0f2134b9cc8b710622e6174ce969ee2b7454"
+      },
+      "test_cross_charge_geometry_matches": {
+        "matching_test_frames": 0,
+        "test_frames": 212,
+        "matched_trajectory_ids": [],
+        "criterion": "same cell and sorted atomic numbers/fractional coordinates rounded to 1e-8",
+        "interpretation": "matched geometry across Q is allowed; the held-out Q labels are absent from train/validation"
+      }
+    }
+  },
+  "limitations": [
+    "held-out charge is absent from both training and validation",
+    "test trajectories are the two paths per charge from each frozen C1 test split; charge-state frames are absent from train/validation",
+    "no validation energy offset exists for the unseen charge; evaluate raw energy errors, forces, ranking, and selection regret",
+    "same 59-atom V_Sb1 cell; this does not test defect-type or supercell-size transfer"
+  ]
+}

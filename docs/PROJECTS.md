@@ -7,6 +7,7 @@ The repository is a workspace, not a single experiment. Each project owns its ow
 | `defect_comparison` | Defect-data comparison workflow |
 | `mace-md-test` | MACE molecular-dynamics tests |
 | `polar_benchmark` | Polar benchmark experiments |
+| `mace-les` | MACE-LES and matched MACE-Q charged-defect transfer benchmark |
 
 ## Isolation rules
 

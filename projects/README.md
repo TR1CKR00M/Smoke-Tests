@@ -7,6 +7,7 @@ Each experiment is an independent project. The only shared code is under `src/co
 | [`defect_comparison`](defect_comparison) | Defect-data comparison workflow |
 | [`mace-md-test`](mace-md-test) | MACE molecular-dynamics tests |
 | [`polar_benchmark`](polar_benchmark) | Polar benchmark experiments |
+| [mace-les](mace-les) | MACE-LES and matched MACE-Q charged-defect transfer benchmark |
 
 
 New experiments should be added as a new folder with the same structure:
